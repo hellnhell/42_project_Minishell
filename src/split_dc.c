@@ -71,8 +71,8 @@ static char			**prinsplit(char const *s, char c, char **str, int x, t_tab *t)
 	i = 0;
 	w = 0;
 	start = 0;
-	//if (!(strq = (char**)malloc(sizeof(char*) * (x + 1))))
-	//	return (NULL);
+
+
 	while (s[i] != 0 && w < x)
 	{
 		if (s[i] != c && s[i] != 0)
@@ -98,7 +98,7 @@ static char			**prinsplit(char const *s, char c, char **str, int x, t_tab *t)
 					len += j;
 					str[w] = ft_substr(s, start, len);
 					i++;
-					return(strq) ;
+					break ;
 				}
 				else	
 				{
