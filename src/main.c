@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/16 17:28:32 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/20 18:37:28 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		main(int argc, char **argv, char **env)
 		i = 0;
 		ft_putstr_fd("marishell% ", 1);
 		t->line = read_line(t);
+		// Si ; está entre comillas no lo tiene que separar
+		// Hay que comprobar primero que el número de comillas es par
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])
 		{
