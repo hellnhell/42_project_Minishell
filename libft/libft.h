@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/05 18:29:45 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/20 21:25:24 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 typedef	struct	s_list
 {
 	void			*content;
+	int			pipe_izq;
+	int			pipe_dch;
+	int			concat_izq;
+	int			concat_dch;
+	int			replace_izq;
+	int			replace_dch;
+	int			mins_izq;
+	int			mins_dch;
 	struct s_list	*next;
 }				t_list;
 

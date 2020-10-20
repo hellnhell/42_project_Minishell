@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 17:17:10 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/16 20:22:29 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/20 20:02:03 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static char			**prinsplit(char const *s, char c, char **str, int x, t_tab *t)
 			{
 				len = 0;
 				j = 0;
-				printf("si-----%c\n", s[i]);
 				if (s[i] == 39)
 				{
 					i++;

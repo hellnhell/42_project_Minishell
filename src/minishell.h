@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/16 17:46:25 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/20 21:25:04 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,27 @@ typedef struct		s_tab
 	char		**tokens;
 	char		**orders;
 	char		**path;
+	char		*after_simbol;
+	
 }					t_tab;
+
+/*typedef struct  s_lst {
+    void		*content;
+	int			pipe_izq;
+	int			pipe_dch;
+	int			concat_izq;
+	int			concat_dch;
+	int			replace_izq;
+	int			replace_dch;
+	int			mins_izq;
+	int			mins_dch;
+    struct s_lst * next;
+} t_lst;*/
+
 
 char	*read_line(t_tab *t);
 void	read_path(t_tab *t, char **env);
-int	check_path(t_tab *t, char **env);
+int		check_path(t_tab *t, char **env);
 char	**split_line(char *line);
 void 	*ft_realloc(void *ptr, size_t originalsize, size_t newsize);
 char	*ft_strtok(char *str, char *sepa);
