@@ -32,8 +32,9 @@ SRCSC		= ft_memset.c \
 				ft_putnbr_fd.c \
 				ft_split.c \
 				get_next_line/get_next_line.c \
-				ft_strcmp.c \
-				ft_lstadd_front_bonus.c\
+				ft_strcmp.c
+
+SBONUS		= ft_lstadd_front_bonus.c\
 				ft_lstadd_back_bonus.c\
 				ft_lstclear_bonus.c\
 				ft_lstdelone_bonus.c\
@@ -47,6 +48,7 @@ SRCSH		= libft.h
 
 OBJS		= $(SRCSC:%.c=%.o)
 
+OBONUS		= $(SBONUS:%.c=%.o)
 
 NAME		= libft.a
 
@@ -66,12 +68,16 @@ $(NAME):	${OBJS}
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS} 
+			${RM} ${OBJS} ${OBONUS}
 
 fclean:		clean
 			${RM} ${NAME}
 
 re:			fclean all
 
+bonus:		all ${OBONUS}
+			@echo "libft.a (bonus) - compiling"
+			@${AR} ${NAME} ${OBJS} ${OBONUS}
+			@echo "libft.a (bonus) - done"
 
 .PHONY:		all clean fclean re

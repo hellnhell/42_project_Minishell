@@ -6,17 +6,17 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/20 21:32:23 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/22 20:03:13 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_simbols(t_tab *t, int i , int j, t_list *list1)
+/*void	ft_simbols(t_tab *t, int i , int j, List *list)
 {
 	if (t->orders[i][j] == '|')
-		list1->pipe_dch = 1;
-}
+		list->pipe_dch = 1;
+}*/
 
 char	*read_line(t_tab *t)
 {
@@ -27,18 +27,18 @@ char	*read_line(t_tab *t)
 	return(t->line);
 }
 
-void	initt(t_tab *t, t_list *list1)
+void	initt(t_tab *t, List *list)
 {
 	t->line = NULL;
 	t->path = NULL;
-	list1->pipe_dch = 0;
-	list1->pipe_izq = 0;
-	list1->concat_izq = 0;
-	list1->concat_dch = 0;
-	list1->replace_izq = 0;
-	list1->replace_dch = 0;
-	list1->mins_izq = 0;
-	list1->mins_dch = 0;
+	/*list->first->pipe_b = 0;
+	list->first->pipe_a = 0;
+	list->first->concat_a = 0;
+	list->first->concat_b = 0;
+	list->first->replace_a = 0;
+	list->first->replace_b = 0;
+	list->first->mins_a = 0;
+	list->first->mins_b = 0;*/
 }
 
 int		main(int argc, char **argv, char **env)
@@ -46,49 +46,31 @@ int		main(int argc, char **argv, char **env)
 	t_tab	*t;
 	int		i;
 	int		j;
-	int 	z;
-	t_list	*list1;
-	void	*node2;
-	t_list	*new;
-
-	if (!(list1 = (t_list *) malloc(sizeof(t_list))))
-		return (1);
+	List	*list;
+	
 	if(!(t = malloc (sizeof(t_tab))))
 		return (1);
-	initt(t, list1);
+	list = new_list();
+	initt(t, list);
 	(void)argc;
 	(void)argv;
 	(void)env;
 	while (1)
 	{
 		i = 0;
-		ft_putstr_fd("marishell% ", 1);
+		write(1, "marishell% ", 12);
 		t->line = read_line(t);
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])
 		{
-			j = 0;
-			while (t->orders[i][j])
+			create_list_elemnts(t, list, i);
+		 	Node *iterator = list->first;
+			while (iterator != NULL)
 			{
-				if (t->orders[i][j] >= 'A' && t->orders[i][j] <= 'z')
-				{
-					list1->content = t->orders[i];
-					ft_simbols(t, i, j, list1);
-					j++;
-					z = 0;
-					while (t->orders[i][j])
-					{
-						t->after_simbol[z] = t->orders[i][j];
-						j++;
-					}	
-					if (list1->next == NULL)
-					{
-						ft_lstadd_back(&list1, new);
-						printf("h\n");
-					}
-					new->content = t->after_simbol;
-				}	
+				printf("list----%s\n", iterator->element);
+				iterator = iterator->next;
 			}
+			printf("\n");
 			t->tokens = ft_split_com(t->orders[i], ' ',t);
 			if(check_our_implement(t))
 			{

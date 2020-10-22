@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/20 21:25:04 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/22 19:27:05 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,27 @@ typedef struct		s_tab
 	char		**tokens;
 	char		**orders;
 	char		**path;
-	char		*after_simbol;
-	
+	char		**args;
 }					t_tab;
 
-/*typedef struct  s_lst {
-    void		*content;
-	int			pipe_izq;
-	int			pipe_dch;
-	int			concat_izq;
-	int			concat_dch;
-	int			replace_izq;
-	int			replace_dch;
-	int			mins_izq;
-	int			mins_dch;
-    struct s_lst * next;
-} t_lst;*/
+typedef struct Node
+{
+    char    *element;
+	int		pipe_a;
+	int		pipe_b;
+	int		concat_b;
+	int		concat_a;
+	int		replace_b;
+	int		replace_a;
+	int		mins_b;
+	int		mins_a;
+    struct Node *next;
+} Node;
+
+typedef struct  List {
+    Node	*first;
+	int 	size;
+} List;
 
 
 char	*read_line(t_tab *t);
@@ -58,5 +63,18 @@ int		ft_cd(char **args);
 int		check_our_implement(t_tab *t);
 char	**ft_split_com(char const *s, char c, t_tab *t);
 int		not_command_error(t_tab *t);
+
+List    *new_list(void);
+Node    *new_node(char *s);
+void    destructor_node(Node *node);
+void    destructor_list(List *list);
+void    pop_front(List *list);
+void    pop_back(List *list);
+void    pop_n_element(List *list, int n);
+void    push_front(List *list, char *s);
+void    push_back(List *list, char *s);
+void    push_after_n(List *list, char *s, int n);
+List    *copy_list(List *list);
+void	create_list_elemnts(t_tab *t,List *list,int i);
 
 #endif

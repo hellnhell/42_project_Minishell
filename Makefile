@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/10/13 17:18:02 by emartin-         ###   ########.fr        #
+#    Updated: 2020/10/22 20:02:48 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ SRCS	=   src/main.c              \
 			src/cd.c				\
 			src/ft_strjoin_sl.c		\
 			src/check_our_implement.c	\
-			src/split_dc.c	
+			src/split_dc.c			\
+			src/list_pop_elements.c		\
+			src/list_utils.c			\
+			src/list_add_elements.c	\
+			src/create_lelemnts.c
 
 GCC			=   @gcc -Wall -Wextra -Werror -g3
 OBJS		=   $(SRCS:.c=.o)
