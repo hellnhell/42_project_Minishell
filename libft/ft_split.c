@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/10/20 19:48:07 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/10/22 18:07:43 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** pero ignorando los ; que están entre comillas
 */
 
-// Lo estoy haciendo solo para comillas de un tipo pero hay que hacer las dos
+// Hay qe comprobar si este gestiona bien que las comillas pegadas a cosas
 
 static int	ft_countwords(char const *s, char c)
 {
@@ -31,7 +31,15 @@ static int	ft_countwords(char const *s, char c)
 	{
 		while (s[i] == '\"')
 		{
+			i++;
 			while (s[i] && s[i] != '\"')
+				i++;
+			i++;
+		}
+		while (s[i] == '\'')
+		{
+			i++;
+			while (s[i] && s[i] != '\'')
 				i++;
 			i++;
 		}
@@ -41,7 +49,7 @@ static int	ft_countwords(char const *s, char c)
 			continue ;
 		}
 		counter++;
-		while (s[i] && s[i] != c)
+		while (s[i] && s[i] != c && s[i] != '\"' && s[i] != '\'')
 		{
 			i++;
 			if (s[i] && s[i] == '\"')
@@ -50,7 +58,12 @@ static int	ft_countwords(char const *s, char c)
 				while (s[i] && s[i] != '\"')
 					i++;
 			}
-
+			else if (s[i] && s[i] == '\'')
+			{
+				i++;
+				while (s[i] && s[i] != '\'')
+					i++;
+			}
 		}
 	}
 	return (counter);
@@ -69,6 +82,16 @@ static int	ft_size(char const *s, char c, int j)
 		{
 			j++;
 			while (s[j] && s[j] != '\"')
+			{
+				j++;
+				counter++;
+			}
+			counter++;
+		}
+		else if (s[j] == '\'')
+		{
+			j++;
+			while (s[j] && s[j] != '\'')
 			{
 				j++;
 				counter++;
@@ -95,6 +118,12 @@ static int	ft_cpyword(char const *s, char c, int j, char *str)
 		{
 			str[i++] = s[j++];
 			while (s[j] && s[j] != '\"')
+				str[i++] = s[j++];
+		}
+		else if (s[j] == '\'')
+		{
+			str[i++] = s[j++];
+			while (s[j] && s[j] != '\'')
 				str[i++] = s[j++];
 		}
 		str[i++] = s[j++];
@@ -129,9 +158,14 @@ char		**ft_split(char const *s, char c)
 	return (tab);
 }
 
+
 int main()
 {
-	char **s = ft_split(";;;;hola que tal ; todo \";\" bien", ';');
-	printf("%s\n%s\n", s[0], s[1]);
+	//char **s = ft_split(";;;;hola \"que;\" tal ; todo \';\' bien", ';');
+	//printf("%s\n%s\n", s[0], s[1]);
 	//ft_size(";;;;hola que tal ; hi \";\" no", ';', 0);
+	int n;
+	n = ft_countwords(";;;;\"hola\" \"que;\" tal ; todo \';\' bien", ';');
+	printf("%i\n", n);
 }
+
