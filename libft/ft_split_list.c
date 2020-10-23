@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/10/23 21:27:30 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/10/23 21:42:30 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ static int	ft_cpyword(char const *s, char **env, int j, char *str)
 				z = ft_strlen2(env[n - 1]) + 1;
 				while (env[n - 1][z]) // Le restamos 1 porque hemos devuelto el índice + 1
 					str[i++] = env[n - 1][z++];
+				j += skip_env(&s[j]);
 			}
 		}
 		if (s[j] == '\"')
@@ -287,7 +288,7 @@ int main(int argc, char **argv, char **env)
 	//printf("%i\n", n);
 	//n = ft_size("hola  s\"que     tal\"rt", ' ', 4, env);
 	//n = ft_size("\" hola  \"",' ', 0, env);
-	str = ft_split_list("$LOGNAME \"que   \" tal", ' ', env);
+	str = ft_split_list("\"$LOGNAME\" \"que   \" tal", ' ', env);
 	n = 0;
 	while (str[n])
 	{
