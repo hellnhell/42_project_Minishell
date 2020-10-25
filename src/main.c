@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/22 20:03:13 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/23 20:33:01 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*void	ft_simbols(t_tab *t, int i , int j, List *list)
-{
-	if (t->orders[i][j] == '|')
-		list->pipe_dch = 1;
-}*/
 
 char	*read_line(t_tab *t)
 {

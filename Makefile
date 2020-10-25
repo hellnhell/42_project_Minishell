@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
+#    By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/10/22 20:02:48 by emartin-         ###   ########.fr        #
+#    Updated: 2020/10/23 20:32:21 by hellnhell        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,25 +20,28 @@ SRCS	=   src/main.c              \
 			src/cd.c				\
 			src/ft_strjoin_sl.c		\
 			src/check_our_implement.c	\
-			src/split_dc.c			\
-			src/list_pop_elements.c		\
-			src/list_utils.c			\
-			src/list_add_elements.c	\
-			src/create_lelemnts.c
+			src/split_dc.c	\
+			src/create_lelemnts.c \
+			src/list_add_elements.c \
+			src/list_pop_elements.c \
+			src/list_utils.c
 
-GCC			=   @gcc -Wall -Wextra -Werror -g3
+GCC			=   -g3 -Wall -Wextra -Werror -I
 OBJS		=   $(SRCS:.c=.o)
-LIBFT		= libft/libft.a
-INCLUDES	=   ./
+LIBFT		= 	libft/libft.a
 
-all: $(NAME)
+INCLUDES	=   ./
 $(NAME):	$(OBJS)
-		@$(MAKE) -C libft
-		@$(GCC) -I$(INCLUDES) $(LIBFT) $(OBJS) -o $(NAME)
+		gcc ${CFLAGS} $(OBJS) ${LIBFT} -I$(INCLUDES) -o $(NAME) 
+
+$(LIBFT):
+			@$(MAKE) -C libft
+		
 clean:
-			-@$(RM) $(OBJS)
+			@$(RM) $(OBJS)
 			@$(MAKE) -C libft clean
+			
 fclean:		clean
-			-@$(RM) $(NAME) $(LIBFT)
+			$(RM) $(NAME) $(LIBFT)
 re:			fclean all
 .PHONY:		all clean fclean re bonus
