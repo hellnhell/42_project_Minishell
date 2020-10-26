@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/26 19:46:17 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/26 19:57:02 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int		main(int argc, char **argv, char **env)
 				{
 					read_path(t, env);
 					check_path(t, env);
-					printf("ffff\n");
 				}
-				printf("f\n");
 				i++;
 				iterator = iterator->next;
 				free(t->tokens);
