@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/10/23 21:42:30 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/10/26 17:36:02 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,20 @@ static int	ft_size(char const *s, char c, int j, char **env)
 			j++;
 			while (s[j] && s[j] != '\"')
 			{
-				j++;
-				counter++;
+				if (s[j] == '$')
+				{
+					n = ft_dollar_count(&s[j + 1], env);
+					counter += n;
+					j++;
+					if (n == 0)
+						while (s[j] && s[j] != ' ' && s[j] != '\"' && s[j] != '\'' && s[j] != '$')
+							j++;
+				}
+				else
+				{
+					j++;
+					counter++;
+				}
 			}
 			counter = counter - 1;
 		}
@@ -216,19 +228,23 @@ static int	ft_cpyword(char const *s, char **env, int j, char *str)
 					str[i++] = env[n - 1][z++];
 				j += skip_env(&s[j]);
 			}
+			else
+				j += skip_env(&s[j]);
 		}
 		if (s[j] == '\"')
 		{
 			j++;
 			while (s[j] && s[j] != '\"')
 			{
-				if (s[j] == '$' && (n = ft_check_dollar(&s[j], env)))
+				if (s[j] == '$' && (n = ft_check_dollar(&s[j + 1], env)))
 				{
 					z = ft_strlen2(env[n - 1]) + 1;
 					while (env[n - 1][z]) // Le restamos 1 porque hemos devuelto el índice + 1
 						str[i++] = env[n - 1][z++];
-					j += skip_env(&s[j]);
+					j += skip_env(&s[j + 1]);
 				}
+				else if (s[j] == '$')
+					j += skip_env(&s[j + 1]);
 				else
 					str[i++] = s[j];
 				j++;
@@ -244,7 +260,7 @@ static int	ft_cpyword(char const *s, char **env, int j, char *str)
 			}
 			j++;
 		}
-		else if (s[j] && s[j] != c)
+		else if (s[j] && s[j] != c && s[j] != '$')
 			str[i++] = s[j++];
 	}
 	str[i] = 0;
@@ -288,7 +304,7 @@ int main(int argc, char **argv, char **env)
 	//printf("%i\n", n);
 	//n = ft_size("hola  s\"que     tal\"rt", ' ', 4, env);
 	//n = ft_size("\" hola  \"",' ', 0, env);
-	str = ft_split_list("\"$LOGNAME\" \"que   \" tal", ' ', env);
+	str = ft_split_list("\"hola   que 'tal  ' estas \"", ' ', env);
 	n = 0;
 	while (str[n])
 	{

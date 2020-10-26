@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/16 17:46:25 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/23 20:09:36 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ typedef struct		s_tab
 	char		**tokens;
 	char		**orders;
 	char		**path;
+	char		**env;
 }					t_tab;
 
 char	*read_line(t_tab *t);
 void	read_path(t_tab *t, char **env);
-int	check_path(t_tab *t, char **env);
+int		check_path(t_tab *t, char **env);
 char	**split_line(char *line);
 void 	*ft_realloc(void *ptr, size_t originalsize, size_t newsize);
 char	*ft_strtok(char *str, char *sepa);
