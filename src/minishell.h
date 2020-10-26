@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/25 19:24:26 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/10/26 13:38:11 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ typedef struct		s_tab
 	char		**path;
 	char		**args;
 	char		**command;
+	char		*index;
 }					t_tab;
 
 typedef struct Node
 {
     char    *element;
-	int		pipe;
-	int		may;
-	int		min;
-	int		doubmay;
 	int		pipe_a;
 	int		pipe_b;
 	int		concat_b;
@@ -68,9 +65,8 @@ int		ft_cd(char **args);
 int		check_our_implement(t_tab *t);
 char	**ft_split_com(char const *s, char c, t_tab *t);
 int		not_command_error(t_tab *t);
-//char			*ft_strndup(const char *s, int c);
-void		simbols(t_tab *t, List *list, int *index, int y, int i);
-int		simbols_flag(t_tab *t, List *list, int j, int i);
+void	simbols_flags(t_tab *t, List *list, int doubl);
+int		simbols(t_tab *t, List *list, int j, int i);
 
 
 List    *new_list(void);

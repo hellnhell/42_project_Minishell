@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/23 20:33:01 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/10/26 13:48:32 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*read_line(t_tab *t)
 	return(t->line);
 }
 
-void	initt(t_tab *t, List *list)
+void	initt(t_tab *t)
 {
 	t->line = NULL;
 	t->path = NULL;
@@ -45,8 +45,7 @@ int		main(int argc, char **argv, char **env)
 	
 	if(!(t = malloc (sizeof(t_tab))))
 		return (1);
-	list = new_list();
-	initt(t, list);
+	initt(t);
 	(void)argc;
 	(void)argv;
 	(void)env;
@@ -58,6 +57,7 @@ int		main(int argc, char **argv, char **env)
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])
 		{
+			list = new_list();
 			create_list_elemnts(t, list, i);
 		 	Node *iterator = list->first;
 			while (iterator != NULL)
@@ -66,7 +66,7 @@ int		main(int argc, char **argv, char **env)
 				iterator = iterator->next;
 			}
 			printf("\n");
-			t->tokens = ft_split_com(t->orders[i], ' ',t);
+			t->tokens = ft_split_com(list->first->element, ' ', t);
 			if(check_our_implement(t))
 			{
 				read_path(t, env);

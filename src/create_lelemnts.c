@@ -6,163 +6,97 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/25 19:52:23 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/10/26 13:40:40 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*char			*ft_strndup(const char *s, int c)
+int		simbols(t_tab *t, List *list, int j, int i)
 {
-	int		pos;
-	char	*dup;
+	int		simbol;
 
-	if (!(dup = malloc(ft_strlen(s) + 1)))
-		return (NULL);
-	pos = 0;
-	while (s[pos] && pos <= c)
-	{
-		dup[pos] = s[pos];
-		pos++;
-	}
-	dup[pos] = 0;
-	return (dup);
-}*/
-
-/*int		simbols_flag(t_tab *t, List *list, int j, int i)
-{
-	if (t->orders[i][j] == '|')
-	{
-		printf("pipe\n");
-		list->first->pipe = 1;
-		return (1);
-	}
-	else if ((t->orders[i][j] == '<'))
-	{
-		printf("<\n");
-		list->first->min = 1;
-		return (1);
-	}
-	else if ((t->orders[i][j] == '>'))
-	{
-		printf(">\n");
-		list->first->may = 1;
-		return (1);
-	}
-	else if ((t->orders[i][j] == '>') && (t->orders[i][++j] == '>'))
-	{
-		printf(">>\n");
-		list->first->doubmay = 1;
-		return (1);
-	}
+	if ((t->orders[i][j] == '|') || (t->orders[i][j] == '<') || (t->orders[i][j] == '>'))
+		simbol = 1;
 	else
-		return (0);	
+		simbol = 0;
+	return (simbol);	
 }
 
-void		simbols(t_tab *t, List *list, int y, int i)
+void		simbols_flags(t_tab *t, List *list, int doubl)
 {
-	int 	j;
+	int		y;
 
-	j = 0;
-	if (!(t->command = malloc(sizeof(char **) * ft_strlen(t->orders[i]))))
-		return;
-	while (j < ft_strlen(t->orders[i]))
+	y = 0;
+	while (t->index[y])
 	{
-		if (list->first->pipe == 1 || list->first->may == 1 || 
-		list->first->min == 1 || list->first->doubmay == 1 )
+		//En el MAc cambiar numeros x simbolos xq no se xq coño no los pilla
+		if (t->index[y] == 124)
 		{
-			t->command[j] = ft_split(t->orders[i], );
-			printf("command----%s\n", t->command[j]);
-			j++;
+			list->first->pipe_a = 1;
+			list->first->next->pipe_b = 1; 
+		}	
+		else if (t->index[y] == 60)
+		{
+			list->first->mins_a = 1;
+			list->first->next->mins_b = 1;
+		}	
+		else if (t->index[y] == 32 && doubl == 0)
+		{
+			list->first->concat_a= 1;
+			list->first->next->concat_b = 1; 
 		}
-		j++;	
+		else if (doubl == 1)
+		{
+			list->first->replace_a = 1;
+			list->first->next->replace_b = 1; 
+		}
+		y++;			
 	}
-}*/
+}
 
 
 void	create_list_elemnts(t_tab *t, List *list, int i)
 {
 	unsigned int		j;
 	int 				y;
-	unsigned int		len;
-	char				*index;
+	int					x;
 	char				*aux;
+	int					doubl;
 
 	j = 0;
-	y = 1;
-	len = 0;
+	y = 0;
+	doubl = 0;
 	if (!(aux = malloc(sizeof(char*) * ft_strlen(t->orders[i]))))
 		return;
-//	if (!(index = malloc(sizeof(int *) * ft_strlen(t->orders[i]))))
-//		return;
+	if (!(t->index = malloc(sizeof(char *) * ft_strlen(t->orders[i]))))
+		return;
+		x = 0;
 	while (t->orders[i][j])
 	{
-		//guardar cada tipo de simbolo
-		if (t->orders[i][j] == '|')
-			j++;
+		if (simbols(t, list, j, i) == 0) // Esto mira si es un simbolito solo
+		{
+			aux[x] = t->orders[i][j];
+			x++;
+		}	
 		else
 		{
-			index[0] = '0';
-			printf("index----%d\n", index[y]);
-			index[y] = j;
-			len = index[y] - index[y - 1];
-			if (index[0] == 48)
+			if (t->orders[i][j] ==  '>' && t->orders[i][++j] == '>')
 			{
-				aux = ft_substr(t->orders[i], 0, index[y]);
-				push_back(list, aux);
+				printf("d1\n");
+				doubl = 1;
+				t->index[y] = t->orders[i][++j];
 			}
 			else
-			{
-				aux = ft_substr(t->orders[i], index[y], len);
-				push_back(list, aux);
-				y++;
-							
-			}
-			j++;
-			//simbols(t, list, index, y, i);
+				t->index[y] = t->orders[i][j];
+			y++;
+			push_back(list, aux);//esto te crea nuevos nodos
+			x = 0;
 		}
+		simbols_flags(t, list, doubl); // esto mira q simbolo es y activa flags 
+		j++;
 	}
-	
-
-
-
-	/*	if (list->first== NULL) 
-		{
-			/*
-			push_back(list, aux);
-			//printf("%d\n", index[y]);
-			if (j > index[y])
-			{
-				aux = ft_substr(t->orders[i], j, ft_strlen(t->orders[i]));
-				push_back(list, aux);	
-			}
-			y = 0;
-			if (t->orders[i][j] != '|')
-			{
-				aux[y] = t->orders[i][j];
-				y++;
-			}
-			else 
-			{
-				push_back(list, aux);
-				list->first->pipe_b = 1;   //Esto es temporal hay q cambiarlo x simbols
-				free(aux);
-				y = 0;
-			}
-			j++;
-		}
-		else
-		{
-			printf("j---%i\n", j);
-			printf("aux---%s\n", aux);
-			while (t->orders[i][j])
-			{
-				aux[y] = t->orders[i][j];
-				j++;
-				y++;
-			}
-			push_back(list, aux);
-		}
-		
-	}*/
+	push_back(list, aux);
+	free(aux);
+	free(t->index);
 }
