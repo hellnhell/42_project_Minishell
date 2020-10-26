@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/26 19:40:19 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/26 19:46:17 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*read_line(t_tab *t)
 {
 	char	*line;
 
+	// Aqui el line no hace nada?
 	line = NULL;
 	get_next_line(0, &t->line);
 	return(t->line);
@@ -48,12 +49,13 @@ int		main(int argc, char **argv, char **env)
 	initt(t);
 	(void)argc;
 	(void)argv;
-	(void)env;
 	while (1)
 	{
 		i = 0;
 		write(1, "marishell% ", 12);
 		t->line = read_line(t);
+		// Si ; está entre comillas no lo tiene que separar
+		// Hay que comprobar primero que el número de comillas es par
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])
 		{

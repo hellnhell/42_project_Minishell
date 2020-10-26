@@ -3,89 +3,169 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 18:32:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/13 19:43:47 by emartin-         ###   ########.fr       */
+/*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
+/*   Updated: 2020/10/22 18:07:43 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-static int			ft_words(char const *s, char c)
-{
-	int		w;
-	int		i;
+/* 
+** Esta función es el split modificado para dividir los comandos (es decir, ';')
+** pero ignorando los ; que están entre comillas
+*/
 
+// Hay qe comprobar si este gestiona bien que las comillas pegadas a cosas
+
+static int	ft_countwords(char const *s, char c)
+{
+	int		i;
+	int		counter;
+
+	counter = 0;
 	i = 0;
-	w = 0;
-	while (s[i] != 0)
+	while (s[i])
 	{
-		if (s[i] != c && s[i] != 0)
+		while (s[i] == '\"')
 		{
-			w++;
-			while (s[i] != c && s[i] != 0)
+			i++;
+			while (s[i] && s[i] != '\"')
 				i++;
-		}
-		else
 			i++;
-	}
-	return (w);
-}
-
-static int			ft_letters(const char *s, char c)
-{
-	int		i;
-	int		l;
-
-	i = 0;
-	l = 0;
-	while (s[i] != 0 && s[i] != c)
-	{
-		i++;
-		l++;
-	}
-	return (l);
-}
-
-static char			**prinsplit(char const *s, char c, char **str, int x)
-{
-	int		l;
-	int		i;
-	int		w;
-
-	i = 0;
-	w = 0;
-	while (s[i] != 0 && w < x)
-	{
-		if (s[i] != c && s[i] != 0)
+		}
+		while (s[i] == '\'')
 		{
-			l = 0;
-			if (!(str[w] = (char*)malloc(sizeof(char) *
-			(ft_letters(s, c) + 1))))
-				return (NULL);
-			while (s[i] != c && s[i] != 0)
-				str[w][l++] = s[i++];
-			str[w][l] = '\0';
-			w++;
-		}
-		else
 			i++;
+			while (s[i] && s[i] != '\'')
+				i++;
+			i++;
+		}
+		if (s[i] && s[i] == c)
+		{
+			i++;
+			continue ;
+		}
+		counter++;
+		while (s[i] && s[i] != c && s[i] != '\"' && s[i] != '\'')
+		{
+			i++;
+			if (s[i] && s[i] == '\"')
+			{
+				i++;
+				while (s[i] && s[i] != '\"')
+					i++;
+			}
+			else if (s[i] && s[i] == '\'')
+			{
+				i++;
+				while (s[i] && s[i] != '\'')
+					i++;
+			}
+		}
 	}
-	str[w] = NULL;
-	return (str);
+	return (counter);
 }
 
-char				**ft_split(char const *s, char c)
+static int	ft_size(char const *s, char c, int j)
 {
-	char	**str;
-	int		x;
+	int		counter;
 
+	counter = 0;
+	while (s[j] == c)
+		j++;
+	while (s[j] && s[j] != c)
+	{
+		if (s[j] == '\"')
+		{
+			j++;
+			while (s[j] && s[j] != '\"')
+			{
+				j++;
+				counter++;
+			}
+			counter++;
+		}
+		else if (s[j] == '\'')
+		{
+			j++;
+			while (s[j] && s[j] != '\'')
+			{
+				j++;
+				counter++;
+			}
+			counter++;
+		}
+		counter++;
+		j++;
+	}
+	//printf("%i\n", counter + 1);
+	return (counter + 1);
+}
+
+static int	ft_cpyword(char const *s, char c, int j, char *str)
+{
+	int		i;
+
+	i = 0;
+	while (s[j] == c)
+		j++;
+	while (s[j] && s[j] != c)
+	{
+		if (s[j] == '\"')
+		{
+			str[i++] = s[j++];
+			while (s[j] && s[j] != '\"')
+				str[i++] = s[j++];
+		}
+		else if (s[j] == '\'')
+		{
+			str[i++] = s[j++];
+			while (s[j] && s[j] != '\'')
+				str[i++] = s[j++];
+		}
+		str[i++] = s[j++];
+	}
+	str[i] = 0;
+	return (j);
+}
+
+char		**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	int		words;
+	char	**tab;
+
+	j = 0;
 	if (!s)
 		return (NULL);
-	x = ft_words(s, c);
-	if (!(str = (char**)malloc(sizeof(char*) * (x + 1))))
+	i = ft_countwords(s, c);
+	//printf("%i\n", i);
+	if (!(tab = malloc(sizeof(char **) * (i + 1))))
 		return (NULL);
-	return (prinsplit(s, c, str, x));
+	tab[i] = NULL;
+	words = i;
+	i = 0;
+	while (i < words)
+	{
+		tab[i] = malloc(sizeof(char) * ft_size(s, c, j));
+		j = ft_cpyword(s, c, j, tab[i]);
+		i++;
+	}
+	return (tab);
 }
+
+
+int main()
+{
+	//char **s = ft_split(";;;;hola \"que;\" tal ; todo \';\' bien", ';');
+	//printf("%s\n%s\n", s[0], s[1]);
+	//ft_size(";;;;hola que tal ; hi \";\" no", ';', 0);
+	int n;
+	n = ft_countwords(";;;;\"hola\" \"que;\" tal ; todo \';\' bien", ';');
+	printf("%i\n", n);
+}
+

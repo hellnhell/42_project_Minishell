@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/26 19:37:34 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/26 19:46:40 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	read_path(t_tab *t, char **env)
 	while (env[i])
 	{
 		//t->our_env[i] = ft_strdup(env[i]);
+		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
 		if (ft_strncmp("PATH=", env[i], 5) == 0)
 			t->path = ft_split(&env[i][5], ':');
 		i++;
