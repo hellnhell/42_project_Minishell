@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/13 20:11:20 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/26 19:37:34 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,17 @@ int		check_path(t_tab *t, char **env)
 
 	i = 0;
 	//exit q hay q gestionar con errno
+	if (!t->tokens[0])
+		printf("errrrrrroorrrrr\n");
 	while(t->path[i])
 	{
-		if (!t->tokens[0])
-			break ;
-		else
-		{
-			aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
-			tmp = aux;
-			j = execve(tmp, t->tokens, env);
-			free(aux);
-			i++;
-		}
+		printf("%d\n", i);
+		aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
+		printf("tokens-----%s\n", t->tokens[0]);
+		tmp = aux;
+		j = execve(tmp, t->tokens, env);
+		free(aux);
+		i++;
 	}
 	if (j < 0)
 		not_command_error(t);
@@ -61,5 +60,4 @@ void	read_path(t_tab *t, char **env)
 			t->path = ft_split(&env[i][5], ':');
 		i++;
 	}
-	free(t->path);
 }
