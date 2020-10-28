@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/26 19:47:02 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/28 20:12:52 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ typedef struct		s_tab
 typedef struct Node
 {
     char    *element;
-	int		pipe_a;
-	int		pipe_b;
-	int		concat_b;
-	int		concat_a;
-	int		replace_b;
-	int		replace_a;
-	int		mins_b;
-	int		mins_a;
     struct Node *next;
 } Node;
 
@@ -63,7 +55,8 @@ char	*ft_strjoin_sl(const char *s1, const char *s2);
 int		ft_echo(char **args);
 int		ft_pwd(void);
 int		ft_cd(char **args);
-int		check_our_implement(t_tab *t);
+int     ft_export(char **args, t_tab *t);
+int		check_our_implement(t_tab *t, char **env);
 char	**ft_split_com(char const *s, char c, t_tab *t);
 int		not_command_error(t_tab *t);
 void	simbols_flags(t_tab *t, List *list, int doubl);

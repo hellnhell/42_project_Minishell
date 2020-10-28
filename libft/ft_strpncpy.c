@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strpncpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 13:20:50 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/28 19:46:08 by isfernan         ###   ########.fr       */
+/*   Created: 2020/10/28 19:20:31 by isfernan          #+#    #+#             */
+/*   Updated: 2020/10/28 19:35:35 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
+#include <stdio.h>
 
-size_t		ft_strlen(const char *s)
+void	ft_strpncpy(char *dest, char *str, int len)
 {
-	size_t i;
+	int		i;
 
 	i = 0;
-	while (s[i])
+	while (i < len)
+	{
+		dest[i] = str[i];
 		i++;
-	return (i);
-}
-
-size_t		ft_strlen2(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i] && s[i] != '=')
-		i++;
-	return (i);
+	}
+	dest[i] = '\0';
 }

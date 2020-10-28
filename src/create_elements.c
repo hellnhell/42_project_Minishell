@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/26 19:18:39 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/28 18:13:21 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		simbols(t_tab *t, List *list, int j, int i)
 	return (simbol);	
 }
 
-void		simbols_flags(t_tab *t, List *list, int doubl)
+/*void		simbols_flags(t_tab *t, List *list, int doubl)
 {
 	int		y;
 
@@ -58,7 +58,7 @@ void		simbols_flags(t_tab *t, List *list, int doubl)
 		}
 		iterator = iterator->next;
 	}
-}
+}*/
 
 
 void	create_list_elemnts(t_tab *t, List *list, int i)

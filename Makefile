@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
+#    By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/10/26 17:26:43 by emartin-         ###   ########.fr        #
+#    Updated: 2020/10/28 18:39:46 by isfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS	=   src/main.c              \
 			src/echo.c				\
 			src/pwd.c				\
 			src/cd.c				\
+			src/export.c			\
 			src/ft_strjoin_sl.c		\
 			src/check_our_implement.c	\
 			src/split_dc.c 				\
