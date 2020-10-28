@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/26 19:46:40 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/26 20:18:18 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int		check_path(t_tab *t, char **env)
 
 	i = 0;
 	//exit q hay q gestionar con errno
+	printf("tokens-----%s\n", t->tokens[0]);
 	if (!t->tokens[0])
 		printf("errrrrrroorrrrr\n");
 	while(t->path[i])
 	{
-		printf("%d\n", i);
+		//printf("%d\n", i);
 		aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
-		printf("tokens-----%s\n", t->tokens[0]);
 		tmp = aux;
 		j = execve(tmp, t->tokens, env);
 		free(aux);

@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/26 19:47:02 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/28 17:58:19 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ typedef struct		s_tab
 typedef struct Node
 {
     char    *element;
-	int		pipe_a;
-	int		pipe_b;
-	int		concat_b;
-	int		concat_a;
-	int		replace_b;
-	int		replace_a;
-	int		mins_b;
-	int		mins_a;
     struct Node *next;
 } Node;
 

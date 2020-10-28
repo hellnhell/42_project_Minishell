@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/10/22 18:07:43 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/10/26 20:05:11 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,15 +157,3 @@ char		**ft_split(char const *s, char c)
 	}
 	return (tab);
 }
-
-
-int main()
-{
-	//char **s = ft_split(";;;;hola \"que;\" tal ; todo \';\' bien", ';');
-	//printf("%s\n%s\n", s[0], s[1]);
-	//ft_size(";;;;hola que tal ; hi \";\" no", ';', 0);
-	int n;
-	n = ft_countwords(";;;;\"hola\" \"que;\" tal ; todo \';\' bien", ';');
-	printf("%i\n", n);
-}
-
