@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/10/26 17:36:02 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/10/26 20:07:47 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,42 +20,9 @@
 ** de las comillas dobles
 */
 
-size_t		ft_strlen(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-size_t		ft_strlen2(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i] && s[i] != '=')
-		i++;
-	return (i);
-}
-
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	
-	while ((s1[i] && s2[i]) && s1[i] == s2[i] && i < n - 1)
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
 // He cambiado esta función aquí pero en el otro split no!!!!
 
-static int	ft_countwords(char const *s, char c, char **env)
+static int	ft_countwords(char const *s, char c)
 {
 	int		i;
 	int		counter;
@@ -278,7 +245,7 @@ char		**ft_split_list(char const *s, char c, char **env)
 	j = 0;
 	if (!s)
 		return (NULL);
-	i = ft_countwords(s, c, env);
+	i = ft_countwords(s, c);
 	if (!(tab = malloc(sizeof(char **) * (i + 1))))
 		return (NULL);
 	tab[i] = NULL;
@@ -291,24 +258,4 @@ char		**ft_split_list(char const *s, char c, char **env)
 		i++;
 	}
 	return (tab);
-}
-
-int main(int argc, char **argv, char **env)
-{
-	char	**str;
-	int		n;
-
-	(void)argc;
-	(void)argv;
-	//n = ft_countwords("hola    \"que tal\"  colosal", ' ', str);
-	//printf("%i\n", n);
-	//n = ft_size("hola  s\"que     tal\"rt", ' ', 4, env);
-	//n = ft_size("\" hola  \"",' ', 0, env);
-	str = ft_split_list("\"hola   que 'tal  ' estas \"", ' ', env);
-	n = 0;
-	while (str[n])
-	{
-		printf("|%s|\n", str[n]);
-		n++;
-	}
 }

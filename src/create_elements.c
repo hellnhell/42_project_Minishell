@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/26 19:18:39 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/26 20:28:58 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		simbols(t_tab *t, List *list, int j, int i)
 	return (simbol);	
 }
 
-void		simbols_flags(t_tab *t, List *list, int doubl)
+/*void		simbols_flags(t_tab *t, List *list, int doubl)
 {
 	int		y;
 
@@ -58,7 +58,7 @@ void		simbols_flags(t_tab *t, List *list, int doubl)
 		}
 		iterator = iterator->next;
 	}
-}
+}*/
 
 
 void	create_list_elemnts(t_tab *t, List *list, int i)
@@ -73,7 +73,7 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	y = 0;
 	doubl = 0;
 	x = 0;
-	if (!(t->index = malloc(sizeof(char *) * ft_strlen(t->orders[i]))))
+	if (!(t->index = malloc(sizeof(char) * ft_strlen(t->orders[i]))))
 		return;
 	if (!(aux = malloc(sizeof(char) * ft_strlen(t->orders[i]) + 1)))
 		return;
@@ -105,9 +105,9 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 		j++;
 	}
 	aux[x] = '\0';
+	t->index[y] = '\0';
 	printf("index---%s\n", t->index);
-	printf("auxj: %s\n", &aux[j]);
 	push_back(list, aux);
 			//printf("aux----%s\n", aux);
-	free(t->index);
+	//free(t->index);
 }
