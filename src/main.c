@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/28 19:48:59 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/10/29 18:19:28 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		main(int argc, char **argv, char **env)
 	if(!(t = malloc (sizeof(t_tab))))
 		return (1);
 	initt(t);
+	ft_allocate_env(env, t);
+	ft_cpy_env(env, t);
 	(void)argc;
 	(void)argv;
 	while (1)

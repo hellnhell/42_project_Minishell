@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/26 20:18:18 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/29 19:04:03 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	read_path(t_tab *t, char **env)
 	{
 		//t->our_env[i] = ft_strdup(env[i]);
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
-		if (ft_strncmp("PATH=", env[i], 5) == 0)
-			t->path = ft_split(&env[i][5], ':');
+		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
+			t->path = ft_split(&t->env[i][5], ':');
 		i++;
 	}
 }
