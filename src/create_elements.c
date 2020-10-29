@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/26 20:28:58 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/29 19:45:05 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		simbols(t_tab *t, List *list, int j, int i)
+static int		simbols(t_tab *t, List *list, int j, int i)
 {
 	int		simbol;
 
@@ -80,23 +80,16 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	while (t->orders[i][j])
 	{
 		if (simbols(t, list, j, i) == 0) 
-		{
-			aux[x] = t->orders[i][j];
-			x++;
-		}	
+			aux[x++] = t->orders[i][j];
 		else
 		{
 			if (t->orders[i][j] == '>' && t->orders[i][j + 1] == '>')
 			{
-				t->index[y] = '-';
+				t->index[y++] = '-';
 				j++;
-				y++;
 			}
 			else
-			{
-				t->index[y] = t->orders[i][j];
-				y++;
-			}
+				t->index[y++] = t->orders[i][j];
 			aux[x] = '\0';
 			push_back(list, aux);
 			x = 0;
@@ -106,8 +99,5 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	}
 	aux[x] = '\0';
 	t->index[y] = '\0';
-	printf("index---%s\n", t->index);
 	push_back(list, aux);
-			//printf("aux----%s\n", aux);
-	//free(t->index);
 }

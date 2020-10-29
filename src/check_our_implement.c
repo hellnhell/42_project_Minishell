@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/10/13 20:06:48 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/29 19:09:33 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ int		check_our_implement(t_tab *t)
 		return(ft_echo(&t->tokens[1]));
 	else 
 		return (1);
-
 }

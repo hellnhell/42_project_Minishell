@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/28 17:58:19 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/29 20:58:08 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ int		ft_pwd(void);
 int		ft_cd(char **args);
 int		check_our_implement(t_tab *t);
 char	**ft_split_com(char const *s, char c, t_tab *t);
-int		not_command_error(t_tab *t);
 void	simbols_flags(t_tab *t, List *list, int doubl);
-int		simbols(t_tab *t, List *list, int j, int i);
+
 
 
 List    *new_list(void);
@@ -74,6 +73,9 @@ void    push_back(List *list, char *s);
 void    push_after_n(List *list, char *s, int n);
 List    *copy_list(List *list);
 void	create_list_elemnts(t_tab *t,List *list,int i);
+
+ 
+#define PROMPT 	"\e[91mM \e[92mA \e[93mR \e[94mI \e[95mS \e[96mH \e[91mE \e[92mL \e[93m% \e[0m "
 
 
 #endif

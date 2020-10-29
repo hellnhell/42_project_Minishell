@@ -6,19 +6,35 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/28 17:38:03 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/29 20:50:14 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void		iterate_list(List *list, t_tab *t, int i, char **env)
+{
+	Node	*iterator;
+	
+	iterator = list->first;
+	while (iterator != NULL)
+	{
+		printf("list----[%s]\n", iterator->element);
+		t->tokens = ft_split_list(iterator->element, ' ', env);
+		if(check_our_implement(t) == 1)
+		{
+			read_path(t, env);
+			check_path(t, env);
+		}
+		iterator = iterator->next;
+		free(t->tokens);
+	}
+	printf("\n");
+	i++;
+}
 
 char	*read_line(t_tab *t)
 {
-	char	*line;
-
-	// Aqui el line no hace nada?
-	line = NULL;
 	get_next_line(0, &t->line);
 	return(t->line);
 }
@@ -35,6 +51,8 @@ int		main(int argc, char **argv, char **env)
 	int		i;
 	int		j;
 	List	*list;
+	//pid_t	pid_min;
+	//int		status;
 	
 	if(!(t = malloc (sizeof(t_tab))))
 		return (1);
@@ -43,30 +61,22 @@ int		main(int argc, char **argv, char **env)
 	(void)argv;
 	while (1)
 	{
-		i = 0;
-		write(1, "marishell% ", 12);
-		t->line = read_line(t);
-		t->orders = ft_split(t->line, ';');
-		while (t->orders[i])
 		{
-			list = new_list();
-			create_list_elemnts(t, list, i);
-		 	Node *iterator = list->first;
-			while (iterator != NULL)
+			i = 0;
+			ft_putstr_fd(PROMPT, 1);
+			t->line = read_line(t);
+			t->orders = ft_split(t->line, ';');
+			while (t->orders[i])
 			{
-				printf("list----%s\n", iterator->element);
-				t->tokens = ft_split_list(iterator->element, ' ', env);
-				if(check_our_implement(t))
-				{
-					read_path(t, env);
-					check_path(t, env);
-				}
-				iterator = iterator->next;
-				free(t->tokens);
+				list = new_list();
+				create_list_elemnts(t, list, i);
+				iterate_list(list, t, i, env);
+				//destructor_list(list);
+				t->orders[i] = NULL;
 			}
-			printf("\n");
-			i++;
+			free(t->orders);
 		}
-		free(t->orders);
+		//system("leaks minishell");
 	}
+	
 }

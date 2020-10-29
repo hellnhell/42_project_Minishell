@@ -6,18 +6,18 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/26 20:18:18 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/10/29 18:59:09 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		not_command_error(t_tab *t)
+static void		not_command_error(t_tab *t)
 {
 	ft_putstr_fd("zsh : command not found: ", 1);
 	ft_putstr_fd(t->tokens[0], 1);
 	write(1, "\n", 2);	
-	return(0);
+	exit(0);
 }
 
 
@@ -27,23 +27,31 @@ int		check_path(t_tab *t, char **env)
 	int		j;
 	char	*aux;
 	char	*tmp;
+	int		status;
+	pid_t	pid;
 
 	i = 0;
-	//exit q hay q gestionar con errno
-	printf("tokens-----%s\n", t->tokens[0]);
-	if (!t->tokens[0])
-		printf("errrrrrroorrrrr\n");
-	while(t->path[i])
-	{
-		//printf("%d\n", i);
-		aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
-		tmp = aux;
-		j = execve(tmp, t->tokens, env);
-		free(aux);
-		i++;
+	pid = fork();
+	if (pid == 0)
+	{	
+	//if (!t->tokens[0])
+	//	printf("errrrrrroorrrrr\n");
+	
+		while(t->path[i])
+		{
+			
+			aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
+			tmp = aux;
+			j = execve(tmp, t->tokens, env);
+			free(aux);
+			i++;
+		}
+		if (j < 0)
+			not_command_error(t);
 	}
-	if (j < 0)
-		not_command_error(t);
+	else
+		waitpid(pid, &status, 0);
+	printf("%d\n", status);
 	return(1);
 }
 
