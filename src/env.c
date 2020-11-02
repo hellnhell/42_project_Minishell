@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 13:20:50 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/28 19:46:08 by isfernan         ###   ########.fr       */
+/*   Created: 2020/10/29 18:02:19 by isfernan          #+#    #+#             */
+/*   Updated: 2020/10/29 18:07:20 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "minishell.h"
 
-size_t		ft_strlen(const char *s)
+int     ft_env(char **env)
 {
-	size_t i;
+	int     l;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-size_t		ft_strlen2(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i] && s[i] != '=')
-		i++;
-	return (i);
+	l = -1;
+	while (env[++l])
+	{
+		ft_putstr_fd(env[l], 1);
+		if (env[l + 1])
+			ft_putchar_fd('\n', 1);
+	}
+	return (0);
 }

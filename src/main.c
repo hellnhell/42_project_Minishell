@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/29 20:50:14 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/02 21:25:53 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void		iterate_list(List *list, t_tab *t, int i, char **env)
 	while (iterator != NULL)
 	{
 		printf("list----[%s]\n", iterator->element);
-		t->tokens = ft_split_list(iterator->element, ' ', env);
-		if(check_our_implement(t) == 1)
+		t->tokens = ft_split_list(iterator->element, ' ', env);				//GESTIONAR EL EXIT STATUS
+		if(check_our_implement(t, env) == 1)
 		{
 			read_path(t, env);
 			check_path(t, env);
@@ -29,7 +29,7 @@ static void		iterate_list(List *list, t_tab *t, int i, char **env)
 		iterator = iterator->next;
 		free(t->tokens);
 	}
-	printf("\n");
+	//printf("\n");
 	i++;
 }
 
@@ -57,6 +57,8 @@ int		main(int argc, char **argv, char **env)
 	if(!(t = malloc (sizeof(t_tab))))
 		return (1);
 	initt(t);
+	ft_allocate_env(env, t);
+	ft_cpy_env(env, t);
 	(void)argc;
 	(void)argv;
 	while (1)

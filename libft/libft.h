@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/28 18:15:28 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/02 19:20:31 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,8 @@ char			*ft_strnew(size_t size);
 void			ft_strdel(char **as);
 int				ft_strcmp(const char *s1, const char *s2);
 char			**ft_split_list(char const *s, char c, char **env);
+void			ft_strpncpy(char *dest, char *str, int len);
+
+
 
 #endif

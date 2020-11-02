@@ -33,7 +33,8 @@ SRCSC		= ft_memset.c \
 				ft_split.c \
 				get_next_line/get_next_line.c \
 				ft_strcmp.c \
-				ft_split_list.c
+				ft_split_list.c \
+				ft_strpncpy.c
 
 SBONUS		= ft_lstadd_front_bonus.c\
 				ft_lstadd_back_bonus.c\

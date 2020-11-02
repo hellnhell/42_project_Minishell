@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/29 19:45:05 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/02 18:07:39 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	y = 0;
 	doubl = 0;
 	x = 0;
-	if (!(t->index = malloc(sizeof(char) * ft_strlen(t->orders[i]))))
+	if (!(t->index = malloc(sizeof(char *) * ft_strlen(t->orders[i]))))
 		return;
 	if (!(aux = malloc(sizeof(char) * ft_strlen(t->orders[i]) + 1)))
 		return;
@@ -100,4 +100,5 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	aux[x] = '\0';
 	t->index[y] = '\0';
 	push_back(list, aux);
+	free(t->index);
 }

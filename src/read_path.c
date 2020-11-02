@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/29 18:59:09 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/02 21:24:07 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static void		not_command_error(t_tab *t)
 {
-	ft_putstr_fd("zsh : command not found: ", 1);
+	ft_putstr_fd("bash: ", 1);
 	ft_putstr_fd(t->tokens[0], 1);
-	write(1, "\n", 2);	
-	exit(0);
+	ft_putstr_fd(": ", 1);
+	ft_putstr_fd("command not found\n", 1);
+	exit(127); // aqui gestionar $?
 }
 
 
@@ -50,9 +51,12 @@ int		check_path(t_tab *t, char **env)
 			not_command_error(t);
 	}
 	else
+	{
 		waitpid(pid, &status, 0);
-	printf("%d\n", status);
-	return(1);
+		t->status = status;
+	}
+	//printf("%d\n", status);
+	return(0);
 }
 
 void	read_path(t_tab *t, char **env)
@@ -65,8 +69,8 @@ void	read_path(t_tab *t, char **env)
 	{
 		//t->our_env[i] = ft_strdup(env[i]);
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
-		if (ft_strncmp("PATH=", env[i], 5) == 0)
-			t->path = ft_split(&env[i][5], ':');
+		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
+			t->path = ft_split(&t->env[i][5], ':');
 		i++;
 	}
 }
