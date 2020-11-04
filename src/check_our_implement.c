@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/10/29 19:13:20 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/04 19:22:18 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int			check_our_implement(t_tab *t, char **env)
 		return (ft_env(t->env));
 	if (ft_strncmp(t->tokens[0], "unset", 5) == 0 && ft_strlen(t->tokens[0]) == 5)
 		return (ft_unset(&t->tokens[1], t));
+	if (ft_strncmp(t->tokens[0], "exit", 4) == 0 && ft_strlen(t->tokens[0]) == 4)
+		return (ft_exit(&t->tokens[1]));
 	else
 		return (1);
 

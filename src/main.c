@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/29 18:19:28 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/04 16:42:26 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		main(int argc, char **argv, char **env)
 			}
 			printf("\n");
 			i++;
-			t->orders[i] = NULL;
+			//t->tokens[i] = NULL;
 		}
 		free(t->orders);
 	}

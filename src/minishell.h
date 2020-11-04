@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/10/29 19:15:30 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/04 19:20:49 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		ft_cd(char **args);
 int     ft_export(char **args, t_tab *t);
 int     ft_env(char **env);
 int		ft_unset(char **args, t_tab *t);
+int		ft_exit(char **args);
 int		check_our_implement(t_tab *t, char **env);
 char	**ft_split_com(char const *s, char c, t_tab *t);
 int		not_command_error(t_tab *t);
@@ -80,6 +81,9 @@ void	create_list_elemnts(t_tab *t,List *list,int i);
 
 void	ft_allocate_env(char **env, t_tab *t);
 void	ft_cpy_env(char **env, t_tab *t);
+void	ft_allocate_path(t_tab *t, char **path);
+void	ft_cpy_path(t_tab *t, char **path);
+
 
 
 #endif

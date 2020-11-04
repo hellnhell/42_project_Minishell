@@ -6,7 +6,7 @@
 #    By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/10/29 19:12:29 by isfernan         ###   ########.fr        #
+#    Updated: 2020/11/04 19:21:14 by isfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	=   src/main.c              \
 			src/export.c			\
 			src/unset.c				\
 			src/env.c				\
+			src/exit.c				\
 			src/ft_strjoin_sl.c		\
 			src/check_our_implement.c	\
 			src/split_dc.c 				\
