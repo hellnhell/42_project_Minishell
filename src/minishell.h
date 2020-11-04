@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/02 21:24:22 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:36:28 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include	<unistd.h>
 # include	<string.h>
 # include	<stdlib.h>
-#include	<errno.h>
+# include	<errno.h>
+# include 	<sys/types.h>
+# include 	<sys/wait.h>
 
 typedef struct		s_tab
 {
@@ -58,9 +60,11 @@ int		ft_cd(char **args);
 int     ft_export(char **args, t_tab *t);
 int     ft_env(char **env);
 int		ft_unset(char **args, t_tab *t);
-int		check_our_implement(t_tab *t, char **env);
+int		check_our_implement(t_tab *t);
 void	simbols_flags(t_tab *t, List *list, int doubl);
 int		ft_exit(char **args);
+void	free_matrix(char **matrix);
+
 
 
 

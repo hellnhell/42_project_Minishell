@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_elements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/02 18:07:39 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:06:38 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int		simbols(t_tab *t, List *list, int j, int i)
+static int		simbols(t_tab *t, int j, int i)
 {
 	int		simbol;
 
@@ -67,11 +67,9 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	int 				y;
 	int					x;
 	char				*aux;
-	int					doubl;
 
 	j = 0;
 	y = 0;
-	doubl = 0;
 	x = 0;
 	if (!(t->index = malloc(sizeof(char *) * ft_strlen(t->orders[i]))))
 		return;
@@ -79,7 +77,7 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 		return;
 	while (t->orders[i][j])
 	{
-		if (simbols(t, list, j, i) == 0) 
+		if (simbols(t, j, i) == 0) 
 			aux[x++] = t->orders[i][j];
 		else
 		{
@@ -95,10 +93,12 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 			x = 0;
 		}
 		//simbols_flags(t, list, doubl);
+		//free(aux);
 		j++;
 	}
 	aux[x] = '\0';
 	t->index[y] = '\0';
 	push_back(list, aux);
+	free(aux);
 	free(t->index);
 }

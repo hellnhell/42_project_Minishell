@@ -35,7 +35,6 @@ void    destructor_list(List *list) // no se si esta bien
         pop_front(list);
         i++;
     }
-    free(list);
 }
 
 int     size_list(List *lista)

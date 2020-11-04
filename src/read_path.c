@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/02 21:24:07 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/04 11:56:23 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		check_path(t_tab *t, char **env)
 	else
 	{
 		waitpid(pid, &status, 0);
-		t->status = status;
+		t->status = (status / 256);
 	}
 	//printf("%d\n", status);
 	return(0);
@@ -62,7 +62,6 @@ int		check_path(t_tab *t, char **env)
 void	read_path(t_tab *t, char **env)
 {
 	int		i;
-	char *test;
 
 	i = 0;
 	while (env[i])

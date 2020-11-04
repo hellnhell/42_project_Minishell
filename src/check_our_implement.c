@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_our_implement.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/02 19:17:11 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/04 12:00:03 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			check_our_implement(t_tab *t, char **env)
+int			check_our_implement(t_tab *t)
 {
 	if (!t->tokens[0])
 		return (1);

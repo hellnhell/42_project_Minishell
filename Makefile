@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
+#    By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/02 19:19:29 by emartin-         ###   ########.fr        #
+#    Updated: 2020/11/04 12:42:24 by hellnhell        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME	= 	minishell
 
 SRCS	=   src/main.c              \
 			src/read_path.c			\
-			src/split_line.c		\
 			src/echo.c				\
 			src/pwd.c				\
 			src/cd.c				\
@@ -23,27 +22,30 @@ SRCS	=   src/main.c              \
 			src/env.c				\
 			src/ft_strjoin_sl.c		\
 			src/check_our_implement.c	\
-			src/split_dc.c 				\
 			src/list_add_elements.c	\
 			src/list_pop_elements.c \
 			src/list_utils.c		\
 			src/create_elements.c	\
 			src/utils.c				\
 			src/exit.c
- 
-GCC			=   @gcc -Wall -Wextra -Werror -g3
-OBJS		=   $(SRCS:.c=.o)
-LIBFT		= 	libft/libft.a
-INCLUDES	=   ./
 
-all: 		$(NAME)
-$(NAME):	$(OBJS)
+LIBFT   =   libft/libft.a
+OBJS    =   $(SRCS:.c=.o)
+CFLAGS  = -Wall -Wextra -Werror -I -g3 -ggdb3
+
+$(NAME):    $(OBJS)
+		gcc ${CFLAGS} $(OBJS) ${LIBFT} -o $(NAME)
+		
+$(LIBFT):
 		@$(MAKE) -C libft
-		@$(GCC) -I$(INCLUDES) $(LIBFT) $(OBJS) -o $(NAME)
-clean:
-			-@$(RM) $(OBJS)
-			@$(MAKE) -C libft clean
-fclean:		clean
-			-@$(RM) $(NAME) $(LIBFT)
-re:			fclean all
+		
+all     : $(NAME)
+
+clean   :
+		rm -rf $(OBJS)
+		@$(MAKE) -C libft clean
+		
+fclean  :   clean
+		rm -rf $(NAME) $(LIBFT)
+		
 .PHONY:		all clean fclean re bonus

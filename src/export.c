@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 18:30:04 by isfernan          #+#    #+#             */
-/*   Updated: 2020/10/29 19:11:46 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/04 11:59:02 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static void	ft_change_env(char *str, t_tab *t)
 {
 	char	*var;
 	char	*val;
-	int		i;
+	size_t		i;
 	int		j;
 	int		z;
 

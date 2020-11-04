@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:12:06 by isfernan          #+#    #+#             */
-/*   Updated: 2020/10/29 19:44:36 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/04 11:59:34 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int  need_to_remove(char *s, char **env)
 {
 	int     i;
-	int     j;
+	size_t     j;
 
 	i = 0;
 	while (env[i])

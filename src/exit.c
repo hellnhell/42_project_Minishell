@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/02 21:09:57 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/04 12:58:29 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ int		ft_exit(char **args)
 {
 	int		j;
 	
-	j = ft_atoi(args[0]);
 	ft_putstr_fd("11exit\n", 1);
-	if (args)
+	if (args[0])
+	{
+		j = ft_atoi(args[0]);
 		ft_exit_args(args, j);
+	}
 	else
 		exit(0);
 	return(0);
