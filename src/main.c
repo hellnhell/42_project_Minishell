@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/04 16:42:26 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:13:25 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		main(int argc, char **argv, char **env)
 		 	Node *iterator = list->first;
 			while (iterator != NULL)
 			{
-				printf("list----%s\n", iterator->element);
+				//printf("list----%s\n", iterator->element);
 				t->tokens = ft_split_list(iterator->element, ' ', env);
 				if(check_our_implement(t, env))
 				{

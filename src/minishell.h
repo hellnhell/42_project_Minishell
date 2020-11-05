@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/04 19:20:49 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:59:03 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include	<unistd.h>
 # include	<string.h>
 # include	<stdlib.h>
-#include	<errno.h>
+# include	<errno.h>
+# include 	<sys/types.h>
+# include 	<signal.h>
 
 typedef struct		s_tab
 {
@@ -52,6 +54,7 @@ char	**split_line(char *line);
 void 	*ft_realloc(void *ptr, size_t originalsize, size_t newsize);
 char	*ft_strtok(char *str, char *sepa);
 char	*ft_strjoin_sl(const char *s1, const char *s2);
+char	*ft_strjoin_sl2(const char *s1, const char *s2);
 int		ft_echo(char **args);
 int		ft_pwd(void);
 int		ft_cd(char **args);

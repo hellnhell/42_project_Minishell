@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/28 19:46:13 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:19:52 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ typedef	struct	s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef	struct 		s_ints
+{
+	int			i;
+	int			counter;
+	int			j;
+}					t_ints;
 
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strncat(char *dest, char *src, unsigned int nb);

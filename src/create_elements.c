@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_elements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/10/28 18:13:21 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:43:06 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 		j++;
 	}
 	aux[x] = '\0';
-	printf("index---%s\n", t->index);
-	printf("auxj: %s\n", &aux[j]);
+	//printf("index---%s\n", t->index);
+	//printf("auxj: %s\n", &aux[j]);
 	push_back(list, aux);
 			//printf("aux----%s\n", aux);
 	free(t->index);

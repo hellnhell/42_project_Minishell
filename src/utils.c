@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:19:39 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/04 19:30:52 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/05 16:38:15 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_allocate_path(t_tab *t, char **path)
 		//t->env[l][c] = '\0';
 		l++;
 	}
-	t->path[l] = (char *)malloc(sizeof(char) * (ft_strlen(buff) + 11));
+	t->path[l] = (char *)malloc(sizeof(char) * (ft_strlen(buff) + 1));
 	free(buff);
 }
 
@@ -91,7 +91,6 @@ void	ft_cpy_path(t_tab *t, char **path)
 
 	buff = malloc(1024);
 	getcwd(buff, 1024);
-	s = ft_strjoin(buff, "/minishell");
 	l = 0;
 	while (path[l])
 	{
@@ -104,8 +103,6 @@ void	ft_cpy_path(t_tab *t, char **path)
         t->path[l][c] = '\0';
 		l++;
 	}
-	t->path[l] = ft_strcpy(t->path[l], s);
-	printf("------%s\n", t->path[l]);
+	t->path[l] = ft_strcpy(t->path[l], buff);
 	free(buff);
-	free(s);
 }

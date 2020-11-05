@@ -6,11 +6,13 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/04 19:28:29 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:52:22 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// Aquí hay que matar el proceso
 
 int		not_command_error(t_tab *t)
 {
@@ -29,26 +31,41 @@ int		check_path(t_tab *t, char **env)
 	char	*tmp;
 	int		status;
 	pid_t	pid;
+	char	*buff;
 
 	i = 0;
+	buff = malloc(1024);
+	getcwd(buff, 1024);
 	pid = fork();
 	if (pid == 0)
 	{	
 	//if (!t->tokens[0])
 	//	printf("errrrrrroorrrrr\n");
 	
-		while(t->path[i] && t->path[i + 1])
-		{
+		while(t->path[i])
+		{ // Esto igual da error porque t->tokens[0] puede no existir
+			if (t->tokens[0][0] == '.')
+			{
+				aux = ft_strjoin_sl2(buff, t->tokens[0]);
+				tmp = aux;
+				//printf("lo que estamos probando con el . es %s\n", tmp);
+				j = execve(tmp, t->tokens, env);
+				free(aux);
+				if (j >= 0)
+					continue ;
+			}
+			else if (t->tokens[0][0] == '/')
+			{
+				j = execve(t->tokens[0], t->tokens, env);
+				if (j >= 0)
+					continue ;
+			}			
 			aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
 			tmp = aux;
 			j = execve(tmp, t->tokens, env);
+			//printf("lo que estamos probando es %s\n", tmp);
 			free(aux);
 			i++;
-		}
-		if (t->path[i])
-		{
-			printf("hola que tal------%s\n", t->path[i]);
-			j = execve(t->path[i], t->tokens, env);
 		}
 		if (j < 0)
 			not_command_error(t);
@@ -58,6 +75,7 @@ int		check_path(t_tab *t, char **env)
 		waitpid(pid, &status, 0);
 		//t->status = (status / 256);
 	}
+	free(buff);
 	//printf("%d\n", status);
 	return(0);
 }
