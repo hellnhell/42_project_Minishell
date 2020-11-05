@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/04 13:36:28 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 20:52:54 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct		s_tab
 	char		*index;
 	char		**env;
 	int			status;
+	char		*aux;
 }					t_tab;
 
 typedef struct Node
@@ -86,6 +87,8 @@ void	create_list_elemnts(t_tab *t,List *list,int i);
 
 void	ft_allocate_env(char **env, t_tab *t);
 void	ft_cpy_env(char **env, t_tab *t);
+void	ft_allocate_path(t_tab *t, char **path);
+void	ft_cpy_path(t_tab *t, char **path);
 
 
 #endif

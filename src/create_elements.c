@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/04 13:06:38 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 20:20:24 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,23 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	unsigned int		j;
 	int 				y;
 	int					x;
-	char				*aux;
+	//char				*aux;
 
 	j = 0;
 	y = 0;
 	x = 0;
 	if (!(t->index = malloc(sizeof(char *) * ft_strlen(t->orders[i]))))
 		return;
-	if (!(aux = malloc(sizeof(char) * ft_strlen(t->orders[i]) + 1)))
+	
+	if (!(t->aux = malloc(sizeof(char) * ft_strlen(t->orders[i]) + 1)))
 		return;
 	while (t->orders[i][j])
 	{
 		if (simbols(t, j, i) == 0) 
-			aux[x++] = t->orders[i][j];
+		{
+			t->aux[x] = t->orders[i][j];
+			x++;
+		}
 		else
 		{
 			if (t->orders[i][j] == '>' && t->orders[i][j + 1] == '>')
@@ -88,17 +92,17 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 			}
 			else
 				t->index[y++] = t->orders[i][j];
-			aux[x] = '\0';
-			push_back(list, aux);
+			t->aux[x] = '\0';
+			push_back(list, t->aux);
 			x = 0;
 		}
 		//simbols_flags(t, list, doubl);
-		//free(aux);
+		//free(t->aux);
 		j++;
 	}
-	aux[x] = '\0';
+	t->aux[x] = '\0';
 	t->index[y] = '\0';
-	push_back(list, aux);
-	free(aux);
+	push_back(list, t->aux);
+	free(t->aux);
 	free(t->index);
 }

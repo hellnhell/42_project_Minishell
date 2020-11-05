@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/04 13:39:38 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 20:39:40 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		free_matrix(char **matrix)
 	free(matrix);
 }
 
-static void		iterate_list(List *list, t_tab *t, int i, char **env)
+static void		iterate_list(List *list, t_tab *t, char **env)
 {
 	Node	*iterator;
 	
@@ -33,7 +33,7 @@ static void		iterate_list(List *list, t_tab *t, int i, char **env)
 	while (iterator != NULL)
 	{
 		printf("list----[%s]\n", iterator->element);
-		t->tokens = ft_split_list(iterator->element, ' ', env);	//LEAK--- deberia liberarse en free matrix
+		t->tokens = ft_split_list(iterator->element, ' ', env);	
 		if(check_our_implement(t) == 1)
 		{
 			read_path(t, env);
@@ -41,9 +41,9 @@ static void		iterate_list(List *list, t_tab *t, int i, char **env)
 		}
 		iterator = iterator->next;
 	}
+	destructor_list(list);
 	free_matrix(t->tokens);
-	//printf("\n");
-	i++;
+	//LEAK--- deberia liberarse en free matrix
 }
 
 char	*read_line(t_tab *t)
@@ -83,10 +83,11 @@ int		main(int argc, char **argv, char **env)
 			while (t->orders[i])
 			{
 				list = new_list();
-				create_list_elemnts(t, list, i); //LEAK -still reachable --- liberar listas
-				iterate_list(list, t, i, env); //LEAK -still reachable
-				t->orders[i] = NULL;
+				create_list_elemnts(t, list, i);
+				iterate_list(list, t, env); //LEAK -still reachable
+				printf("orders----%s\n", t->orders[i]);
 				i++;
+				t->orders[i] = NULL;
 			}
 			free_matrix(t->orders);
 			//system("leaks minishell");

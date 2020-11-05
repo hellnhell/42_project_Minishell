@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/04 11:56:23 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 20:59:26 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ int		check_path(t_tab *t, char **env)
 	{	
 	//if (!t->tokens[0])
 	//	printf("errrrrrroorrrrr\n");
-	
 		while(t->path[i])
 		{
-			
 			aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
 			tmp = aux;
 			j = execve(tmp, t->tokens, env);
@@ -68,6 +66,7 @@ void	read_path(t_tab *t, char **env)
 	{
 		//t->our_env[i] = ft_strdup(env[i]);
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
+		//PROBAR "ASDAS" CON LOS CAMBIOS DE ISA
 		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
 			t->path = ft_split(&t->env[i][5], ':');
 		i++;
