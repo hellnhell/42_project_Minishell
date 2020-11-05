@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nazurmen <nazurmen@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:18:50 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/09/25 18:53:58 by nazurmen         ###   ########.fr       */
+/*   Updated: 2020/11/05 21:36:33 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_pwd(void)
 {

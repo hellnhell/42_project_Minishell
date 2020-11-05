@@ -6,13 +6,13 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/04 12:58:29 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 22:02:39 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-static void		ft_exit_args(char **args, int j)
+static void		ft_exit_args(char **args, int j) //PROBAR A METER NUESTRO PRINTF
 {
 	int		i;
 	int		k;

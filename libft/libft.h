@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/04 12:51:13 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 21:14:10 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 # include <stddef.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
 
 typedef	struct	s_list
 {
@@ -21,13 +23,20 @@ typedef	struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+typedef	struct 		s_ints
+{
+	int			i;
+	int			counter;
+	int			j;
+}					t_ints;
+
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strncat(char *dest, char *src, unsigned int nb);
 char			*ft_strcat(char *dest, char *src);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
-void			*ft_memcpy(void *dst, const void *src, size_t n);
-//void			*ft_memccpy(void *dst, const void *src, int c, size_t n);
+//void			*ft_memcpy(void *dst, const void *src, size_t n);
+void			*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void			*ft_memmove(void *dst, const void *src, size_t len);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -81,6 +90,31 @@ void			ft_strdel(char **as);
 int				ft_strcmp(const char *s1, const char *s2);
 char			**ft_split_list(char const *s, char c, char **env);
 void			ft_strpncpy(char *dest, char *str, int len);
+
+typedef struct Node
+{
+    char    *element;
+    struct Node *next;
+} Node;
+
+typedef struct  List {
+    Node	*first;
+	int 	size;
+} List;
+
+List    *new_list(void);
+Node    *new_node(char *s);
+void    destructor_node(Node *node);
+void    destructor_list(List *list);
+void    pop_front(List *list);
+void    pop_back(List *list);
+void    pop_n_element(List *list, int n);
+void    push_front(List *list, char *s);
+void    push_back(List *list, char *s);
+void    push_after_n(List *list, char *s, int n);
+List    *copy_list(List *list);
+
+
 
 
 

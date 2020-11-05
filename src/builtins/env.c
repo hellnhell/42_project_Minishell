@@ -6,11 +6,11 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:02:19 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/04 13:14:07 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 21:36:13 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_cpy_env(char **env, t_tab *t)
 {

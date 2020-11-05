@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/05 20:52:54 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 21:10:17 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,7 @@ typedef struct		s_tab
 	char		*aux;
 }					t_tab;
 
-typedef struct Node
-{
-    char    *element;
-    struct Node *next;
-} Node;
 
-typedef struct  List {
-    Node	*first;
-	int 	size;
-} List;
 
 
 char	*read_line(t_tab *t);
@@ -65,22 +56,12 @@ int		check_our_implement(t_tab *t);
 void	simbols_flags(t_tab *t, List *list, int doubl);
 int		ft_exit(char **args);
 void	free_matrix(char **matrix);
-
-
-
-
-List    *new_list(void);
-Node    *new_node(char *s);
-void    destructor_node(Node *node);
-void    destructor_list(List *list);
-void    pop_front(List *list);
-void    pop_back(List *list);
-void    pop_n_element(List *list, int n);
-void    push_front(List *list, char *s);
-void    push_back(List *list, char *s);
-void    push_after_n(List *list, char *s, int n);
-List    *copy_list(List *list);
 void	create_list_elemnts(t_tab *t,List *list,int i);
+
+
+
+
+
 
  
 #define PROMPT "\e[91mM \e[92mA \e[93mR \e[94mI \e[95mS \e[96mH \e[91mE \e[92mL \e[93m% \e[0m "

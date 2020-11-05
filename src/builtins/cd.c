@@ -6,11 +6,11 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 19:04:47 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/04 12:46:16 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 21:37:08 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_cd(char **args)
 {

@@ -6,11 +6,11 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 18:30:04 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/04 11:59:02 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 21:36:30 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void	ft_no_options(t_tab *t)
 {

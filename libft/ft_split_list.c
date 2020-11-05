@@ -6,7 +6,7 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/04 12:52:43 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 21:02:06 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,49 +22,84 @@
 
 // He cambiado esta función aquí pero en el otro split no!!!!
 
-static int	ft_countwords(char const *s, char c)
+void	ft_skipdoubles(t_ints *a, char const *s, char c)
 {
-	int		i;
-	int		counter;
-
-	counter = 0;
-	i = 0;
-	while (s[i])
+	while (s[a->i] == '\"')
 	{
-		while (s[i] == '\"')
+		a->i++;
+		while (s[a->i] && s[a->i] != '\"')
+			a->i++;
+		a->i++;
+		if (s[a->i] == c)
+			a->counter++;
+	}
+}
+
+void	ft_skipsimples(t_ints *a, char const *s, char c)
+{
+	while (s[a->i] == '\'')
+	{
+		a->i++;
+		while (s[a->i] && s[a->i] != '\'')
+			a->i++;
+		a->i++;
+		if (s[a->i] == c)
+			a->counter++;
+	}
+}
+
+void	ft_skip_all(t_ints *a, char const *s, char c)
+{
+	while (s[a->i] && s[a->i] != c)
+	{
+		a->i++;
+		if (s[a->i] && s[a->i] == '\"')
 		{
-			i++;
-			while (s[i] && s[i] != '\"')
-				i++;
-			i++;
-			if (s[i] == c)
-				counter++;
+			a->i++;
+			while (s[a->i] && s[a->i] != '\"')
+				a->i++;
 		}
-		if (s[i] == c)
+		if (s[a->i] && s[a->i] == '\'')
 		{
-			i++;
-			continue ;
-		}
-		counter++;
-		while (s[i] && s[i] != c)
-		{
-			i++;
-			if (s[i] && s[i] == '\"')
-			{
-				i++;
-				while (s[i] && s[i] != '\"')
-					i++;
-			}
+			a->i++;
+			while (s[a->i] && s[a->i] != '\'')
+				a->i++;
 		}
 	}
-	return (counter);
+}
+
+static int	ft_countwords(char const *s, char c)
+{
+	t_ints	*a;
+	int		n;
+
+	a = malloc(sizeof(t_ints));
+	a->counter = 0;
+	a->i = 0;
+	while (s[a->i])
+	{
+		ft_skipdoubles(a, s, c);
+		ft_skipsimples(a, s, c);
+		if (s[a->i] == c)
+		{
+			a->i++;
+			continue ;
+		}
+		a->counter++;
+		ft_skip_all(a, s, c);
+	}
+	n = a->counter;
+	free(a);
+	return (n);
 }
 
 /*
 ** Esta función recibe una cadena cuyo primer caracter es el
-** que va después de $ y devuelve el valor de la cadena de 
-**  caracteres por la que vamos a tener que sustituir la 
+** que va después de $ y devuelve el valor de la cadena de
+** caracteres por la que vamos a tener que sustituir la
 ** variable de ambiente correspondiente
+**
+** env[i] + j + 1 -> el 1 es por el dólar
 */
 
 int			ft_dollar_count(char const *s, char **env)
@@ -78,9 +113,10 @@ int			ft_dollar_count(char const *s, char **env)
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
-		if (!(n = ft_strncmp(s, env[i], j)) && (!s[j] || s[j] == ' ' || s[j] == '\"' || s[j] == '\'' || s[j] == '$'))
+		if (!(n = ft_strncmp(s, env[i], j)) && (!s[j] || s[j] == ' ' ||
+			s[j] == '\"' || s[j] == '\'' || s[j] == '$'))
 		{
-			n = ft_strlen(env[i] + j + 1) - j; // Le quitamos 1 por el dólar
+			n = ft_strlen(env[i] + j + 1) - j;
 			return (n);
 		}
 		i++;
@@ -88,56 +124,89 @@ int			ft_dollar_count(char const *s, char **env)
 	return (0);
 }
 
-static int	ft_size(char const *s, char c, int j, char **env)
+void	ft_dollar_found(t_ints *a, char **env, char const *s)
 {
-	int		counter;
-	int		n;
+	a->i = ft_dollar_count(&s[a->j + 1], env);
+	a->counter += a->i;
+	a->j++;
+	if (a->i == 0)
+		while (s[a->j] && s[a->j] != ' ' && s[a->j] != '\"' &&
+			s[a->j] != '\'' && s[a->j] != '$')
+			a->j++;
+}
 
-	counter = 0;
-	while (s[j] == c)
-		j++;
-	while (s[j] && s[j] != c)
+void	ft_quotations_found(t_ints *a, char **env, char const *s)
+{
+	a->j++;
+	while (s[a->j] && s[a->j] != '\"')
 	{
-		n = 1;
-		if (s[j] == '$')
+		if (s[a->j] == '$')
 		{
-			n = ft_dollar_count(&s[j + 1], env);
-			counter += n;
-			j++;
-			if (n == 0)
-				while (s[j] && s[j] != ' ' && s[j] != '\"' && s[j] != '\'' && s[j] != '$')
-					j++;
+			a->i = ft_dollar_count(&s[a->j + 1], env);
+			a->counter += a->i;
+			a->j++;
+			if (a->i == 0)
+				while (s[a->j] && s[a->j] != ' ' && s[a->j] != '\"'
+					&& s[a->j] != '\'' && s[a->j] != '$')
+					a->j++;
 		}
-		if (s[j] == '\"')
+		else
 		{
-			j++;
-			while (s[j] && s[j] != '\"')
-			{
-				if (s[j] == '$')
-				{
-					n = ft_dollar_count(&s[j + 1], env);
-					counter += n;
-					j++;
-					if (n == 0)
-						while (s[j] && s[j] != ' ' && s[j] != '\"' && s[j] != '\'' && s[j] != '$')
-							j++;
-				}
-				else
-				{
-					j++;
-					counter++;
-				}
-			}
-			counter = counter - 1;
-		}
-		if (n != 0)
-		{
-			counter++;
-			j++;
+			a->j++;
+			a->counter++;
 		}
 	}
-	return (counter + 1);
+	a->counter = a->counter - 1;
 }
+
+void	ft_simpquotations_found(t_ints *a, char const *s)
+{
+	a->j++;
+	while (s[a->j] && s[a->j] != '\'')
+	{
+		a->j++;
+		a->counter++;
+	}
+	a->counter = a->counter - 1;
+}
+
+void	ft_not_zero(t_ints *a)
+{
+	a->counter++;
+	a->j++;
+}
+
+static int	ft_size(char const *s, char c, int j, char **env)
+{
+	t_ints	*a;
+	int		n;
+
+	a = malloc(sizeof(t_ints));
+	a->counter = 0;
+	a->j = j;
+	while (s[a->j] == c)
+		a->j++;
+	while (s[a->j] && s[a->j] != c)
+	{
+		a->i = 1;
+		if (s[a->j] == '$')
+			ft_dollar_found(a, env, s);
+		if (s[a->j] == '\"')
+			ft_quotations_found(a, env, s);
+		if (s[a->j] == '\'')
+			ft_simpquotations_found(a, s);
+		if (a->i != 0)
+			ft_not_zero(a);
+	}
+	n = a->counter + 1;
+	free(a);
+	return (n);
+}
+
+/*
+** Devolvemos i + 1 porque la i puede ser 0 y no queremos devolver
+** 0 si lo hemos encontrado
+*/
 
 int			ft_check_dollar(char const *s, char **env)
 {
@@ -148,13 +217,13 @@ int			ft_check_dollar(char const *s, char **env)
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
-		if (!(ft_strncmp(s, env[i], j)) && (!s[j] || s[j] == ' ' || s[j] == '\"' || s[j] == '\'' || s[j] == '$'))
-			return (i + 1); // Devolvemos i + 1 porque la i puede ser 0 y no queremos devolver 0 si lo hemos encontrado
+		if (!(ft_strncmp(s, env[i], j)) && (!s[j] || s[j] == ' ' ||
+			s[j] == '\"' || s[j] == '\'' || s[j] == '$'))
+			return (i + 1);
 		i++;
 	}
 	return (0);
 }
-
 
 int			skip_env(char const *s)
 {
@@ -166,66 +235,92 @@ int			skip_env(char const *s)
 	return (i);
 }
 
-static int	ft_cpyword(char const *s, char **env, int j, char *str)
+/*
+** en env[n - 1] le restamos uno porque hemos devuleto el índice +1
+*/
+
+void	ft_dollar_cpy(t_ints *a, char **env, char *str, char const *s)
 {
-	int		i;
-	char	c;
 	int		n;
 	int		z;
 
-	i = 0;
-	c = ' ';
-	while (s[j] == c)
-		j++;
-	while (s[j] && s[j] != c)
+	a->j++;
+	if ((n = ft_check_dollar(&s[a->j], env)))
 	{
-		if (s[j] == '$')
-		{
-			j++;
-			if ((n = ft_check_dollar(&s[j], env)))
-			{
-				z = ft_strlen2(env[n - 1]) + 1;
-				while (env[n - 1][z]) // Le restamos 1 porque hemos devuelto el índice + 1
-					str[i++] = env[n - 1][z++];
-				j += skip_env(&s[j]);
-			}
-			else
-				j += skip_env(&s[j]);
-		}
-		if (s[j] == '\"')
-		{
-			j++;
-			while (s[j] && s[j] != '\"')
-			{
-				if (s[j] == '$' && (n = ft_check_dollar(&s[j + 1], env)))
-				{
-					z = ft_strlen2(env[n - 1]) + 1;
-					while (env[n - 1][z]) // Le restamos 1 porque hemos devuelto el índice + 1
-						str[i++] = env[n - 1][z++];
-					j += skip_env(&s[j + 1]);
-				}
-				else if (s[j] == '$')
-					j += skip_env(&s[j + 1]);
-				else
-					str[i++] = s[j];
-				j++;
-			}
-			j++;
-		}
-		if (s[j] == '\'')
-		{
-			j++;
-			while (s[j] && s[j] != '\'')
-			{
-				str[i++] = s[j++];
-			}
-			j++;
-		}
-		else if (s[j] && s[j] != c && s[j] != '$')
-			str[i++] = s[j++];
+		z = ft_strlen2(env[n - 1]) + 1;
+		while (env[n - 1][z])
+			str[a->i++] = env[n - 1][z++];
+		a->j += skip_env(&s[a->j]);
 	}
-	str[i] = 0;
-	return (j);
+	else
+		a->j += skip_env(&s[a->j]);
+}
+
+/*
+** en env[n - 1] le restamos uno porque hemos devuleto el índice +1
+*/
+
+void	ft_quotations_cpy(t_ints *a, char **env, char *str, char const *s)
+{
+	int		n;
+	int		z;
+
+	a->j++;
+	while (s[a->j] && s[a->j] != '\"')
+	{
+		if (s[a->j] == '$' && (n = ft_check_dollar(&s[a->j + 1], env)))
+		{
+			z = ft_strlen2(env[n - 1]) + 1;
+			while (env[n - 1][z])
+				str[a->i++] = env[n - 1][z++];
+			a->j += skip_env(&s[a->j + 1]);
+		}
+		else if (s[a->j] == '$')
+			a->j += skip_env(&s[a->j + 1]);
+		else
+			str[a->i++] = s[a->j];
+		a->j++;
+	}
+	a->j++;
+}
+
+void	ft_simpquotations_cpy(t_ints *a, char *str, char const *s)
+{
+	a->j++;
+	while (s[a->j] && s[a->j] != '\'')
+	{
+		str[a->i++] = s[a->j++];
+	}
+	a->j++;
+}
+
+static int	ft_cpyword(char const *s, char **env, int j, char *str)
+{
+	t_ints	*a;
+	char	c;
+	int		n;
+
+	a = malloc(sizeof(t_ints));
+	a->i = 0;
+	a->j = j;
+	c = ' ';
+	while (s[a->j] == c)
+		a->j++;
+	while (s[a->j] && s[a->j] != c)
+	{
+		if (s[a->j] == '$')
+			ft_dollar_cpy(a, env, str, s);
+		if (s[a->j] == '\"')
+			ft_quotations_cpy(a, env, str, s);
+		if (s[a->j] == '\'')
+			ft_simpquotations_cpy(a, str, s);
+		else if (s[a->j] && s[a->j] != c && s[a->j] != '$')
+			str[a->i++] = s[a->j++];
+	}
+	str[a->i] = 0;
+	n = a->j;
+	free(a);
+	return (n);
 }
 
 char		**ft_split_list(char const *s, char c, char **env)
@@ -233,7 +328,6 @@ char		**ft_split_list(char const *s, char c, char **env)
 	int		i;
 	int		j;
 	int		words;
-	int		p;
 	char	**tab;
 
 	j = 0;
@@ -247,7 +341,7 @@ char		**ft_split_list(char const *s, char c, char **env)
 	i = 0;
 	while (i < words)
 	{
-		tab[i] = malloc(sizeof(char) * (p = ft_size(s, c, j, env)));
+		tab[i] = malloc(sizeof(char) * ft_size(s, c, j, env));
 		j = ft_cpyword(s, env, j, tab[i]);
 		i++;
 	}

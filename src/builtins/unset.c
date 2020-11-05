@@ -6,11 +6,11 @@
 /*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:12:06 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/04 11:59:34 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/05 21:36:36 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int  need_to_remove(char *s, char **env)
 {

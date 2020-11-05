@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 19:32:51 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/10/21 19:29:23 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/05 21:35:58 by hellnhell        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_echo(char **args)
 {

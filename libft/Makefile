@@ -1,7 +1,7 @@
 SRCSC		= ft_memset.c \
 				ft_bzero.c \
-				ft_memcpy.c \
 				ft_memmove.c \
+				ft_memcpy.c \
 				ft_memchr.c \
 				ft_memcmp.c \
 				ft_strlen.c \
@@ -34,7 +34,11 @@ SRCSC		= ft_memset.c \
 				get_next_line/get_next_line.c \
 				ft_strcmp.c \
 				ft_split_list.c \
-				ft_strpncpy.c
+				ft_strpncpy.c	\
+				list_add_elements.c \
+				list_pop_elements.c \
+				list_utils.c
+			
 
 SBONUS		= ft_lstadd_front_bonus.c\
 				ft_lstadd_back_bonus.c\
@@ -45,7 +49,7 @@ SBONUS		= ft_lstadd_front_bonus.c\
 				ft_lstlast_bonus.c\
 				ft_lstnew_bonus.c\
 				ft_lstmap_bonus.c\
-			
+
 SRCSH		= libft.h
 
 OBJS		= $(SRCSC:%.c=%.o)
@@ -62,18 +66,24 @@ RM			= rm -f
 
 CFLAGS		= -Wall -Wextra -Werror
 
+PRINTF 		= printf/printf.a
+
 $(NAME):	${OBJS}
 			@echo "libft.a - compiling"
-			@${AR} ${NAME} ${OBJS} ${SRCSH}
-			@echo "libft.a - done"
+			@${AR} ${NAME} ${OBJS} ${PRINTF} ${SRCSH} 
+
+$(PRINTF):
+		@$(MAKE) -C printf
+		@echo "libft.a - done"
 
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS} ${OBONUS}
+			${RM} ${OBJS} ${OBONUS} 
+			@$(MAKE) -C printf clean
 
 fclean:		clean
-			${RM} ${NAME}
+			${RM} ${NAME} ${PRINTF} 
 
 re:			fclean all
 
