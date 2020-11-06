@@ -6,12 +6,15 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/05 17:59:03 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/06 19:49:41 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define PROMPT "\e[91mM \e[92mA \e[93mR \e[94mI \e[95mS \e[96mH \e[91mE \e[92mL \e[93mL \e[94m% \e[0m "
+
 
 # include	"../libft/libft.h"
 # include	"../libft/get_next_line/get_next_line.h"
@@ -64,7 +67,6 @@ int		ft_unset(char **args, t_tab *t);
 int		ft_exit(char **args);
 int		check_our_implement(t_tab *t, char **env);
 char	**ft_split_com(char const *s, char c, t_tab *t);
-int		not_command_error(t_tab *t);
 void	simbols_flags(t_tab *t, List *list, int doubl);
 int		simbols(t_tab *t, List *list, int j, int i);
 

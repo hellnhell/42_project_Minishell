@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/05 19:13:25 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/06 20:01:57 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		main(int argc, char **argv, char **env)
 	while (1)
 	{
 		i = 0;
-		write(1, "marishell% ", 12);
+		ft_putstr_fd(PROMPT, 1);
 		t->line = read_line(t);
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])
@@ -64,12 +64,27 @@ int		main(int argc, char **argv, char **env)
 					check_path(t, env);
 				}
 				iterator = iterator->next;
-				free(t->tokens);
+				free(t->tokens); // Liberarlo bien
 			}
-			printf("\n");
 			i++;
+			//system("leaks minishell");
 			//t->tokens[i] = NULL;
 		}
 		free(t->orders);
 	}
 }
+
+/*
+void		free_matrix(char **matrix)
+{
+	int		i;
+	
+	i = 0;
+	while(matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}
+*/

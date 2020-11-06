@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/05 17:43:06 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/06 20:05:21 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	doubl = 0;
 	x = 0;
 	if (!(t->index = malloc(sizeof(char *) * ft_strlen(t->orders[i]))))
-		return;
+		return ;
 	if (!(aux = malloc(sizeof(char) * ft_strlen(t->orders[i]) + 1)))
-		return;
+		return ;
 	while (t->orders[i][j])
 	{
 		if (simbols(t, list, j, i) == 0) 

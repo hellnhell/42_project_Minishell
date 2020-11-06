@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/04 19:20:38 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/06 19:51:58 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void		ft_exit_args(char **args, int j)
 	{
 		if(++k > 1)
 		{
-			ft_putstr_fd("bash: exit: too many arguments", 1);				
-			exit(1);
+			ft_putstr_fd("bash: exit: too many arguments\n", 1);				
+			return ;
 		}
 	}
 	if(ft_strncmp(args[0], "-", 1) == 0)			

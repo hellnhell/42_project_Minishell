@@ -6,20 +6,19 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/05 17:52:22 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/06 19:49:27 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Aquí hay que matar el proceso
-
-int		not_command_error(t_tab *t)
+static void		not_command_error(t_tab *t)
 {
-	ft_putstr_fd("zsh : command not found: ", 1);
+	ft_putstr_fd("bash: ", 1);
 	ft_putstr_fd(t->tokens[0], 1);
-	write(1, "\n", 2);	
-	return(0);
+	ft_putstr_fd(": ", 1);
+	ft_putstr_fd("command not found\n", 1);
+	exit(127); // aqui gestionar $?
 }
 
 
