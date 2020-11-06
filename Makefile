@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+         #
+#    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/05 21:35:34 by hellnhell        ###   ########.fr        #
+#    Updated: 2020/11/06 17:29:10 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,24 +25,20 @@ SRCS	=   src/main.c              \
 			src/builtins/unset.c				\
 			src/builtins/env.c				\
 			src/builtins/exit.c
+			 \
+GCC			=   @gcc -Wall -Wextra -Werror -g3
+OBJS		=   $(SRCS:.c=.o)
+LIBFT		= libft/libft.a
+INCLUDES	=   ./
 
-LIBFT   =   libft/libft.a
-OBJS    =   $(SRCS:.c=.o)
-CFLAGS  = -Wall -Wextra -Werror -I -g3 -ggdb3
-
-$(NAME):    $(OBJS)
-		gcc ${CFLAGS} $(OBJS) ${LIBFT} -o $(NAME)
-		
-$(LIBFT):
+all: $(NAME)
+$(NAME):	$(OBJS)
 		@$(MAKE) -C libft
-		
-all     : $(NAME)
-
-clean   :
-		rm -rf $(OBJS)
-		@$(MAKE) -C libft clean
-		
-fclean  :   clean
-		rm -rf $(NAME) $(LIBFT)
-		
+		@$(GCC) -I$(INCLUDES) $(LIBFT) $(OBJS) -o $(NAME)
+clean:
+			-@$(RM) $(OBJS)
+			@$(MAKE) -C libft clean
+fclean:		clean
+			-@$(RM) $(NAME) $(LIBFT)
+re:			fclean all
 .PHONY:		all clean fclean re bonus
