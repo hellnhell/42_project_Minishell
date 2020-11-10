@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/06 17:35:01 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:59:34 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ typedef	struct	s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct		s_tab
+{
+	char		*line;
+	char		**tokens;
+	char		**orders;
+	char		**path;
+	char		**args;
+	char		**command;
+	char		*index;
+	char		**env;
+	int			status;
+	char		*aux;
+}					t_tab;
 
 typedef	struct 		s_ints
 {
@@ -88,7 +102,7 @@ size_t			ft_line_len(const char *s);
 char			*ft_strnew(size_t size);
 void			ft_strdel(char **as);
 int				ft_strcmp(const char *s1, const char *s2);
-char			**ft_split_list(char const *s, char c, char **env);
+char			**ft_split_list(char const *s, char c, t_tab *t);
 void			ft_strpncpy(char *dest, char *str, int len);
 
 typedef struct Node

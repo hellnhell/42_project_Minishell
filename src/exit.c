@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/06 19:37:22 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:22:43 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		ft_exit_args(char **args, int j)
 		if(++k > 1)
 		{
 			ft_putstr_fd("bash: exit: too many arguments\n", 1);				
-			exit(1);
+			return ;
 		}
 	}
 	if(ft_strncmp(args[0], "-", 1) == 0)			

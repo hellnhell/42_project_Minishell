@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/06 17:57:17 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/10 18:00:27 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int			ft_dollar_count(char const *s, char **env)
 
 	i = 0;
 	n = 0;
+	if (s[0] == '?')
+		return (3);
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
@@ -216,6 +218,8 @@ int			ft_check_dollar(char const *s, char **env)
 	int		j;
 
 	i = 0;
+	if (s[0] == '?')
+		return (-1);
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
@@ -254,6 +258,8 @@ void	ft_dollar_cpy(t_ints *a, char **env, char *str, char const *s)
 			str[a->i++] = env[n - 1][z++];
 		a->j += skip_env(&s[a->j]);
 	}
+	else if (n == -1)
+		str[a->i++] = '?';
 	else
 		a->j += skip_env(&s[a->j]);
 }
@@ -325,7 +331,7 @@ static int	ft_cpyword(char const *s, char **env, int j, char *str)
 	return (n);
 }
 
-char		**ft_split_list(char const *s, char c, char **env)
+char		**ft_split_list(char const *s, char c, t_tab *t)
 {
 	int		i;
 	int		j;
@@ -343,8 +349,8 @@ char		**ft_split_list(char const *s, char c, char **env)
 	i = 0;
 	while (i < words)
 	{
-		tab[i] = malloc(sizeof(char) * ft_size(s, c, j, env));
-		j = ft_cpyword(s, env, j, tab[i]);
+		tab[i] = malloc(sizeof(char) * ft_size(s, c, j, t->env));
+		j = ft_cpyword(s, t->env, j, tab[i]);
 		i++;
 	}
 	return (tab);

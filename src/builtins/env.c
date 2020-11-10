@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:02:19 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/05 21:36:13 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/10 17:45:10 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ft_allocate_env(char **env, t_tab *t)
 		l++;
 	}
 	ft_cpy_env(env, t);
-	free_matrix(t->env);
 }
 
 

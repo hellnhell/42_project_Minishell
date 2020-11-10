@@ -67,21 +67,17 @@ RM			= rm -f
 
 CFLAGS		= -Wall -Wextra -Werror
 
-PRINTF 		= printf/printf.a
-
 $(NAME):	${OBJS}
 			@echo "libft.a - compiling"
-			@${AR} ${NAME} ${OBJS} ${PRINTF} ${SRCSH} 
+			@${AR} ${NAME} ${OBJS} ${SRCSH} 
+			@echo "libft.a - done"
 
-$(PRINTF):
-		@$(MAKE) -C printf
-		@echo "libft.a - done"
 
 all:		${NAME}
 
 clean:
 			${RM} ${OBJS} ${OBONUS} 
-			@$(MAKE) -C printf clean
+
 
 fclean:		clean
 			${RM} ${NAME} ${PRINTF} 

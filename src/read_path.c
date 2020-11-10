@@ -6,15 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/06 17:40:24 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:46:21 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Aquí hay que matar el proceso
-
-int		not_command_error(t_tab *t)
+static void		not_command_error(t_tab *t)
 {
 	ft_putstr_fd("bash: ", 1);
 	ft_putstr_fd(t->tokens[0], 1);
@@ -74,7 +72,7 @@ int		check_path(t_tab *t, char **env)
 	else
 	{
 		waitpid(pid, &status, 0);
-		//t->status = (status / 256);
+		t->status = (status / 256);
 	}
 	free(buff);
 	//printf("%d\n", status);
