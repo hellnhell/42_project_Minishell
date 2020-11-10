@@ -6,7 +6,11 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/11/10 17:59:07 by emartin-         ###   ########.fr       */
+=======
+/*   Updated: 2020/11/10 19:16:21 by emartin-         ###   ########.fr       */
+>>>>>>> 7ed1bf8346aa6457a7b0a2987e0638b944c249b2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +32,16 @@
 # include 	<signal.h>
 
 
+typedef struct Node
+{
+    char    *element;
+    struct Node *next;
+} Node;
 
-
+typedef struct  List {
+    Node	*first;
+	int 	size;
+} List;
 
 
 char	*read_line(t_tab *t);
@@ -41,7 +53,7 @@ char	*ft_strjoin_sl(const char *s1, const char *s2);
 char	*ft_strjoin_sl2(const char *s1, const char *s2);
 int		ft_echo(char **args);
 int		ft_pwd(void);
-int		ft_cd(char **args);
+int		ft_cd(char **args, char **env);
 int     ft_export(char **args, t_tab *t);
 int     ft_env(char **env);
 int		ft_unset(char **args, t_tab *t);

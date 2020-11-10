@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/10 17:31:05 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/10 19:56:56 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int		main(int argc, char **argv, char **env)
 			while (iterator != NULL)
 			{
 				//printf("list----%s\n", iterator->element);
-				t->tokens = ft_split_list(iterator->element, ' ', env);
-				if(check_our_implement(t))
+				t->tokens = ft_split_list(iterator->element, ' ', t);
+				if(check_our_implement(t, env))
 				{
 					read_path(t, env);
 					check_path(t, env);

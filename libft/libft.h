@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/10 17:59:34 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/10 19:57:56 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ typedef	struct 		s_ints
 	int			counter;
 	int			j;
 }					t_ints;
+
+typedef struct		s_tab
+{
+	char		*line;
+	char		**tokens;
+	char		**orders;
+	char		**path;
+	char		**args;
+	char		**command;
+	char		*index;
+	char		**env;
+	int			status;
+	int			qm;
+}					t_tab;
+
 
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strncat(char *dest, char *src, unsigned int nb);
