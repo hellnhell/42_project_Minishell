@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/05 20:39:40 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/06 19:23:32 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		iterate_list(List *list, t_tab *t, char **env)
 	iterator = list->first;
 	while (iterator != NULL)
 	{
-		printf("list----[%s]\n", iterator->element);
+		//printf("list----[%s]\n", iterator->element);
 		t->tokens = ft_split_list(iterator->element, ' ', env);	
 		if(check_our_implement(t) == 1)
 		{
@@ -78,6 +78,7 @@ int		main(int argc, char **argv, char **env)
 			i = 0;
 			ft_putstr_fd(PROMPT, 1);
 			t->line = read_line(t); //LEAK -still reachable
+			//printf("eins\n");
 			t->orders = ft_split(t->line, ';'); //LEAK
 			free (t->line);
 			while (t->orders[i])
@@ -85,11 +86,10 @@ int		main(int argc, char **argv, char **env)
 				list = new_list();
 				create_list_elemnts(t, list, i);
 				iterate_list(list, t, env); //LEAK -still reachable
-				printf("orders----%s\n", t->orders[i]);
+				free(t->orders[i]);
 				i++;
-				t->orders[i] = NULL;
 			}
-			free_matrix(t->orders);
+			free(t->orders);
 			//system("leaks minishell");
 		}
 	}

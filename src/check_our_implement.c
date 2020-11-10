@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_our_implement.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/05 20:46:53 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/06 17:35:26 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int			check_our_implement(t_tab *t)
 		return (ft_env(t->env));
 	if (ft_strncmp(t->tokens[0], "unset", 5) == 0 && ft_strlen(t->tokens[0]) == 5)
 		return (ft_unset(&t->tokens[1], t));
+	if (ft_strncmp(t->tokens[0], "exit", 4) == 0 && ft_strlen(t->tokens[0]) == 4)
+		return (ft_exit(&t->tokens[1]));
 	else
 		return (1);
 }

@@ -1,2 +1,3 @@
-creo que echo $var con var inexistente no hace lo que debería --- es un salto de linea creo q es ok
+creo que echo $var con var inexistente no hace lo que debería
 
+cd solo tiene que ir al root

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/05 21:02:06 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/06 17:57:17 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 ** de las comillas dobles
 */
 
-// He cambiado esta función aquí pero en el otro split no!!!!
+/*
+** He cambiado esta función aquí pero en el otro split no!!!!
+*/
 
 void	ft_skipdoubles(t_ints *a, char const *s, char c)
 {
