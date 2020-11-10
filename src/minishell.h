@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/06 19:49:41 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/10 19:16:21 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@
 # include 	<sys/types.h>
 # include 	<signal.h>
 
-typedef struct		s_tab
-{
-	char		*line;
-	char		**tokens;
-	char		**orders;
-	char		**path;
-	char		**args;
-	char		**command;
-	char		*index;
-	char		**env;
-}					t_tab;
 
 typedef struct Node
 {
@@ -60,7 +49,7 @@ char	*ft_strjoin_sl(const char *s1, const char *s2);
 char	*ft_strjoin_sl2(const char *s1, const char *s2);
 int		ft_echo(char **args);
 int		ft_pwd(void);
-int		ft_cd(char **args);
+int		ft_cd(char **args, char **env);
 int     ft_export(char **args, t_tab *t);
 int     ft_env(char **env);
 int		ft_unset(char **args, t_tab *t);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/06 20:01:57 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/10 19:26:44 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		main(int argc, char **argv, char **env)
 			while (iterator != NULL)
 			{
 				//printf("list----%s\n", iterator->element);
-				t->tokens = ft_split_list(iterator->element, ' ', env);
+				t->tokens = ft_split_list(iterator->element, ' ', t);
 				if(check_our_implement(t, env))
 				{
 					read_path(t, env);

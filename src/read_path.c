@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/06 19:49:27 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/10 19:36:36 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		check_path(t_tab *t, char **env)
 	else
 	{
 		waitpid(pid, &status, 0);
-		//t->status = (status / 256);
+		t->status = (status / 256);
 	}
 	free(buff);
 	//printf("%d\n", status);
@@ -98,5 +98,6 @@ void	read_path(t_tab *t, char **env)
 			ft_cpy_path(t, path);
 		}
 		i++;
+		
 	}
 }

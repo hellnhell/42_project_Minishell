@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/05 18:19:52 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/10 18:21:49 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ typedef	struct 		s_ints
 	int			counter;
 	int			j;
 }					t_ints;
+
+typedef struct		s_tab
+{
+	char		*line;
+	char		**tokens;
+	char		**orders;
+	char		**path;
+	char		**args;
+	char		**command;
+	char		*index;
+	char		**env;
+	int			status;
+	int			qm;
+}					t_tab;
+
 
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strncat(char *dest, char *src, unsigned int nb);
@@ -86,7 +101,7 @@ size_t			ft_line_len(const char *s);
 char			*ft_strnew(size_t size);
 void			ft_strdel(char **as);
 int				ft_strcmp(const char *s1, const char *s2);
-char			**ft_split_list(char const *s, char c, char **env);
+char			**ft_split_list(char const *s, char c, t_tab *t);
 void			ft_strpncpy(char *dest, char *str, int len);
 
 

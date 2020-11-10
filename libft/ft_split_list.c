@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/05 19:23:03 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/10 18:46:02 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int			ft_dollar_count(char const *s, char **env)
 
 	i = 0;
 	n = 0;
+	if (s[0] && s[0] == '?')
+		return (2);
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
@@ -216,6 +218,8 @@ int			ft_check_dollar(char const *s, char **env)
 	int		j;
 
 	i = 0;
+	if (s[0] && s[0] == '?')
+		return (-1);
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
@@ -232,7 +236,7 @@ int			skip_env(char const *s)
 	int		i;
 
 	i = 0;
-	while (s[i] && ft_isalpha(s[i]))
+	while (s[i] && (ft_isalpha(s[i]) || s[i] == '?'))
 		i++;
 	return (i);
 }
@@ -241,28 +245,36 @@ int			skip_env(char const *s)
 ** en env[n - 1] le restamos uno porque hemos devuleto el índice +1
 */
 
-void	ft_dollar_cpy(t_ints *a, char **env, char *str, char const *s)
+void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 {
 	int		n;
 	int		z;
+	char	*itoa;
 
 	a->j++;
-	if ((n = ft_check_dollar(&s[a->j], env)))
+	n = ft_check_dollar(&s[a->j], t->env);
+	if (n > 0)
 	{
-		z = ft_strlen2(env[n - 1]) + 1;
-		while (env[n - 1][z])
-			str[a->i++] = env[n - 1][z++];
-		a->j += skip_env(&s[a->j]);
+		z = ft_strlen2(t->env[n - 1]) + 1;
+		while (t->env[n - 1][z])
+			str[a->i++] = t->env[n - 1][z++];
 	}
-	else
-		a->j += skip_env(&s[a->j]);
+	else if (n == -1)
+	{
+		z = 0;
+		itoa = ft_itoa(t->status);
+		while (itoa[z])
+			str[a->i++] = itoa[z++];
+	}
+
+	a->j += skip_env(&s[a->j]);
 }
 
 /*
 ** en env[n - 1] le restamos uno porque hemos devuleto el índice +1
 */
 
-void	ft_quotations_cpy(t_ints *a, char **env, char *str, char const *s)
+void	ft_quotations_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 {
 	int		n;
 	int		z;
@@ -270,11 +282,11 @@ void	ft_quotations_cpy(t_ints *a, char **env, char *str, char const *s)
 	a->j++;
 	while (s[a->j] && s[a->j] != '\"')
 	{
-		if (s[a->j] == '$' && (n = ft_check_dollar(&s[a->j + 1], env)))
+		if (s[a->j] == '$' && (n = ft_check_dollar(&s[a->j + 1], t->env)))
 		{
-			z = ft_strlen2(env[n - 1]) + 1;
-			while (env[n - 1][z])
-				str[a->i++] = env[n - 1][z++];
+			z = ft_strlen2(t->env[n - 1]) + 1;
+			while (t->env[n - 1][z])
+				str[a->i++] = t->env[n - 1][z++];
 			a->j += skip_env(&s[a->j + 1]);
 		}
 		else if (s[a->j] == '$')
@@ -296,7 +308,7 @@ void	ft_simpquotations_cpy(t_ints *a, char *str, char const *s)
 	a->j++;
 }
 
-static int	ft_cpyword(char const *s, char **env, int j, char *str)
+static int	ft_cpyword(char const *s, t_tab *t, int j, char *str)
 {
 	t_ints	*a;
 	char	c;
@@ -311,9 +323,9 @@ static int	ft_cpyword(char const *s, char **env, int j, char *str)
 	while (s[a->j] && s[a->j] != c)
 	{
 		if (s[a->j] == '$')
-			ft_dollar_cpy(a, env, str, s);
+			ft_dollar_cpy(a, t, str, s);
 		if (s[a->j] == '\"')
-			ft_quotations_cpy(a, env, str, s);
+			ft_quotations_cpy(a, t, str, s);
 		if (s[a->j] == '\'')
 			ft_simpquotations_cpy(a, str, s);
 		else if (s[a->j] && s[a->j] != c && s[a->j] != '$')
@@ -325,7 +337,7 @@ static int	ft_cpyword(char const *s, char **env, int j, char *str)
 	return (n);
 }
 
-char		**ft_split_list(char const *s, char c, char **env)
+char		**ft_split_list(char const *s, char c, t_tab *t)
 {
 	int		i;
 	int		j;
@@ -343,8 +355,8 @@ char		**ft_split_list(char const *s, char c, char **env)
 	i = 0;
 	while (i < words)
 	{
-		tab[i] = malloc(sizeof(char) * ft_size(s, c, j, env));
-		j = ft_cpyword(s, env, j, tab[i]);
+		tab[i] = malloc(sizeof(char) * ft_size(s, c, j, t->env));
+		j = ft_cpyword(s, t, j, tab[i]);
 		i++;
 	}
 	return (tab);
