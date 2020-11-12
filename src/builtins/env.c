@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:02:19 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/10 17:45:10 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/12 17:30:22 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ int     ft_env(char **env)
 	while (env[++l])
 	{
 		ft_putstr_fd(env[l], 1);
-		if (env[l + 1])
-			ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', 1);		
 	}
 	return (0);
 }

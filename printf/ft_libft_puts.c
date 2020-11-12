@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libft_puts.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:50:42 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/05 21:27:44 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/11 17:52:06 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_puthex(t_tab *tab, unsigned long nbr)
 	}
 }
 
-void	ft_putstr_fd(char *s, int fd, t_tab *tab)
+/*void	ft_putstr_fd(char *s, int fd, t_tab *tab)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ void	ft_putstr_fd(char *s, int fd, t_tab *tab)
 		}
 	}
 }
-
+*/
 void	ft_putnbr_fd(unsigned int nb, int fd, t_tab *tab)
 {
 	unsigned int	nbr;

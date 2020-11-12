@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/10 17:44:41 by emartin-         ###   ########.fr        #
+#    Updated: 2020/11/12 19:14:05 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,10 @@ SRCS	=   src/main.c              \
 			src/builtins/export.c			\
 			src/builtins/unset.c				\
 			src/builtins/env.c				\
-			src/builtins/exit.c
-			 \
+			src/builtins/exit.c		 \
+			src/ft_pipes.c
+			#src/clear.c
+			
 GCC			=   @gcc -Wall -Wextra -Werror -g3
 OBJS		=   $(SRCS:.c=.o)
 LIBFT		= 	libft/libft.a

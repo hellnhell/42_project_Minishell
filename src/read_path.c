@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/10 19:57:40 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/12 19:44:44 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,21 @@
 
 static void		not_command_error(t_tab *t)
 {
-	ft_putstr_fd("bash: ", 1);
-	ft_putstr_fd(t->tokens[0], 1);
-	ft_putstr_fd(": ", 1);
-	ft_putstr_fd("command not found\n", 1);
-	exit(127); // aqui gestionar $?
+	if (t->tokens[0][0] == '/')
+	{
+		ft_putstr_fd("bash: ", 1);
+		ft_putstr_fd(t->tokens[0], 1);
+		ft_putstr_fd(": ", 1);
+		ft_putstr_fd("No such file or directory\n", 1);	
+	}
+	else
+	{
+		ft_putstr_fd("bash: ", 1);
+		ft_putstr_fd(t->tokens[0], 1);
+		ft_putstr_fd(": ", 1);
+		ft_putstr_fd("command not found\n", 1);
+	}
+	exit(127); 
 }
 
 

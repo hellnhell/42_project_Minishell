@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 19:04:47 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/10 19:57:01 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:45:12 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	ft_cd(char **args, char **env)
 	}
 	else if (-1 == chdir(path))
 	{
-		ft_putstr_fd("cd: no such file or directory: ", 1);
+		ft_putstr_fd("bash: cd: ", 1);
 		ft_putstr_fd(path, 1);
+		ft_putstr_fd(": No such file or directory", 1);
 		ft_putchar_fd('\n', 1);
 	}
 	/*else 

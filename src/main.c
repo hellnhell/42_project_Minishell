@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/10 19:56:56 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/12 19:40:21 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	initt(t_tab *t)
 {
 	t->line = NULL;
 	t->path = NULL;
+	t->i = 0;
 }
 
 int		main(int argc, char **argv, char **env)
@@ -41,11 +42,14 @@ int		main(int argc, char **argv, char **env)
 	initt(t);
 	ft_allocate_env(env, t);
 	ft_cpy_env(env, t);
+			//execve("/bin/ls", env, env);
+	
 	(void)argc;
 	(void)argv;
 	while (1)
 	{
 		i = 0;
+		//clear_terminal(env);
 		ft_putstr_fd(PROMPT, 1);
 		t->line = read_line(t);
 		t->orders = ft_split(t->line, ';');
@@ -56,15 +60,26 @@ int		main(int argc, char **argv, char **env)
 		 	Node *iterator = list->first;
 			while (iterator != NULL)
 			{
-				//printf("list----%s\n", iterator->element);
 				t->tokens = ft_split_list(iterator->element, ' ', t);
-				if(check_our_implement(t, env))
+				printf("index--- %c\n i----- %i\n", t->index[t->i], t->i);
+				if(t->index[t->i] && t->index[t->i] == '|' && !t->index[t->i - 1])
+					ft_pipes_first(t, env);
+				else if(t->index[t->i] && t->index[t->i] == '|' && t->index[t->i - 1] == '|')
+					ft_pipes_mid(t, env);
+				else if(!t->index[t->i] && t->index[t->i - 1] == '|')
+					ft_pipes_end(t, env);
+				//printf("list----%s\n", iterator->element);
+				else
 				{
-					read_path(t, env);
-					check_path(t, env);
+					if(check_our_implement(t))
+					{
+						read_path(t, env);
+						check_path(t, env);
+					}
 				}
 				iterator = iterator->next;
 				free(t->tokens); // Liberarlo bien
+				t->i++;
 			}
 			i++;
 			//system("leaks minishell");

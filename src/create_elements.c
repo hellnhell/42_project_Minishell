@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/10 17:22:23 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/12 19:24:29 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,12 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 		j++;
 	}
 	aux[x] = '\0';
-	//printf("index---%s\n", t->index);
+	t->index[y] = '\0';
+	//printf("indexCreate ---%s\n", t->index);
 	//printf("auxj: %s\n", &aux[j]);
 	push_back(list, aux);
 			//printf("aux----%s\n", aux);
-	free(t->index);
+	//free(t->index);
 }
 /*static int		count_simbols(char *str)
 {

@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/22 19:32:51 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/12 18:03:14 by emartin-         ###   ########.fr       */
+/*   Created: 2020/11/11 20:29:09 by emartin-          #+#    #+#             */
+/*   Updated: 2020/11/11 20:30:46 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int	ft_echo(char **args)
+void	clear_terminal(char **env)
 {
-	int i;
-	int flag;
-
-	flag = 0;
-	i = 0;
-	if (args[i] && ft_strncmp("-n", args[i], 2) == 0)
+	pid_t		pid;
+	
+	pid = fork();
+	if (pid = 0)
 	{
-		i++;
-		flag++;
+		execv(usr)
 	}
-	while (args[i])
-	{
-		//printf("i----%i\nargs-----%s\n",i, args[i]);
-		ft_putstr_fd(args[i], 1);
-		if(args[++i])
-			ft_putchar_fd(' ', 1);
-	}
-	if (!flag)
-		ft_putchar_fd('\n', 1);
-	return(0);
 }

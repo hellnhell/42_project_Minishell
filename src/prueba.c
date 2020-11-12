@@ -7,7 +7,6 @@
 
 int		main(int argc, char **argv, char **env)
 {
-    printf("%s\n", env[0]);
-    int j = execve("/bin/echo", argv, env);
+	printf("hola");
     return (0);
 }
