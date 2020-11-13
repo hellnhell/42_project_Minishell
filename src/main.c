@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/12 19:40:21 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/13 18:47:02 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		main(int argc, char **argv, char **env)
 			while (iterator != NULL)
 			{
 				t->tokens = ft_split_list(iterator->element, ' ', t);
-				printf("index--- %c\n i----- %i\n", t->index[t->i], t->i);
+				//printf("index--- %c\n i----- %i\n", t->index[t->i], t->i);
 				if(t->index[t->i] && t->index[t->i] == '|' && !t->index[t->i - 1])
 					ft_pipes_first(t, env);
 				else if(t->index[t->i] && t->index[t->i] == '|' && t->index[t->i - 1] == '|')

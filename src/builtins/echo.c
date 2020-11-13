@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 19:32:51 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/12 18:03:14 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/13 18:22:54 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_echo(char **args)
 	int i;
 	int flag;
 
+	write(2, "natural\n", 8);
 	flag = 0;
 	i = 0;
 	if (args[i] && ft_strncmp("-n", args[i], 2) == 0)
@@ -27,11 +28,11 @@ int	ft_echo(char **args)
 	while (args[i])
 	{
 		//printf("i----%i\nargs-----%s\n",i, args[i]);
-		ft_putstr_fd(args[i], 1);
+		ft_putstr_fd(args[i], STDOUT_FILENO);
 		if(args[++i])
-			ft_putchar_fd(' ', 1);
+			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
 	if (!flag)
-		ft_putchar_fd('\n', 1);
-	return(0);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/05 22:02:39 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/13 18:06:16 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,18 @@ static void		ft_exit_args(char **args, int j) //PROBAR A METER NUESTRO PRINTF
 	}
 	if(ft_strncmp(args[0], "-", 1) == 0)			
 		i++;
-	if (ft_isdigit(args[0][i]) == 1)
-		exit(j);
-	else
+	while (args[0][i])
 	{
-		ft_putstr_fd("bash: exit:  ", 1);
-		ft_putstr_fd(args[0], 1);
-		ft_putstr_fd(": numeric argument required\n", 1);
-		exit(255);
+		if (ft_isdigit(args[0][i]) != 1)
+		{
+			ft_putstr_fd("bash: exit:  ", 1);
+			ft_putstr_fd(args[0], 1);
+			ft_putstr_fd(": numeric argument required\n", 1);
+			exit(255);
+		}
+		i++;
 	}
+	exit(j);
 }
 
 int		ft_exit(char **args)
