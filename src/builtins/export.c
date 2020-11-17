@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 18:30:04 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/05 21:36:30 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/17 19:46:00 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_no_options(t_tab *t)
 	}
 }
 
-static void	ft_cpy_newenv(char **env, char **newenv, char *var, char *val)
+static void	ft_cpy_newenv(char **env, char **newenv, char *var, char *val)//31
 {
 	int		l;
 	int		c;
@@ -64,14 +64,12 @@ static void	ft_cpy_newenv(char **env, char **newenv, char *var, char *val)
 		}
 		w++;
 		z++;
-		//free(env[w]);
 	}
-	//free(env);
 }
 
-static char	**ft_realloc_env(t_tab *t, char *var, char *val, int x)
+static char	**ft_realloc_env(t_tab *t, char *var, char *val, int x)//35
 {
-	char 	**newenv;
+	char	**newenv;
 	int		l;
 	int		c;
 	int		w;
@@ -108,13 +106,13 @@ static char	**ft_realloc_env(t_tab *t, char *var, char *val, int x)
 	return (newenv);
 }
 
-static void	ft_change_env(char *str, t_tab *t)
+static void	ft_change_env(char *str, t_tab *t)//39
 {
-	char	*var;
-	char	*val;
+	char		*var;
+	char		*val;
 	size_t		i;
-	int		j;
-	int		z;
+	int			j;
+	int			z;
 
 	j = 0;
 	i = ft_strlen2(str);
@@ -138,11 +136,9 @@ static void	ft_change_env(char *str, t_tab *t)
 			while (*var)
 				t->env[j][i++] = *var++;
 			t->env[j][i++] = '=';
-			//printf("el env[j] de ahora |%s| %i\n", t->env[j], j);
 			while (*val)
 				t->env[j][i++] = *val++;
 			t->env[j][i] = '\0';
-			//printf("env[j]:%s\n", t->env[j]);
 			break ;
 		}
 		j++;
@@ -154,7 +150,7 @@ static void	ft_change_env(char *str, t_tab *t)
 int		ft_export(char **args, t_tab *t)
 {
 	int		i;
-	
+
 	i = 0;
 	if (!args[0])
 		ft_no_options(t);

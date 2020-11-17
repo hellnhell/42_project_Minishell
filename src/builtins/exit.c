@@ -3,31 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/13 18:06:16 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/17 20:05:30 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void		ft_exit_args(char **args, int j) //PROBAR A METER NUESTRO PRINTF
+static void		ft_exit_args(char **args, int j)//PROBAR A METER NUESTRO PRINTF
 {
 	int		i;
 	int		k;
-	
+
 	i = 0;
-	k = 0;	
-	while (args[k])
-	{
-		if(++k > 1)
-		{
-			ft_putstr_fd("bash: exit: too many arguments", 1);				
-			exit(1);
-		}
-	}
-	if(ft_strncmp(args[0], "-", 1) == 0)			
+	k = 0;
+	if (ft_strncmp(args[0], "-", 1) == 0)
 		i++;
 	while (args[0][i])
 	{
@@ -40,20 +32,28 @@ static void		ft_exit_args(char **args, int j) //PROBAR A METER NUESTRO PRINTF
 		}
 		i++;
 	}
+	while (args[k])
+	{
+		if (++k > 1)
+		{
+			ft_putstr_fd("bash: exit: too many arguments", 1);
+			exit(1);
+		}
+	}
 	exit(j);
 }
 
-int		ft_exit(char **args)
+int			ft_exit(char **args, t_tab *t)
 {
 	int		j;
-	
-	ft_putstr_fd("11exit\n", 1);
+
+	ft_putstr_fd("exit\n", 1);
 	if (args[0])
 	{
 		j = ft_atoi(args[0]);
 		ft_exit_args(args, j);
 	}
 	else
-		exit(0);
-	return(0);
+		exit(t->status);
+	return (0);
 }

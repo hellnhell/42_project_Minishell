@@ -6,16 +6,16 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 19:04:47 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/11 20:45:12 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/17 19:36:37 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_cd(char **args, char **env)
+int			ft_cd(char **args, char **env) //35 líneas -- ft_printf
 {
-	char *path;
-	int i;
+	char		*path;
+	int			i;
 
 	path = args[0];
 	i = 0;
@@ -28,9 +28,7 @@ int	ft_cd(char **args, char **env)
 			{
 				printf("path --- %s\n", path);
 				chdir(env[i] + 5);
-				
 			}
-		
 			i++;
 		}
 	}
@@ -41,7 +39,7 @@ int	ft_cd(char **args, char **env)
 		ft_putstr_fd(": No such file or directory", 1);
 		ft_putchar_fd('\n', 1);
 	}
-	/*else 
+	else
 	{
 		while (args[i])
 		{
@@ -49,6 +47,6 @@ int	ft_cd(char **args, char **env)
 			if (args[++i])
 				path = ft_strjoin(path, " ");
 		}
-	}*/
-	return(0);
+	}
+	return (0);
 }

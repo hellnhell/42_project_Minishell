@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_pipes_alt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/22 19:32:51 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/17 19:37:09 by emartin-         ###   ########.fr       */
+/*   Created: 2020/11/17 19:06:38 by emartin-          #+#    #+#             */
+/*   Updated: 2020/11/17 19:18:31 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int			ft_echo(char **args)
+void		ft_pipes_first(t_tab *t, char **env)
 {
-	int		i;
-	int		flag;
+	int		status;
+	pid_t	pid;
 
-	write(2, "natural\n", 8);
-	flag = 0;
-	i = 0;
-	if (args[i] && ft_strncmp("-n", args[i], 2) == 0)
+	pipe(t->fd1);
+	pid = fork();
+	if (pid == 0)
 	{
-		i++;
-		flag++;
+		dup2(t->fd1[WRITE_END], STDOUT_FILENO);
+		check_builtins(t, env);
+		exit(0);
 	}
-	while (args[i])
+	else if (pid > 0)
 	{
-		//printf("i----%i\nargs-----%s\n",i, args[i]);
-		ft_putstr_fd(args[i], STDOUT_FILENO);
-		if (args[++i])
-			ft_putchar_fd(' ', STDOUT_FILENO);
+		waitpid(pid, &status, 0);
+		close(t->fd1[WRITE_END]);
+		dup2(t->fd1[READ_END], STDIN_FILENO);
+		close(t->fd1[READ_END]);
 	}
-	if (!flag)
-		ft_putchar_fd('\n', STDOUT_FILENO);
-	return (0);
 }
+

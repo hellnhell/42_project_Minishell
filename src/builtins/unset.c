@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:12:06 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/05 21:36:36 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/17 19:48:58 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int  need_to_remove(char *s, char **env)
+static int 		need_to_remove(char *s, char **env)
 {
-	int     i;
-	size_t     j;
+	int			i;
+	size_t		j;
 
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strlen(s) == (j = ft_strlen2(env[i])) && ft_strncmp(s, env[i], j) == 0)
+		if (ft_strlen(s) == (j = ft_strlen2(env[i]))
+			&& ft_strncmp(s, env[i], j) == 0)
 			return (i);
 		i++;
 	}
 	return (0);
 }
 
-static char	**ft_remove(t_tab *t, int n)
+static char		**ft_remove(t_tab *t, int n)//31
 {
 	int		l;
 	int		c;

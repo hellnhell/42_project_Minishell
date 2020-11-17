@@ -6,62 +6,42 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:19:39 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/06 17:41:24 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/17 19:30:14 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void	ft_allocate_path(t_tab *t, char **path)
+char			*ft_strjoin_sl(const char *s1, const char *s2)
 {
-	int		l;
-	int		c;
-	char	*buff;
+	int		pos;
+	char	*dest;
 
-	l = 0;
-	c = 0;
-	buff = malloc(1024);
-	getcwd(buff, 1024);
-	while (path[l])
-		l++;
-	t->path = (char **)malloc(sizeof(char *) * (l + 2));
-	t->path[l] = NULL;
-	l = 0;
-	while (path[l])
-	{
-		c = 0;
-		while (path[l][c])
-			c++;
-		t->path[l] = (char *)malloc(sizeof(char) * (c + 1));
-		//t->env[l][c] = '\0';
-		l++;
-	}
-	t->path[l] = (char *)malloc(sizeof(char) * (ft_strlen(buff) + 1));
-	free(buff);
+	if (!(dest = malloc(ft_strlen(s1) + ft_strlen(s2) + 2)))
+		return (NULL);
+	pos = 0;
+	while (*s1)
+		dest[pos++] = *s1++;
+	dest[pos++] = '/';
+	while (*s2)
+		dest[pos++] = *s2++;
+	dest[pos] = '\0';
+	return (dest);
 }
 
-void	ft_cpy_path(t_tab *t, char **path)
+char			*ft_strjoin_sl2(const char *s1, const char *s2)
 {
-	int		l;
-	int		c;
-	char	*buff;
-	char	*s;
+	int		pos;
+	char	*dest;
 
-	buff = malloc(1024);
-	getcwd(buff, 1024);
-	l = 0;
-	while (path[l])
-	{
-		c = 0;
-		while (path[l][c])
-		{
-			t->path[l][c] = path[l][c];
-			c++;
-		}
-        t->path[l][c] = '\0';
-		l++;
-	}
-	t->path[l] = ft_strcpy(t->path[l], buff);
-	free(buff);
+	if (!(dest = malloc(ft_strlen(s1) + ft_strlen(s2))))
+		return (NULL);
+	pos = 0;
+	while (*s1)
+		dest[pos++] = *s1++;
+	s2++;
+	while (*s2)
+		dest[pos++] = *s2++;
+	dest[pos] = '\0';
+	return (dest);
 }

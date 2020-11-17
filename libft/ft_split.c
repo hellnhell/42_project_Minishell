@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/05 19:46:11 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/11/17 19:33:11 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-/* 
+/*
 ** Esta función es el split modificado para dividir los comandos (es decir, ';')
 ** pero ignorando los ; que están entre comillas
 */
 
-// Hay qe comprobar si este gestiona bien que las comillas pegadas a cosas
+//Hay qe comprobar si este gestiona bien que las comillas pegadas a cosas
 
-static int	ft_countwords(char const *s, char c)
+static int		ft_countwords(char const *s, char c)
 {
 	int		i;
 	int		counter;
@@ -69,7 +69,7 @@ static int	ft_countwords(char const *s, char c)
 	return (counter);
 }
 
-static int	ft_size(char const *s, char c, int j)
+static int		ft_size(char const *s, char c, int j)
 {
 	int		counter;
 
@@ -105,7 +105,7 @@ static int	ft_size(char const *s, char c, int j)
 	return (counter + 1);
 }
 
-static int	ft_cpyword(char const *s, char c, int j, char *str)
+static int		ft_cpyword(char const *s, char c, int j, char *str)
 {
 	int		i;
 

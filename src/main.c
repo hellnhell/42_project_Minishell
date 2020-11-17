@@ -3,22 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/13 18:47:02 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/17 19:32:04 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	iterate_list(t_tab *t, List *list, char **env)
+{
+	Node *iterator = list->first;
+	while (iterator != NULL)
+	{
+		t->tokens = ft_split_list(iterator->element, ' ', t);
+		if(t->index[t->i] && t->index[t->i] == '|' && !t->index[t->i - 1])
+			ft_pipes_first(t, env);
+		//check_pipes(t, env)		OLD CONTROL PIPES
+		else 
+			check_builtins(t, env);
+		iterator = iterator->next;
+		free(t->tokens); // Liberarlo bien
+		t->i++;
+	}
+}
 
 char	*read_line(t_tab *t)
 {
-	char	*line;
-
-	// Aqui el line no hace nada?
-	line = NULL;
 	get_next_line(0, &t->line);
 	return(t->line);
 }
@@ -28,6 +40,7 @@ void	initt(t_tab *t)
 	t->line = NULL;
 	t->path = NULL;
 	t->i = 0;
+	t->status = 0;
 }
 
 int		main(int argc, char **argv, char **env)
@@ -37,15 +50,13 @@ int		main(int argc, char **argv, char **env)
 	int		j;
 	List	*list;
 	
+	(void)argc;
+	(void)argv;
 	if(!(t = malloc (sizeof(t_tab))))
 		return (1);
 	initt(t);
 	ft_allocate_env(env, t);
 	ft_cpy_env(env, t);
-			//execve("/bin/ls", env, env);
-	
-	(void)argc;
-	(void)argv;
 	while (1)
 	{
 		i = 0;
@@ -57,35 +68,13 @@ int		main(int argc, char **argv, char **env)
 		{
 			list = new_list();
 			create_list_elemnts(t, list, i);
-		 	Node *iterator = list->first;
-			while (iterator != NULL)
-			{
-				t->tokens = ft_split_list(iterator->element, ' ', t);
-				//printf("index--- %c\n i----- %i\n", t->index[t->i], t->i);
-				if(t->index[t->i] && t->index[t->i] == '|' && !t->index[t->i - 1])
-					ft_pipes_first(t, env);
-				else if(t->index[t->i] && t->index[t->i] == '|' && t->index[t->i - 1] == '|')
-					ft_pipes_mid(t, env);
-				else if(!t->index[t->i] && t->index[t->i - 1] == '|')
-					ft_pipes_end(t, env);
-				//printf("list----%s\n", iterator->element);
-				else
-				{
-					if(check_our_implement(t))
-					{
-						read_path(t, env);
-						check_path(t, env);
-					}
-				}
-				iterator = iterator->next;
-				free(t->tokens); // Liberarlo bien
-				t->i++;
-			}
+			save_std(t);
+			iterate_list(t, list, env);
 			i++;
 			//system("leaks minishell");
-			//t->tokens[i] = NULL;
 		}
 		free(t->orders);
+		clean_std(t);
 	}
 }
 

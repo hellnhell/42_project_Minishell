@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/12 19:14:05 by emartin-         ###   ########.fr        #
+#    Updated: 2020/11/17 19:30:34 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME	= 	minishell
 
 SRCS	=   src/main.c              \
 			src/read_path.c			\
-			src/ft_strjoin_sl.c		\
 			src/check_our_implement.c	\
 			src/create_elements.c	\
 			src/utils.c				\
@@ -25,7 +24,9 @@ SRCS	=   src/main.c              \
 			src/builtins/unset.c				\
 			src/builtins/env.c				\
 			src/builtins/exit.c		 \
-			src/ft_pipes.c
+			src/ft_pipes_alt.c	\
+			src/save_std.c
+			#src/ft_pipes.c
 			#src/clear.c
 			
 GCC			=   @gcc -Wall -Wextra -Werror -g3
