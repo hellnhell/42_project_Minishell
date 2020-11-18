@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/17 19:24:14 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/18 19:45:41 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include	<errno.h>
 # include 	<sys/types.h>
 # include 	<sys/wait.h>
+# include	<fcntl.h>
 # include 	<signal.h>
 
 char	*read_line(t_tab *t);
@@ -69,7 +70,11 @@ void	ft_pipes_first(t_tab *, char **env);
 void	ft_pipes_mid(t_tab *t, char **env);
 void	ft_pipes_end(t_tab *t, char **env);
 void	save_std(t_tab *t);
-void	clean_std(t_tab *t);
+void	reset_std(t_tab *t);
+
+void	ft_redi_greater(t_tab *t, char **env, Node *iterator);
+void	ft_redi_less(t_tab *t, char **env, Node *iterator);
+void	ft_redi_double(t_tab *t, char **env, Node *iterator);
 
 
 

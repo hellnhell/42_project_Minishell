@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/17 19:32:04 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/18 19:45:04 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,34 @@
 void	iterate_list(t_tab *t, List *list, char **env)
 {
 	Node *iterator = list->first;
+	
+	t->i = 0;
 	while (iterator != NULL)
 	{
 		t->tokens = ft_split_list(iterator->element, ' ', t);
-		if(t->index[t->i] && t->index[t->i] == '|' && !t->index[t->i - 1])
+		if(t->index[t->i] && t->index[t->i] == '|')
 			ft_pipes_first(t, env);
-		//check_pipes(t, env)		OLD CONTROL PIPES
+		else if(t->index[t->i] && t->index[t->i] == '>')
+		{
+			iterator = iterator->next;
+			ft_redi_greater(t, env, iterator);
+		}
+		else if(t->index[t->i] && t->index[t->i] == '<')
+		{
+			ft_redi_less(t, env, iterator);			
+			iterator = iterator->next;
+		}
+		else if(t->index[t->i] && t->index[t->i] == '-')
+		{
+			iterator = iterator->next;			
+			ft_redi_double(t, env, iterator);
+		}
 		else 
 			check_builtins(t, env);
 		iterator = iterator->next;
 		free(t->tokens); // Liberarlo bien
 		t->i++;
+		
 	}
 }
 
@@ -39,7 +56,6 @@ void	initt(t_tab *t)
 {
 	t->line = NULL;
 	t->path = NULL;
-	t->i = 0;
 	t->status = 0;
 }
 
@@ -57,6 +73,7 @@ int		main(int argc, char **argv, char **env)
 	initt(t);
 	ft_allocate_env(env, t);
 	ft_cpy_env(env, t);
+	//system("touch hola.txt");
 	while (1)
 	{
 		i = 0;
@@ -66,15 +83,15 @@ int		main(int argc, char **argv, char **env)
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])
 		{
+			save_std(t);
 			list = new_list();
 			create_list_elemnts(t, list, i);
-			save_std(t);
 			iterate_list(t, list, env);
 			i++;
 			//system("leaks minishell");
+			reset_std(t);
 		}
 		free(t->orders);
-		clean_std(t);
 	}
 }
 

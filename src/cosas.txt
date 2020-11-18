@@ -1,3 +1,1 @@
-creo que echo $var con var inexistente no hace lo que debería
 
-cd solo tiene que ir al root
