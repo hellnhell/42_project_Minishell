@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/18 19:45:41 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/18 20:11:37 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include	"../libft/libft.h"
 # include	"../libft/get_next_line/get_next_line.h"
+# include	"../printf/ft_printf.h"
 # include	<stdio.h>
 # include	<unistd.h>
 # include	<string.h>
@@ -66,9 +67,7 @@ void	ft_cpy_env(char **env, t_tab *t);
 void	ft_allocate_path(t_tab *t, char **path);
 void	ft_cpy_path(t_tab *t, char **path);
 
-void	ft_pipes_first(t_tab *, char **env);
-void	ft_pipes_mid(t_tab *t, char **env);
-void	ft_pipes_end(t_tab *t, char **env);
+void	ft_pipes(t_tab *, char **env);
 void	save_std(t_tab *t);
 void	reset_std(t_tab *t);
 

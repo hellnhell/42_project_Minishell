@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 18:47:03 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/18 19:48:49 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/18 20:29:43 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_pipes_first(t_tab *t, char **env)
+void		ft_pipes(t_tab *t, char **env)
 {
 	int		status;
 	pid_t	pid;
@@ -29,6 +29,7 @@ void		ft_pipes_first(t_tab *t, char **env)
 		else if (pid > 0)
 		{
 			waitpid(pid, &status, 0);
+			t->status = (status / 256);
 			close(t->fd1[WRITE_END]);
 			dup2(t->fd1[READ_END], STDIN_FILENO);
 			close(t->fd1[READ_END]);
@@ -38,31 +39,28 @@ void		ft_pipes_first(t_tab *t, char **env)
 		exit(-1);
 }
 
-
-void	ft_redi_greater(t_tab *t, char **env, Node *iterator)
+void		ft_redi_greater(t_tab *t, char **env, Node *iterator)
 {
 	int		status;
 	pid_t	pid;
 	char	**str;
-	char	**s;
 
 	str = ft_split_list(iterator->element, ' ', t);
 	if (pipe(t->fd2) == 0)
 	{
-		//printf("%d\n|%s|\n", t->fd2[READ_END], str[0]);
-		//printf("%d\n", t->fd2[READ_END]);
 		t->fd2[WRITE_END] = open(str[0], O_WRONLY | O_TRUNC | O_CREAT, 0640);
 		pid = fork();
 		if (pid == 0)
 		{
 			dup2(t->fd2[WRITE_END], STDOUT_FILENO);
 			check_builtins(t, env);
+			//IF check builtins error = break
 			exit(0);
 		}
 		else if (pid > 0)
 		{
-			waitpid(pid, &status, 0);
-			t->status = (status / 256);
+			waitpid(pid, &t->status, 0);
+			//t->status = (status / 256);
 			close(t->fd2[WRITE_END]);
 			dup2(t->fd2[READ_END], STDIN_FILENO);
 			close(t->fd2[READ_END]);
@@ -72,7 +70,7 @@ void	ft_redi_greater(t_tab *t, char **env, Node *iterator)
 		exit(-1);
 }
 
-void	ft_redi_less(t_tab *t, char **env, Node *iterator)
+void		ft_redi_less(t_tab *t, char **env, Node *iterator)
 {
 	int		status;
 	pid_t	pid;
@@ -82,7 +80,6 @@ void	ft_redi_less(t_tab *t, char **env, Node *iterator)
 	str = ft_split_list(iterator->next->element, ' ', t);
 	if (pipe(t->fd2) == 0)
 	{
-		//printf("%d\n|%s|\n", t->fd2[READ_END], str[0]);
 		t->fd2[READ_END] = open(str[0], O_RDONLY);
 		printf("%d\n", t->fd2[READ_END]);
 		pid = fork();
@@ -103,7 +100,6 @@ void	ft_redi_less(t_tab *t, char **env, Node *iterator)
 			t->status = (status / 256);
 			close(t->fd2[WRITE_END]);
 			dup2(t->fd2[WRITE_END], STDOUT_FILENO);
-
 			close(t->fd2[READ_END]);
 		}
 	}
@@ -111,7 +107,7 @@ void	ft_redi_less(t_tab *t, char **env, Node *iterator)
 		exit(-1);
 }
 
-void	ft_redi_double(t_tab *t, char **env, Node *iterator)
+void		ft_redi_double(t_tab *t, char **env, Node *iterator)
 {
 	int		status;
 	pid_t	pid;
@@ -121,8 +117,6 @@ void	ft_redi_double(t_tab *t, char **env, Node *iterator)
 	str = ft_split_list(iterator->element, ' ', t);
 	if (pipe(t->fd2) == 0)
 	{
-		//printf("%d\n|%s|\n", t->fd2[READ_END], str[0]);
-		//printf("%d\n", t->fd2[READ_END]);
 		t->fd2[WRITE_END] = open(str[0], O_WRONLY | O_APPEND | O_CREAT, 0640);
 		pid = fork();
 		if (pid == 0)

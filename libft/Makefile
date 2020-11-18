@@ -80,7 +80,7 @@ clean:
 
 
 fclean:		clean
-			${RM} ${NAME} ${PRINTF} 
+			${RM} ${NAME}
 
 re:			fclean all
 

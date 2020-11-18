@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/18 19:45:04 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/18 20:23:09 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	iterate_list(t_tab *t, List *list, char **env)
 	{
 		t->tokens = ft_split_list(iterator->element, ' ', t);
 		if(t->index[t->i] && t->index[t->i] == '|')
-			ft_pipes_first(t, env);
+			ft_pipes(t, env);
 		else if(t->index[t->i] && t->index[t->i] == '>')
 		{
 			iterator = iterator->next;
