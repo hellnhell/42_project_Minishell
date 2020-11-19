@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/18 20:23:09 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/19 20:16:59 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ void	iterate_list(t_tab *t, List *list, char **env)
 		iterator = iterator->next;
 		free(t->tokens); // Liberarlo bien
 		t->i++;
-		
 	}
 }
 
 char	*read_line(t_tab *t)
 {
-	get_next_line(0, &t->line);
+	signal(SIGHUP, ft_signal_d);
+	if (!get_next_line(0, &t->line))
+		ft_signal_d1(1);
 	return(t->line);
 }
 
@@ -73,12 +74,13 @@ int		main(int argc, char **argv, char **env)
 	initt(t);
 	ft_allocate_env(env, t);
 	ft_cpy_env(env, t);
-	//system("touch hola.txt");
 	while (1)
 	{
 		i = 0;
+		//printf("no entra:%s\n", s);
 		//clear_terminal(env);
 		ft_putstr_fd(PROMPT, 1);
+		signal(SIGINT, ft_signals);
 		t->line = read_line(t);
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])

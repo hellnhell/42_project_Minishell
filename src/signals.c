@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_std.c                                         :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/17 19:21:12 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/19 17:59:10 by emartin-         ###   ########.fr       */
+/*   Created: 2020/11/19 18:13:40 by emartin-          #+#    #+#             */
+/*   Updated: 2020/11/19 20:14:26 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	save_std(t_tab *t)
+void	ft_signal_d(int sign)
 {
-	t->save[0] = dup(STDIN_FILENO); //SOLO VA BIEN SI LO HACES COMO PRIMER PROCESO
-	t->save[1] = dup(STDOUT_FILENO);
+	if (sign == SIGHUP)
+    {
+		ft_printf("exit\n");
+		exit(0);
+	}
 }
 
-void	reset_std(t_tab *t)
+void	ft_signal_c(int sign)
 {
-	dup2(t->save[0], STDIN_FILENO);
-	dup2(t->save[1], STDOUT_FILENO);
+	if (sign == SIGINT)
+        ft_printf("\n");
+}
+
+void	ft_signals(int sign)
+{
+	if (sign == SIGINT)
+    {
+        ft_printf("\n");
+		ft_putstr_fd(PROMPT, 1);
+    }
+}
+
+void	ft_signal_d1(int sign)
+{
+
 }

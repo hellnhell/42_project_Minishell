@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/18 20:11:37 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/19 20:14:34 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,6 @@ void	create_list_elemnts(t_tab *t,List *list,int i);
 void	check_builtins(t_tab *t, char **env);
 
 
-
-
-
-
-
-
-
  
 #define PROMPT "\e[91mM \e[92mA \e[93mR \e[94mI \e[95mS \e[96mH \e[91mE \e[92mL \e[93mL \e[94m% \e[0m "
 
@@ -75,6 +68,10 @@ void	ft_redi_greater(t_tab *t, char **env, Node *iterator);
 void	ft_redi_less(t_tab *t, char **env, Node *iterator);
 void	ft_redi_double(t_tab *t, char **env, Node *iterator);
 
+void	ft_signals(int sign);
+void	ft_signal_c(int sign);
+void	ft_signal_d(int sign);
+void	ft_signal_d1(int sign);
 
 
 #endif

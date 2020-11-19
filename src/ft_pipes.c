@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 18:47:03 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:29:43 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:51:36 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,11 @@ void		ft_redi_greater(t_tab *t, char **env, Node *iterator)
 		{
 			dup2(t->fd2[WRITE_END], STDOUT_FILENO);
 			check_builtins(t, env);
-			//IF check builtins error = break
 			exit(0);
 		}
 		else if (pid > 0)
 		{
-			waitpid(pid, &t->status, 0);
+			waitpid(pid, &status, 0);
 			//t->status = (status / 256);
 			close(t->fd2[WRITE_END]);
 			dup2(t->fd2[READ_END], STDIN_FILENO);

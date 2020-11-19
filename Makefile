@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/18 17:33:56 by emartin-         ###   ########.fr        #
+#    Updated: 2020/11/19 18:15:51 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS	=   src/main.c              \
 			src/builtins/env.c				\
 			src/builtins/exit.c		 \
 			src/ft_pipes.c	\
-			src/save_std.c
+			src/save_std.c	\
+			src/signals.c
 			#src/clear.c
 			
 GCC			=   @gcc -Wall -Wextra -Werror -g3

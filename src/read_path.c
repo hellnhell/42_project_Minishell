@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/18 18:22:04 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/19 19:14:00 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void		not_command_error(t_tab *t)
 {
+	reset_std(t);
 	if (t->tokens[0][0] == '/')
 	{
 		ft_putstr_fd("bash: ", 1);
@@ -50,7 +51,6 @@ int		check_path(t_tab *t, char **env)
 	{	
 	//if (!t->tokens[0])
 	//	printf("errrrrrroorrrrr\n");
-	
 		while(t->path[i])
 		{ // Esto igual da error porque t->tokens[0] puede no existir
 			if (t->tokens[0][0] == '.')
@@ -81,6 +81,7 @@ int		check_path(t_tab *t, char **env)
 	}
 	else
 	{
+		signal(SIGINT, ft_signal_c);
 		waitpid(pid, &status, 0);
 		t->status = (status / 256);
 	}
@@ -99,9 +100,7 @@ void	read_path(t_tab *t, char **env)
 	i = 0;
 	while (env[i])
 	{
-		//t->our_env[i] = ft_strdup(env[i]);
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
-		//PROBAR "ASDAS" CON LOS CAMBIOS DE ISA
 		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
 		{
 			path = ft_split(&t->env[i][5], ':');
