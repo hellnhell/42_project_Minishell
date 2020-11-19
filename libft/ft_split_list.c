@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/11 17:55:25 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/19 18:16:24 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,8 @@ void	ft_quotations_found(t_ints *a, char **env, char const *s)
 					&& s[a->j] != '\'' && s[a->j] != '$')
 					a->j++;
 		}
+		else if (s[a->j] == '\\' && s[a->j + 1] && s[a->j + 1] == '\\')
+			a->j++;
 		else
 		{
 			a->j++;
@@ -236,7 +238,7 @@ int			skip_env(char const *s)
 	int		i;
 
 	i = 0;
-	while (s[i] && (ft_isalpha(s[i]) || s[i] == '?'))
+	while (s[i] && (ft_isalnum(s[i]) || s[i] == '?'))
 		i++;
 	return (i);
 }
@@ -293,6 +295,8 @@ void	ft_quotations_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 			a->j += skip_env(&s[a->j + 1]);
 		else
 			str[a->i++] = s[a->j];
+		if (s[a->j] == '\\' && s[a->j + 1] && s[a->j + 1] == '\\')
+			a->j++;
 		a->j++;
 	}
 	a->j++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/18 20:23:09 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:27:24 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		main(int argc, char **argv, char **env)
 		return (1);
 	initt(t);
 	ft_allocate_env(env, t);
-	ft_cpy_env(env, t);
+	//ft_cpy_env(env, t);
 	//system("touch hola.txt");
 	while (1)
 	{

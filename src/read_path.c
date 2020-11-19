@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/18 18:22:04 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:21:42 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void		not_command_error(t_tab *t)
 {
+	reset_std(t);
 	if (t->tokens[0][0] == '/')
 	{
 		ft_putstr_fd("bash: ", 1);
