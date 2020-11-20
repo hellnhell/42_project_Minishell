@@ -1,1 +1,2 @@
-./minishell
+echo eins
+

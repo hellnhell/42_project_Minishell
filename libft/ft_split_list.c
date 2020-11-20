@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/11 17:55:25 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 17:54:36 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int			ft_dollar_count(char const *s, char **env)
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
-		if (!(n = ft_strncmp(s, env[i], j)) && (!s[j] || s[j] == ' ' ||
-			s[j] == '\"' || s[j] == '\'' || s[j] == '$'))
+		if (!(n = ft_strncmp(s, env[i], j)) && (!s[j] ||
+			(ft_isprint(s[j]) && !ft_isalnum(s[j]))))
 		{
 			n = ft_strlen(env[i] + j + 1) - j;
 			return (n);
@@ -134,9 +134,14 @@ void	ft_dollar_found(t_ints *a, char **env, char const *s)
 	a->counter += a->i;
 	a->j++;
 	if (a->i == 0)
-		while (s[a->j] && s[a->j] != ' ' && s[a->j] != '\"' &&
-			s[a->j] != '\'' && s[a->j] != '$')
+	{
+		while (s[a->j] && ft_isalnum(s[a->j]))
 			a->j++;
+		if (s[a->j + 1] && ft_isprint(s[a->j + 1]) && !ft_isalnum(s[a->j + 1]))
+			a->j++;
+		while (s[a->j] && ft_isprint(s[a->j]) && !ft_isalnum(s[a->j]))
+			a->j++;
+	}
 }
 
 void	ft_quotations_found(t_ints *a, char **env, char const *s)
@@ -154,6 +159,8 @@ void	ft_quotations_found(t_ints *a, char **env, char const *s)
 					&& s[a->j] != '\'' && s[a->j] != '$')
 					a->j++;
 		}
+		else if (s[a->j] == '\\' && s[a->j + 1] && s[a->j + 1] == '\\')
+			a->j++;
 		else
 		{
 			a->j++;
@@ -223,8 +230,8 @@ int			ft_check_dollar(char const *s, char **env)
 	while (env[i])
 	{
 		j = ft_strlen2(env[i]);
-		if (!(ft_strncmp(s, env[i], j)) && (!s[j] || s[j] == ' ' ||
-			s[j] == '\"' || s[j] == '\'' || s[j] == '$'))
+		if (!(ft_strncmp(s, env[i], j)) && (!s[j] ||
+			(ft_isprint(s[j]) && !ft_isalnum(s[j]))))
 			return (i + 1);
 		i++;
 	}
@@ -236,7 +243,7 @@ int			skip_env(char const *s)
 	int		i;
 
 	i = 0;
-	while (s[i] && (ft_isalpha(s[i]) || s[i] == '?'))
+	while (s[i] && (ft_isalnum(s[i]) || s[i] == '?'))
 		i++;
 	return (i);
 }
@@ -258,6 +265,8 @@ void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 		z = ft_strlen2(t->env[n - 1]) + 1;
 		while (t->env[n - 1][z])
 			str[a->i++] = t->env[n - 1][z++];
+		while (s[a->j] && (ft_isalnum(s[a->j])))
+			a->j++;
 	}
 	else if (n == -1)
 	{
@@ -265,9 +274,11 @@ void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 		itoa = ft_itoa(t->status);
 		while (itoa[z])
 			str[a->i++] = itoa[z++];
+		a->j += skip_env(&s[a->j]);
 	}
-
-	a->j += skip_env(&s[a->j]);
+	else
+		while (s[a->j] && (ft_isalnum(s[a->j])))
+			a->j++;
 }
 
 /*
@@ -293,6 +304,8 @@ void	ft_quotations_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 			a->j += skip_env(&s[a->j + 1]);
 		else
 			str[a->i++] = s[a->j];
+		if (s[a->j] == '\\' && s[a->j + 1] && s[a->j + 1] == '\\')
+			a->j++;
 		a->j++;
 	}
 	a->j++;
@@ -324,9 +337,9 @@ static int	ft_cpyword(char const *s, t_tab *t, int j, char *str)
 	{
 		if (s[a->j] == '$')
 			ft_dollar_cpy(a, t, str, s);
-		if (s[a->j] == '\"')
+		else if (s[a->j] == '\"')
 			ft_quotations_cpy(a, t, str, s);
-		if (s[a->j] == '\'')
+		else if (s[a->j] == '\'')
 			ft_simpquotations_cpy(a, str, s);
 		else if (s[a->j] && s[a->j] != c && s[a->j] != '$')
 			str[a->i++] = s[a->j++];

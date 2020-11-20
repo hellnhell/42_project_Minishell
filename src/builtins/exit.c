@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/17 20:05:30 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 17:58:04 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int			ft_exit(char **args, t_tab *t)
 		ft_exit_args(args, j);
 	}
 	else
+	{
+		system("leaks minishell");
 		exit(t->status);
+	}
 	return (0);
 }

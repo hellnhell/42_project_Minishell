@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/19 19:14:00 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 17:00:59 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int		check_path(t_tab *t, char **env)
 	}
 	else
 	{
-		signal(SIGINT, ft_signal_c);
+		signal(SIGINT, ft_signal_c1);
+		signal(SIGQUIT, ft_signal_quit);
 		waitpid(pid, &status, 0);
 		t->status = (status / 256);
 	}

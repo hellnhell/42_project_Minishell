@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/19 20:16:59 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 18:00:54 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ void	iterate_list(t_tab *t, List *list, char **env)
 		else 
 			check_builtins(t, env);
 		iterator = iterator->next;
-		free(t->tokens); // Liberarlo bien
 		t->i++;
 	}
 }
 
 char	*read_line(t_tab *t)
 {
-	signal(SIGHUP, ft_signal_d);
 	if (!get_next_line(0, &t->line))
-		ft_signal_d1(1);
+		ft_signal_d(1);
 	return(t->line);
 }
 
@@ -67,6 +65,7 @@ int		main(int argc, char **argv, char **env)
 	int		j;
 	List	*list;
 	
+	
 	(void)argc;
 	(void)argv;
 	if(!(t = malloc (sizeof(t_tab))))
@@ -77,10 +76,10 @@ int		main(int argc, char **argv, char **env)
 	while (1)
 	{
 		i = 0;
-		//printf("no entra:%s\n", s);
 		//clear_terminal(env);
 		ft_putstr_fd(PROMPT, 1);
-		signal(SIGINT, ft_signals);
+		signal(SIGINT, ft_signal_c);
+		signal(SIGQUIT, ft_signal_c);
 		t->line = read_line(t);
 		t->orders = ft_split(t->line, ';');
 		while (t->orders[i])
@@ -92,22 +91,21 @@ int		main(int argc, char **argv, char **env)
 			i++;
 			//system("leaks minishell");
 			reset_std(t);
+			free_matrix(t->tokens);
 		}
-		free(t->orders);
+		free_matrix(t->orders);
 	}
 }
 
-/*
 void		free_matrix(char **matrix)
 {
 	int		i;
 	
 	i = 0;
-	while(matrix[i])
+	while (matrix[i])
 	{
 		free(matrix[i]);
 		i++;
 	}
 	free(matrix);
 }
-*/

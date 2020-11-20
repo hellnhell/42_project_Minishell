@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/19 20:14:34 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 17:01:22 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ void	ft_redi_greater(t_tab *t, char **env, Node *iterator);
 void	ft_redi_less(t_tab *t, char **env, Node *iterator);
 void	ft_redi_double(t_tab *t, char **env, Node *iterator);
 
-void	ft_signals(int sign);
 void	ft_signal_c(int sign);
+void	ft_signal_c1(int sign);
 void	ft_signal_d(int sign);
-void	ft_signal_d1(int sign);
+void	ft_signal_quit(int sign);
+
 
 
 #endif
