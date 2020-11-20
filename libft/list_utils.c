@@ -42,3 +42,47 @@ int     size_list(List *lista)
 {
     return (lista->size);
 }
+
+
+
+
+
+
+
+
+
+static void ft_destroy_node(Node *node)
+{
+    free(node->element);
+    free(node);
+}
+static void ft_remove_back(List *list)
+{
+    Node  *pop;
+    Node  *prev_position;
+    pop = list->first;
+    prev_position = NULL;
+    if (list->first != NULL)
+    {
+        if (list->size > 1)
+        {
+            while (pop->next != NULL)
+            {
+                prev_position = pop;
+                pop = pop->next;
+            }
+            prev_position->next = NULL;
+        }
+        else
+            list->first = NULL;
+        ft_destroy_node(pop);
+        list->size--;
+    }
+}
+void        ft_free_lists(List *list)
+{
+    while (list->first != NULL)
+        ft_remove_back(list);
+    free(list);
+}
+

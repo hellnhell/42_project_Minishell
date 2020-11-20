@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 18:47:03 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/19 17:51:36 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 19:27:19 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,19 @@ void		ft_redi_greater(t_tab *t, char **env, Node *iterator)
 		else if (pid > 0)
 		{
 			waitpid(pid, &status, 0);
-			//t->status = (status / 256);
+			t->status = (status / 256);
 			close(t->fd2[WRITE_END]);
 			dup2(t->fd2[READ_END], STDIN_FILENO);
 			close(t->fd2[READ_END]);
 		}
+		free_matrix(str);
+		system("leaks minishell");
 	}
 	else
+	{
+		free_matrix(str);
 		exit(-1);
+	}
 }
 
 void		ft_redi_less(t_tab *t, char **env, Node *iterator)
@@ -80,13 +85,12 @@ void		ft_redi_less(t_tab *t, char **env, Node *iterator)
 	if (pipe(t->fd2) == 0)
 	{
 		t->fd2[READ_END] = open(str[0], O_RDONLY);
-		printf("%d\n", t->fd2[READ_END]);
 		pid = fork();
 		if (pid == 0)
 		{
 			if (t->fd2[READ_END] == -1)
 			{
-				printf("bash: %s: No such file or directory\n", str[0]);
+				ft_printf("bash: %s: No such file or directory\n", str[0]);
 				exit(1);
 			}
 			dup2(t->fd2[READ_END], STDIN_FILENO);
@@ -101,9 +105,13 @@ void		ft_redi_less(t_tab *t, char **env, Node *iterator)
 			dup2(t->fd2[WRITE_END], STDOUT_FILENO);
 			close(t->fd2[READ_END]);
 		}
+		free_matrix(str);
 	}
 	else
+	{
+		free_matrix(str);
 		exit(-1);
+	}
 }
 
 void		ft_redi_double(t_tab *t, char **env, Node *iterator)
@@ -131,8 +139,12 @@ void		ft_redi_double(t_tab *t, char **env, Node *iterator)
 			close(t->fd2[WRITE_END]);
 			dup2(t->fd2[READ_END], STDIN_FILENO);
 			close(t->fd2[READ_END]);
+			free_matrix(str);
 		}
 	}
 	else
+	{
+		free_matrix(str);
 		exit(-1);
+	}
 }

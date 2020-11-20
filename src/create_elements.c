@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/12 19:24:29 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 18:07:37 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 	//printf("indexCreate ---%s\n", t->index);
 	//printf("auxj: %s\n", &aux[j]);
 	push_back(list, aux);
+	free(aux);
 			//printf("aux----%s\n", aux);
 	//free(t->index);
 }

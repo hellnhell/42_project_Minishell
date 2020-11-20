@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/17 19:33:11 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 19:59:56 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +20,29 @@
 
 //Hay qe comprobar si este gestiona bien que las comillas pegadas a cosas
 
-static int		ft_countwords(char const *s, char c)
+static int	ft_countwords(char const *s, char c)
 {
-	int		i;
-	int		counter;
+	t_ints	*a;
+	int		n;
 
-	counter = 0;
-	i = 0;
-	while (s[i])
+	a = malloc(sizeof(t_ints));
+	a->counter = 0;
+	a->i = 0;
+	while (s[a->i])
 	{
-		while (s[i] == '\"')
+		ft_skipdoubles(a, s, c);
+		ft_skipsimples(a, s, c);
+		if (s[a->i] == c)
 		{
-			i++;
-			while (s[i] && s[i] != '\"')
-				i++;
-			i++;
-		}
-		while (s[i] == '\'')
-		{
-			i++;
-			while (s[i] && s[i] != '\'')
-				i++;
-			i++;
-		}
-		if (s[i] && s[i] == c)
-		{
-			i++;
+			a->i++;
 			continue ;
 		}
-		counter++;
-		while (s[i] && s[i] != c && s[i] != '\"' && s[i] != '\'')
-		{
-			i++;
-			if (s[i] && s[i] == '\"')
-			{
-				i++;
-				while (s[i] && s[i] != '\"')
-					i++;
-			}
-			else if (s[i] && s[i] == '\'')
-			{
-				i++;
-				while (s[i] && s[i] != '\'')
-					i++;
-			}
-		}
+		a->counter++;
+		ft_skip_all(a, s, c);
 	}
-	return (counter);
+	n = a->counter;
+	free(a);
+	return (n);
 }
 
 static int		ft_size(char const *s, char c, int j)
@@ -143,7 +119,6 @@ char		**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	i = ft_countwords(s, c);
-	//printf("%i\n", i);
 	if (!(tab = malloc(sizeof(char **) * (i + 1))))
 		return (NULL);
 	tab[i] = NULL;

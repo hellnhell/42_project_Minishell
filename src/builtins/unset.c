@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:12:06 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/17 19:48:58 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 20:33:25 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char		**ft_remove(t_tab *t, int n)//31
 		l++;
 		l2++;
 	}
+	free_matrix(t->env);
 	return (newenv);
 }
 

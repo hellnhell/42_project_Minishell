@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 18:30:04 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/17 19:46:00 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 20:29:52 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static char	**ft_realloc_env(t_tab *t, char *var, char *val, int x)//35
 		z++;
 	}
 	ft_cpy_newenv(t->env, newenv, var, val);
+	free_matrix(t->env);
 	return (newenv);
 }
 
@@ -123,7 +124,7 @@ static void	ft_change_env(char *str, t_tab *t)//39
 	ft_strpncpy(val, str + i + 1, z);
 	if (ft_isdigit(var[0]))
 	{
-		printf("bash: export: \'%s\': not a valid identifier", str);
+		ft_printf("bash: export: \'%s\': not a valid identifier", str);
 		return ;
 	}
 	while (t->env[j])
@@ -133,11 +134,15 @@ static void	ft_change_env(char *str, t_tab *t)//39
 			free(t->env[j]);
 			t->env[j] = malloc(sizeof(char) * (i + z + 2));
 			i = 0;
-			while (*var)
-				t->env[j][i++] = *var++;
+			while (var[i])
+			{
+				t->env[j][i] = var[i];
+				i++;
+			}
 			t->env[j][i++] = '=';
-			while (*val)
-				t->env[j][i++] = *val++;
+			z = 0;
+			while (val[z])
+				t->env[j][i++] = val[z++];
 			t->env[j][i] = '\0';
 			break ;
 		}
@@ -145,6 +150,8 @@ static void	ft_change_env(char *str, t_tab *t)//39
 	}
 	if (!t->env[j])
 		t->env = ft_realloc_env(t, var, val, i + z + 2);
+	free(var);
+	free(val);
 }
 
 int		ft_export(char **args, t_tab *t)

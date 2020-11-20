@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/17 17:53:27 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 19:58:32 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,12 @@ void    push_front(List *list, char *s);
 void    push_back(List *list, char *s);
 void    push_after_n(List *list, char *s, int n);
 List    *copy_list(List *list);
+void    ft_free_lists(List *list);
 
+
+void	ft_skip_all(t_ints *a, char const *s, char c);
+void	ft_skipsimples(t_ints *a, char const *s, char c);
+void	ft_skipdoubles(t_ints *a, char const *s, char c);
 
 
 

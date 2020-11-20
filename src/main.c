@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/20 18:00:54 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 20:13:34 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	iterate_list(t_tab *t, List *list, char **env)
 		}
 		else 
 			check_builtins(t, env);
+		free_matrix(t->tokens);
 		iterator = iterator->next;
 		t->i++;
 	}
@@ -77,13 +78,17 @@ int		main(int argc, char **argv, char **env)
 	{
 		i = 0;
 		//clear_terminal(env);
+		//system("leaks minishell");
 		ft_putstr_fd(PROMPT, 1);
 		signal(SIGINT, ft_signal_c);
 		signal(SIGQUIT, ft_signal_c);
 		t->line = read_line(t);
+		//system("leaks minishell");
 		t->orders = ft_split(t->line, ';');
+		free(t->line);
 		while (t->orders[i])
 		{
+			//system("leaks minishell");
 			save_std(t);
 			list = new_list();
 			create_list_elemnts(t, list, i);
@@ -91,7 +96,8 @@ int		main(int argc, char **argv, char **env)
 			i++;
 			//system("leaks minishell");
 			reset_std(t);
-			free_matrix(t->tokens);
+			ft_free_lists(list);
+			free(t->index);
 		}
 		free_matrix(t->orders);
 	}
@@ -99,13 +105,13 @@ int		main(int argc, char **argv, char **env)
 
 void		free_matrix(char **matrix)
 {
-	int		i;
-	
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
+    int i;
+
+    i = 0;
+    while (matrix[i])
+        i++;
+    i--;
+    while (i >= 0)
+        free(matrix[i--]);
+    free(matrix);
 }

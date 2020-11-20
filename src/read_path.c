@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/20 17:00:59 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/20 19:16:21 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ int		check_path(t_tab *t, char **env)
 			if (t->tokens[0][0] == '.')
 			{
 				aux = ft_strjoin_sl2(buff, t->tokens[0]);
-				tmp = aux;
 				//printf("lo que estamos probando con el . es %s\n", tmp);
-				j = execve(tmp, t->tokens, env);
+				j = execve(aux, t->tokens, env);
 				free(aux);
 				if (j >= 0)
 					continue ;
@@ -68,10 +67,9 @@ int		check_path(t_tab *t, char **env)
 				j = execve(t->tokens[0], t->tokens, env);
 				if (j >= 0)
 					continue ;
-			}			
+			}
 			aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
-			tmp = aux;
-			j = execve(tmp, t->tokens, env);
+			j = execve(aux, t->tokens, env);
 			//printf("lo que estamos probando es %s\n", tmp);
 			free(aux);
 			i++;
@@ -107,8 +105,8 @@ void	read_path(t_tab *t, char **env)
 			path = ft_split(&t->env[i][5], ':');
 			ft_allocate_path(t, path);
 			ft_cpy_path(t, path);
+			free_matrix(path);
 		}
 		i++;
-		
 	}
 }
