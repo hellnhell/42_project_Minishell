@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/20 20:13:34 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/23 17:52:36 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	iterate_list(t_tab *t, List *list, char **env)
 		t->tokens = ft_split_list(iterator->element, ' ', t);
 		if(t->index[t->i] && t->index[t->i] == '|')
 			ft_pipes(t, env);
+		else if(t->index[t->i] && t->index[t->i] == '<' && t->index[t->i + 1] && t->index[t->i + 1] == '>')
+		{
+			iterator = iterator->next;
+			ft_redi_both(t, env, iterator);			
+		}
 		else if(t->index[t->i] && t->index[t->i] == '>')
 		{
 			iterator = iterator->next;
@@ -29,8 +34,8 @@ void	iterate_list(t_tab *t, List *list, char **env)
 		}
 		else if(t->index[t->i] && t->index[t->i] == '<')
 		{
-			ft_redi_less(t, env, iterator);			
 			iterator = iterator->next;
+			ft_redi_less(t, env, iterator);			
 		}
 		else if(t->index[t->i] && t->index[t->i] == '-')
 		{

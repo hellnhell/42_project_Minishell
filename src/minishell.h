@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/20 17:01:22 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/23 18:00:07 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	reset_std(t_tab *t);
 void	ft_redi_greater(t_tab *t, char **env, Node *iterator);
 void	ft_redi_less(t_tab *t, char **env, Node *iterator);
 void	ft_redi_double(t_tab *t, char **env, Node *iterator);
+void	ft_redi_both(t_tab *t, char **env, Node *iterator);
+void	second_redir(t_tab *t, char **env, Node *iterator);
 
 void	ft_signal_c(int sign);
 void	ft_signal_c1(int sign);
