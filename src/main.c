@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/23 17:52:36 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/25 20:00:25 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,26 @@ void	iterate_list(t_tab *t, List *list, char **env)
 	{
 		t->tokens = ft_split_list(iterator->element, ' ', t);
 		if(t->index[t->i] && t->index[t->i] == '|')
+		{
 			ft_pipes(t, env);
-		else if(t->index[t->i] && t->index[t->i] == '<' && t->index[t->i + 1] && t->index[t->i + 1] == '>')
+			printf("un pipe\n");	
+		}
+		else if(t->index[t->i] && t->index[t->i] == '<' && t->index[t->i + 1] && t->index[t->i + 1] == '|')
 		{
 			iterator = iterator->next;
-			ft_redi_both(t, env, iterator);			
+			ft_redi_pipe(t, env, iterator);
+
+			/*free_matrix(t->tokens);
+			iterator = iterator->next;
+			t->tokens = ft_split_list(iterator->element, ' ', t);
+			check_builtins(t, env);*/
+			t->i++;
+		}
+		else if(t->index[t->i] && t->index[t->i] == '<' && t->index[t->i + 1] && (t->index[t->i + 1] == '>' || t->index[t->i + 1] == '-'))
+		{
+			iterator = iterator->next;
+			ft_redi_redi(t, env, iterator, t->index[t->i + 1]);
+			iterator = iterator->next;
 		}
 		else if(t->index[t->i] && t->index[t->i] == '>')
 		{

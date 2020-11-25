@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/23 18:00:07 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/11/25 20:01:42 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,13 @@ void	ft_cpy_path(t_tab *t, char **path);
 void	ft_pipes(t_tab *, char **env);
 void	save_std(t_tab *t);
 void	reset_std(t_tab *t);
+void	reset_stdout(t_tab *t);
 
 void	ft_redi_greater(t_tab *t, char **env, Node *iterator);
 void	ft_redi_less(t_tab *t, char **env, Node *iterator);
 void	ft_redi_double(t_tab *t, char **env, Node *iterator);
-void	ft_redi_both(t_tab *t, char **env, Node *iterator);
-void	second_redir(t_tab *t, char **env, Node *iterator);
+void	ft_redi_pipe(t_tab *t, char **env, Node *iterator);
+void	ft_redi_redi(t_tab *t, char **env, Node *iterator, char c);
 
 void	ft_signal_c(int sign);
 void	ft_signal_c1(int sign);

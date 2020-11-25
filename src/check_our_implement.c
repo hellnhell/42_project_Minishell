@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/20 19:43:35 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/25 19:28:51 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void		check_builtins(t_tab *t, char **env)
 
 int			check_our_implement(t_tab *t)
 {
+	fprintf(stderr, "t->tokens[0]:%s\n", t->tokens[0]);
 	if (!t->tokens[0])
 		return (1);
 	if (!ft_strncmp(t->tokens[0], "exit\0", 5))

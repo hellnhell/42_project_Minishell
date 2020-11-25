@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 19:21:12 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/19 17:59:10 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/25 19:07:34 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,9 @@ void	reset_std(t_tab *t)
 	dup2(t->save[0], STDIN_FILENO);
 	dup2(t->save[1], STDOUT_FILENO);
 }
+
+void	reset_stdout(t_tab *t)
+{
+	dup2(t->save[1], STDOUT_FILENO);
+}
+
