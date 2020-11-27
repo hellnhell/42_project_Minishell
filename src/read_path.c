@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/27 21:09:58 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 21:14:59 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		check_path(t_tab *t, char **env)
 	}
 	else
 	{
-		system("leaks minishell");
+		//system("leaks minishell");
 		signal(SIGINT, ft_signal_c1);
 		signal(SIGQUIT, ft_signal_quit);
 		waitpid(pid, &status, 0);
@@ -102,11 +102,11 @@ void	read_path(t_tab *t)
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
 		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
 		{
-			if (t->z > 0 && t->path != NULL)
+			/*if (t->z > 0 && t->path != NULL)
 			{
 				printf("hace un free aquí\n");
 				free_matrix(t->path);
-			}
+			}*/
 			path = ft_split(&t->env[i][5], ':');
 			ft_allocate_path(t, path);
 			ft_cpy_path(t, path);

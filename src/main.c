@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/27 20:57:38 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 21:14:05 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	iterate_list(t_tab *t, List *list, char **env)
 		else
 			check_builtins(t, env);
 		free_matrix(t->tokens);
+		free_matrix(t->path);
 		iterator = iterator->next;
 		t->i++;
 		t->z++;
