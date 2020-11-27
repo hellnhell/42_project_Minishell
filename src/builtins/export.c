@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 18:30:04 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/20 20:29:52 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 19:33:22 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ static char	**ft_realloc_env(t_tab *t, char *var, char *val, int x)//35
 		}
 		else
 		{
-			printf("este es el %i\n", w);
 			newenv[w] = (char *)malloc(sizeof(char) * x);
 			newenv[w][x - 1] = '\0';
 			z--;

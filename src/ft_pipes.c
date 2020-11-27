@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 18:47:03 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/25 20:09:12 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:55:46 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,19 @@ void		ft_pipes(t_tab *t, char **env)
 		exit(-1);
 }
 
-void		ft_redi_greater(t_tab *t, char **env, Node *iterator)
+void	ft_redi_greater(t_tab *t, char **env, Node *iterator)
 {
 	char	**str;
+	int		fd;
 
 	str = ft_split_list(iterator->element, ' ', t);
-	if (pipe(t->fd1) == 0)
-	{
-		t->fd1[WRITE_END] = open(str[0], O_WRONLY | O_TRUNC | O_CREAT, 0640);
-		dup2(t->fd1[WRITE_END], STDOUT_FILENO);
-		check_builtins(t, env);
-		close(t->fd1[WRITE_END]);
-		close(t->fd1[READ_END]);
-		free_matrix(str);
-	}
-	else
-	{
-		free_matrix(str);
-		exit(-1);
-	}
+	fd = open(str[0], O_WRONLY | O_TRUNC | O_CREAT, 0640);
+	dup2(fd, STDOUT_FILENO);
+	check_builtins(t, env);
+	reset_stdout(t);
+	dup2(fd, STDIN_FILENO);
+	free_matrix(str);
 }
-
 
 /*void		ft_redi_greater(t_tab *t, char **env, Node *iterator)
 {
@@ -96,7 +88,7 @@ void		ft_redi_greater(t_tab *t, char **env, Node *iterator)
 	}
 }*/
 
-void		ft_redi_less(t_tab *t, char **env, Node *iterator)
+void	ft_redi_less(t_tab *t, char **env, Node *iterator)
 {
 	char	**str;
 
@@ -164,22 +156,15 @@ void		ft_redi_less(t_tab *t, char **env, Node *iterator)
 void		ft_redi_double(t_tab *t, char **env, Node *iterator)
 {
 	char	**str;
+	int		fd;
 
 	str = ft_split_list(iterator->element, ' ', t);
-	if (pipe(t->fd1) == 0)
-	{
-		t->fd1[WRITE_END] = open(str[0], O_WRONLY | O_APPEND | O_CREAT, 0640);
-		dup2(t->fd1[WRITE_END], STDOUT_FILENO);
-		check_builtins(t, env);
-		close(t->fd1[WRITE_END]);
-		close(t->fd1[READ_END]);
-		free_matrix(str);
-	}
-	else
-	{
-		free_matrix(str);
-		exit(-1);
-	}
+	fd = open(str[0], O_WRONLY | O_APPEND | O_CREAT, 0640);
+	dup2(fd, STDOUT_FILENO);
+	check_builtins(t, env);
+	reset_stdout(t);
+	dup2(fd, STDIN_FILENO);
+	free_matrix(str);
 }
 
 
@@ -226,7 +211,6 @@ void		ft_redi_pipe(t_tab *t, char **env, Node *iterator)
 	char	**str;
 
 	str = ft_split_list(iterator->element, ' ', t);
-	//printf("%s\n", str[0]);
 	if (pipe(t->fd1) == 0)
 	{
 		pid = fork();
@@ -269,8 +253,6 @@ void	ft_redi_redi(t_tab *t, char **env, Node *iterator, char c)
 
 	s1 = ft_split_list(iterator->element, ' ', t);
 	s2 = ft_split_list(iterator->next->element, ' ', t);
-	printf("%s\n", s1[0]);
-	printf("%s\n", s2[0]);
 	if (pipe(t->fd1) == 0)
 	{
 		t->fd1[READ_END] = open(s1[0], O_RDONLY);
@@ -281,12 +263,8 @@ void	ft_redi_redi(t_tab *t, char **env, Node *iterator, char c)
 		if (t->fd1[READ_END] == -1)
 		{
 			ft_printf("bash: %s: No such file or directory\n", s1[0]);
-			exit(1);
-		}
-		if (t->fd1[WRITE_END] == -1)
-		{
-			ft_printf("bah\n", s1[0]);
-			exit(1);
+			t->status = 1;
+			return ;
 		}
 		dup2(t->fd1[READ_END], STDIN_FILENO);
 		dup2(t->fd1[WRITE_END], STDOUT_FILENO);

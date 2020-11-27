@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/20 19:58:32 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 20:56:58 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ typedef struct		s_tab
 	int			status;
 	int			qm;
 	int			fd1[2];
-	int			fd2[2];
+	int			fd2;
 	int			i;
 	int			save[2];
+	int			z;
 }					t_tab;
 
 
@@ -132,6 +133,7 @@ void    push_front(List *list, char *s);
 void    push_back(List *list, char *s);
 void    push_after_n(List *list, char *s, int n);
 List    *copy_list(List *list);
+int     size_list(List *lista);
 void    ft_free_lists(List *list);
 
 

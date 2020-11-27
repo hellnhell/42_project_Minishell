@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:53:01 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/20 17:54:36 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 20:13:20 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,7 @@ void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 		itoa = ft_itoa(t->status);
 		while (itoa[z])
 			str[a->i++] = itoa[z++];
+		free(itoa);
 		a->j += skip_env(&s[a->j]);
 	}
 	else

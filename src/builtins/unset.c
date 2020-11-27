@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:12:06 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/20 20:33:25 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 19:34:34 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ int			ft_unset(char **args, t_tab *t)
 		while (args[i])
 		{
 			if ((n = need_to_remove(args[i], t->env)))
-			{
-				printf("%i\n", n);
 				t->env = ft_remove(t, n);
-			}
 			i++;
 		}
 	}

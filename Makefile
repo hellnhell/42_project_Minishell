@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/19 18:15:51 by emartin-         ###   ########.fr        #
+#    Updated: 2020/11/27 20:42:46 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS	=   src/main.c              \
 			src/signals.c
 			#src/clear.c
 			
-GCC			=   @gcc -Wall -Wextra -Werror -g3
+GCC			=   @gcc -Wall -Wextra -Werror -g
 OBJS		=   $(SRCS:.c=.o)
 LIBFT		= 	libft/libft.a
 PRINTF		= 	printf/printf.a

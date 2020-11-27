@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/25 20:01:42 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/27 19:49:53 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include 	<signal.h>
 
 char	*read_line(t_tab *t);
-void	read_path(t_tab *t, char **env);
+void	read_path(t_tab *t);
 int		check_path(t_tab *t, char **env);
 void 	*ft_realloc(void *ptr, size_t originalsize, size_t newsize);
 char	*ft_strtok(char *str, char *sepa);
@@ -41,7 +41,7 @@ int		ft_echo(char **args);
 int		ft_pwd(void);
 int		ft_cd(char **args, char **env);
 int     ft_export(char **args, t_tab *t);
-int     ft_env(char **env);
+int     ft_env(char **str);
 int		ft_unset(char **args, t_tab *t);
 int		ft_exit(char **args, t_tab *t);
 int		check_our_implement(t_tab *t);
@@ -61,8 +61,8 @@ void	ft_allocate_path(t_tab *t, char **path);
 void	ft_cpy_path(t_tab *t, char **path);
 
 void	ft_pipes(t_tab *, char **env);
-void	save_std(t_tab *t);
-void	reset_std(t_tab *t);
+void	save2_std(t_tab *t);
+void	reset_std23(t_tab *t);
 void	reset_stdout(t_tab *t);
 
 void	ft_redi_greater(t_tab *t, char **env, Node *iterator);
