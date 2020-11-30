@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/27 21:14:59 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/30 21:44:26 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,9 @@ static void		not_command_error(t_tab *t)
 {
 	reset_std23(t);
 	if (t->tokens[0][0] == '/')
-	{
-		ft_putstr_fd("bash: ", 1);
-		ft_putstr_fd(t->tokens[0], 1);
-		ft_putstr_fd(": ", 1);
-		ft_putstr_fd("No such file or directory\n", 1);	
-	}
+		ft_printf("bash: %s : No such file or directory\n", t->tokens[0]);
 	else
-	{
-		ft_putstr_fd("bash: ", 1);
-		ft_putstr_fd(t->tokens[0], 1);
-		ft_putstr_fd(": ", 1);
-		ft_putstr_fd("command not found\n", 1);
-	}
+		ft_printf("bash: %s : command not found\n", t->tokens[0]);
 	exit(127); 
 }
 
@@ -96,7 +86,6 @@ void	read_path(t_tab *t)
 	char	**path;
 
 	i = 0;
-	printf("el t->i es %i\n", t->i);
 	while (t->env[i])
 	{
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="

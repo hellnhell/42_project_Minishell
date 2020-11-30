@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:02:19 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/27 19:33:41 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:23:13 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void		ft_cpy_env(char **env, t_tab *t)
 	while (env[l])
 	{
 		c = 0;
-		//printf("|%s|\n", env[l]);
 		while (env[l][c])
 		{
 			t->env[l][c] = env[l][c];
@@ -53,13 +52,12 @@ void		ft_allocate_env(char **env, t_tab *t)
 		//t->env[l][c] = '\0';
 		l++;
 	}
-	//ft_cpy_env(env, t);
+	ft_cpy_env(env, t);
 }
-
 
 int			ft_env(char **str)
 {
-	int     l;
+	int		l;
 
 	l = 0;
 	while (str[l])

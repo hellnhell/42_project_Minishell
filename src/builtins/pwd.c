@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:18:50 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/17 19:47:29 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:34:51 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ void		ft_cpy_path(t_tab *t, char **path)
 			t->path[l][c] = path[l][c];
 			c++;
 		}
-        t->path[l][c] = '\0';
+		   t->path[l][c] = '\0';
 		l++;
 	}
 	t->path[l] = ft_strcpy(t->path[l], buff);
+	//printf("%s\n", t->path[l]);
 	free(buff);
 }
 

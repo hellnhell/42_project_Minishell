@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/27 20:42:46 by emartin-         ###   ########.fr        #
+#    Updated: 2020/11/30 20:29:21 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,9 @@ SRCS	=   src/main.c              \
 			src/builtins/exit.c		 \
 			src/ft_pipes.c	\
 			src/save_std.c	\
-			src/signals.c
-			#src/clear.c
+			src/signals.c	\
+			src/iteration.c
+
 			
 GCC			=   @gcc -Wall -Wextra -Werror -g
 OBJS		=   $(SRCS:.c=.o)

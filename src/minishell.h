@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/27 19:49:53 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/30 21:52:41 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void	simbols_flags(t_tab *t, List *list, int doubl);
 void	free_matrix(char **matrix);
 void	create_list_elemnts(t_tab *t,List *list,int i);
 void	check_builtins(t_tab *t, char **env);
+void	iterate_list(t_tab *t, List *list, char **env);
+void	iterate_orders(t_tab *t, List *list, char **env, int i);
+int		check_quotes(char *s);
 
 
  
@@ -75,7 +78,5 @@ void	ft_signal_c(int sign);
 void	ft_signal_c1(int sign);
 void	ft_signal_d(int sign);
 void	ft_signal_quit(int sign);
-
-
 
 #endif

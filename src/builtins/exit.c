@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/20 18:13:03 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:20:33 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		ft_exit_args(char **args, int j)//PROBAR A METER NUESTRO PRINTF
 {
-	int		i;
-	int		k;
+	int			i;
+	int			k;
 
 	i = 0;
 	k = 0;
@@ -25,9 +25,7 @@ static void		ft_exit_args(char **args, int j)//PROBAR A METER NUESTRO PRINTF
 	{
 		if (ft_isdigit(args[0][i]) != 1)
 		{
-			ft_putstr_fd("bash: exit:  ", 1);
-			ft_putstr_fd(args[0], 1);
-			ft_putstr_fd(": numeric argument required\n", 1);
+			ft_printf("mari: exit: %s : numeric argument required\n", args[0]);
 			exit(255);
 		}
 		i++;
@@ -36,18 +34,18 @@ static void		ft_exit_args(char **args, int j)//PROBAR A METER NUESTRO PRINTF
 	{
 		if (++k > 1)
 		{
-			ft_putstr_fd("bash: exit: too many arguments", 1);
+			ft_printf("bash: exit: too many arguments\n");
 			exit(1);
 		}
 	}
 	exit(j);
 }
 
-int			ft_exit(char **args, t_tab *t)
+int				ft_exit(char **args, t_tab *t)
 {
-	int		j;
+	int			j;
 
-	ft_putstr_fd("exit\n", 1);
+	ft_printf("exit\n");
 	if (args[0])
 	{
 		j = ft_atoi(args[0]);

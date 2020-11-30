@@ -6,39 +6,33 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 19:04:47 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/17 19:36:37 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:19:21 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int			ft_cd(char **args, char **env) //35 líneas -- ft_printf
+static void		home_dir(char **env, int i)
+{
+	while (env[i])
+	{
+		if (ft_strncmp("HOME=", env[i], 5) == 0)
+			chdir(env[i] + 5);
+		i++;
+	}
+}
+
+int			ft_cd(char **args, char **env)
 {
 	char		*path;
 	int			i;
 
 	path = args[0];
 	i = 0;
-	if(!path)
-	{
-		while (env[i])
-		{
-			// Esto puede petar si nos dan una variable de entorno que se llame "P
-			if (ft_strncmp("HOME=", env[i], 5) == 0)
-			{
-				printf("path --- %s\n", path);
-				chdir(env[i] + 5);
-			}
-			i++;
-		}
-	}
+	if (!path)
+		home_dir(env, i);
 	else if (-1 == chdir(path))
-	{
-		ft_putstr_fd("bash: cd: ", 1);
-		ft_putstr_fd(path, 1);
-		ft_putstr_fd(": No such file or directory", 1);
-		ft_putchar_fd('\n', 1);
-	}
+		ft_printf("mari: cd: %s : No such file or directory\n", path);
 	else
 	{
 		while (args[i])
@@ -48,5 +42,6 @@ int			ft_cd(char **args, char **env) //35 líneas -- ft_printf
 				path = ft_strjoin(path, " ");
 		}
 	}
+	free(path);//LO PUSE
 	return (0);
 }

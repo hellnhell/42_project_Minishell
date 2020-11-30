@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:12:06 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/27 19:34:34 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/11/30 21:23:44 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int 		need_to_remove(char *s, char **env)
+static int		need_to_remove(char *s, char **env)
 {
 	int			i;
 	size_t		j;
@@ -28,12 +28,12 @@ static int 		need_to_remove(char *s, char **env)
 	return (0);
 }
 
-static char		**ft_remove(t_tab *t, int n)//31
+static char		**ft_remove(t_tab *t, int n)
 {
-	int		l;
-	int		c;
-	int		l2;
-	char	**newenv;
+	int			l;
+	int			c;
+	int			l2;
+	char		**newenv;
 
 	l = 0;
 	while (t->env[l])
@@ -64,10 +64,10 @@ static char		**ft_remove(t_tab *t, int n)//31
 	return (newenv);
 }
 
-int			ft_unset(char **args, t_tab *t)
+int				ft_unset(char **args, t_tab *t)
 {
-	int		i;
-	int		n;
+	int			i;
+	int			n;
 
 	i = 0;
 	if (args[0])
@@ -81,4 +81,3 @@ int			ft_unset(char **args, t_tab *t)
 	}
 	return (0);
 }
-
