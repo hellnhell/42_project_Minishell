@@ -1,3 +1,2 @@
 eins
- t->orders = ft_split(t->line, ';'); seg fault ??
- 
+t->orders = ft_split(t->line, ';'); seg fault ??

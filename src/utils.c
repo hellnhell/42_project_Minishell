@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:19:39 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/30 21:25:31 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/01 18:38:30 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		check_quotes(char *s)
 	if ((a % 2 != 0) || (b % 2 != 0))
 		return (0);
 	return (1);
+	
 }
 
 char			*ft_strjoin_sl(const char *s1, const char *s2)

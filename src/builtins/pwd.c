@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:18:50 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/30 19:34:51 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:15:07 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void		ft_cpy_path(t_tab *t, char **path)
 	int		l;
 	int		c;
 	char	*buff;
-	char	*s;
 
 	buff = malloc(1024);
 	getcwd(buff, 1024);
@@ -62,7 +61,8 @@ void		ft_cpy_path(t_tab *t, char **path)
 		l++;
 	}
 	t->path[l] = ft_strcpy(t->path[l], buff);
-	//printf("%s\n", t->path[l]);
+	printf("%s\n", t->path[l]);
+	t->path[l] = NULL; // CAMBIADO AHORA HAY UN LEAK CON LO Q HAY EN T->PATH[L] PERO NO SE DONDE LO VUELVES A USAR
 	free(buff);
 }
 

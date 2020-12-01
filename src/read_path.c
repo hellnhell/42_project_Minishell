@@ -6,24 +6,25 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/30 21:44:26 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:38:09 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <string.h>
 
 static void		not_command_error(t_tab *t)
 {
 	reset_std23(t);
 	if (t->tokens[0][0] == '/')
-		ft_printf("bash: %s : No such file or directory\n", t->tokens[0]);
+		ft_printf("mari: %s : No such file or directory\n", t->tokens[0]);
 	else
-		ft_printf("bash: %s : command not found\n", t->tokens[0]);
+		ft_printf("mari: %s : command not found\n", t->tokens[0]);
 	exit(127); 
 }
 
 
-int		check_path(t_tab *t, char **env)
+int		check_path(t_tab *t)
 {
 	int		i;
 	int		j;
@@ -41,7 +42,7 @@ int		check_path(t_tab *t, char **env)
 	{	
 	//if (!t->tokens[0])
 	//	printf("errrrrrroorrrrr\n");
-		while(t->path[i] != NULL)
+		while(t->path2[i] != NULL)
 		{ // Esto igual da error porque t->tokens[0] puede no existir
 			if (t->tokens[0][0] == '.')
 			{
@@ -57,7 +58,8 @@ int		check_path(t_tab *t, char **env)
 				if (j >= 0)
 					continue ;
 			}
-			aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
+			//printf("%s'\n", t->tokens[0]);
+			aux = ft_strjoin_sl(t->path2[i], t->tokens[0]);
 			j = execve(aux, t->tokens, t->env);
 			free(aux);
 			i++;
@@ -74,6 +76,7 @@ int		check_path(t_tab *t, char **env)
 		t->status = (status / 256);
 	}
 	free(buff);
+	free_matrix(t->path2); //CAMBIADO
 	//printf("%d\n", status);
 	return(0);
 }
@@ -82,8 +85,7 @@ int		check_path(t_tab *t, char **env)
 void	read_path(t_tab *t)
 {
 	int		i;
-	char	*test;
-	char	**path;
+	//char	**path;
 
 	i = 0;
 	while (t->env[i])
@@ -96,10 +98,10 @@ void	read_path(t_tab *t)
 				printf("hace un free aquí\n");
 				free_matrix(t->path);
 			}*/
-			path = ft_split(&t->env[i][5], ':');
-			ft_allocate_path(t, path);
-			ft_cpy_path(t, path);
-			free_matrix(path);
+			t->path2 = ft_split(&t->env[i][5], ':');
+			//ft_allocate_path(t, path);
+			//ft_cpy_path(t, path);
+			//free_matrix(t->path2);
 			break ;
 		}
 		i++;

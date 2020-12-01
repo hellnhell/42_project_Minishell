@@ -65,7 +65,7 @@ AR			= ar rc
 
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 $(NAME):	${OBJS}
 			@echo "libft.a - compiling"

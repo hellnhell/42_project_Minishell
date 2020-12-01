@@ -6,18 +6,18 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/30 20:37:35 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/01 17:21:52 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		check_builtins(t_tab *t, char **env)
+void		check_builtins(t_tab *t)
 {
 	if(check_our_implement(t))
 	{
 		read_path(t);
-		check_path(t, env);
+		check_path(t);
 	}
 }
 

@@ -6,13 +6,24 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/11/30 21:52:33 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:26:06 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+void		free_matrix(char **matrix)
+{
+      int i;
+    i = 0;
+    while (matrix[i])
+        i++;
+    i--;
+    while (i >= 0)
+        free(matrix[i--]);
+    free(matrix);
+}
 
-static void		infinite_loop(t_tab *t, List *list, char **env)
+static void		ft_minishell(t_tab *t, List *list)
 {
 	int			i;
 	
@@ -31,26 +42,10 @@ static void		infinite_loop(t_tab *t, List *list, char **env)
 		}
 		t->orders = ft_split(t->line, ';');
 		free(t->line);
-		iterate_orders(t, list, env, i);//CAMBIADO
+		iterate_orders(t, list, i);//CAMBIADO
 	}
 }
 
-void		free_matrix(char **matrix)
-{
-    int i;
-
-    i = 0;
-	
-    while (matrix[i])
-    {
-	    i++;
-	
-	}
-    i--;
-    while (i >= 0)
-        free(matrix[i--]);
-    free(matrix);
-}
 
 char	*read_line(t_tab *t)
 {
@@ -71,15 +66,13 @@ void	initt(t_tab *t, char **env)
 int		main(int argc, char **argv, char **env)
 {
 	t_tab	*t;
-	
-	int		j;
 	List	*list;
 	
+	list = NULL;
 	(void)argc;
 	(void)argv;
 	if(!(t = malloc (sizeof(t_tab))))
 		return (1);
 	initt(t, env);
-	infinite_loop(t, list, env);
+	ft_minishell(t, list);
 }
-

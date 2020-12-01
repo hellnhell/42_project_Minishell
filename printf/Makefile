@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 16:56:40 by isfernan          #+#    #+#              #
-#    Updated: 2020/11/18 20:09:15 by emartin-         ###   ########.fr        #
+#    Updated: 2020/12/01 17:17:34 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJS = ${SRCS:.c=.o}
 NAME = printf.a
 
 $(NAME): 
-			-@gcc -Wall -Werror -Wextra -c $(SRCS)
+			-@gcc -Wall -Werror -Wextra -g3 -c $(SRCS)
 			-@ar rc $(NAME) $(OBJS)
 			-@ranlib $(NAME)
 

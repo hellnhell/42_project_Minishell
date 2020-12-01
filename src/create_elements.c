@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/30 20:28:18 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/01 17:22:35 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		simbols(t_tab *t, List *list, int j, int i)
+int		simbols(t_tab *t, int j, int i)
 {
 	int		simbol;
 
@@ -41,7 +41,7 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 		return ;
 	while (t->orders[i][j])
 	{
-		if (simbols(t, list, j, i) == 0) 
+		if (simbols(t, j, i) == 0) 
 		{
 			aux[x] = t->orders[i][j];
 			x++;

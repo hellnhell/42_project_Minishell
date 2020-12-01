@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/11/30 20:29:21 by emartin-         ###   ########.fr        #
+#    Updated: 2020/12/01 20:21:03 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,25 +29,26 @@ SRCS	=   src/main.c              \
 			src/signals.c	\
 			src/iteration.c
 
-			
-GCC			=   @gcc -Wall -Wextra -Werror -g
-OBJS		=   $(SRCS:.c=.o)
-LIBFT		= 	libft/libft.a
-PRINTF		= 	printf/printf.a
-INCLUDES	=   ./
+LIBFT	= 	libft/libft.a
+PRINTF	= 	printf/printf.a
+OBJS    =   $(SRCS:.c=.o)
+CFLAGS  =   -Wall -Wextra -Werror -g3 #-fsanitize=address
 
-all: $(NAME)
-$(NAME):	$(OBJS)
+all     :   $(NAME)
+
+$(NAME) :   $(OBJS)
 		@$(MAKE) -C libft
 		@$(MAKE) -C printf
-		@$(GCC) -I$(INCLUDES) $(LIBFT) $(PRINTF) $(OBJS) -o $(NAME)
-clean:
-			-@$(RM) $(OBJS)
+		@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(PRINTF)
+
+clean   :
+		@/bin/rm -f $(OBJS)
 			@$(MAKE) -C libft clean
 			@$(MAKE) -C printf clean
 
-fclean:		clean
-			-@$(RM) $(NAME) $(LIBFT) $(PRINTF) 
-			
-re:			fclean all
-.PHONY:		all clean fclean re bonus
+fclean  :   clean
+		-@/bin/rm -f $(NAME) $(LIBFT) $(PRINTF) 
+
+re      :   fclean all
+
+.PHONY  :   all clean fclean re
