@@ -6,17 +6,17 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 15:19:40 by isfernan          #+#    #+#             */
-/*   Updated: 2020/12/01 18:38:24 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 18:23:35 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_atoi(const char *str)
+int			ft_atoi(const char *str)
 {
-	int neg;
-	int i;
-	int rtrn;
+	int		neg;
+	int		i;
+	int		rtrn;
 
 	i = 0;
 	rtrn = 0;
@@ -50,7 +50,7 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void		*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	char	*src_cast;
 	char	*dst_cast;
@@ -69,14 +69,14 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-int		ft_max(int a, int b)
+int			ft_max(int a, int b)
 {
 	if (a < b)
 		return (b);
 	return (a);
 }
 
-int		ft_min(int a, int b)
+int			ft_min(int a, int b)
 {
 	if (a < b)
 		return (a);

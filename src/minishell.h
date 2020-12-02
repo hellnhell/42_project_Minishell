@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/12/01 17:38:43 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 21:00:16 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	simbols_flags(t_tab *t, List *list, int doubl);
 void	free_matrix(char **matrix);
 void	create_list_elemnts(t_tab *t,List *list,int i);
 void	check_builtins(t_tab *t);
-void	iterate_list(t_tab *t, List *list);
-void	iterate_orders(t_tab *t, List *list, int i);
+void	check_bash_implement(t_tab *t);
+void	commands_redi_pipes(t_tab *t, List *list);
+void	create_orders(t_tab *t, List *list, int i);
 int		check_quotes(char *s);
 
 void	ft_allocate_env(char **env, t_tab *t);

@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iteration.c                                        :+:      :+:    :+:   */
+/*   commands_redi_pipe.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 20:29:06 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/01 20:06:42 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 21:19:48 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	iterate_orders(t_tab *t, List *list, int i)
-{
-	while (t->orders[i])
-	{
-		save2_std(t);
-		list = new_list();
-		create_list_elemnts(t, list, i);
-		iterate_list(t, list);
-		i++;
-		reset_std23(t);
-		ft_free_lists(list);
-		free(t->index);
-	}
-	free_matrix(t->orders);
-}
 
 void	ft_redi_less_variants(Node *iterator, t_tab *t)
 {
@@ -51,7 +35,7 @@ void	ft_redi_less_variants(Node *iterator, t_tab *t)
 	}
 }
 
-void	iterate_list(t_tab *t, List *list)
+void	commands_redi_pipes(t_tab *t, List *list)
 {
 	Node *iterator = list->first;
 	
@@ -87,8 +71,6 @@ void	iterate_list(t_tab *t, List *list)
 		free_matrix(t->tokens);
 		iterator = iterator->next;
 		t->i++;
-		t->z++;
 		//system("leaks minishell");
 	}
-	//free_matrix(t->path);
 }

@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/01 20:38:09 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 20:26:18 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		check_path(t_tab *t)
 	{	
 	//if (!t->tokens[0])
 	//	printf("errrrrrroorrrrr\n");
-		while(t->path2[i] != NULL)
+		while(t->path[i] != NULL)
 		{ // Esto igual da error porque t->tokens[0] puede no existir
 			if (t->tokens[0][0] == '.')
 			{
@@ -59,7 +59,7 @@ int		check_path(t_tab *t)
 					continue ;
 			}
 			//printf("%s'\n", t->tokens[0]);
-			aux = ft_strjoin_sl(t->path2[i], t->tokens[0]);
+			aux = ft_strjoin_sl(t->path[i], t->tokens[0]);
 			j = execve(aux, t->tokens, t->env);
 			free(aux);
 			i++;
@@ -76,7 +76,7 @@ int		check_path(t_tab *t)
 		t->status = (status / 256);
 	}
 	free(buff);
-	free_matrix(t->path2); //CAMBIADO
+	free_matrix(t->path); //CAMBIADO
 	//printf("%d\n", status);
 	return(0);
 }
@@ -93,22 +93,13 @@ void	read_path(t_tab *t)
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
 		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
 		{
-			/*if (t->z > 0 && t->path != NULL)
-			{
-				printf("hace un free aquí\n");
-				free_matrix(t->path);
-			}*/
-			t->path2 = ft_split(&t->env[i][5], ':');
+
+			t->path = ft_split(&t->env[i][5], ':');
 			//ft_allocate_path(t, path);
 			//ft_cpy_path(t, path);
 			//free_matrix(t->path2);
 			break ;
 		}
 		i++;
-	}
-	if (!t->env[i])
-	{
-		t->path = malloc(sizeof(char *));
-		t->path[0] = NULL;
 	}
 }

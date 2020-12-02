@@ -6,19 +6,23 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/12/01 17:21:52 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 20:59:52 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
 void		check_builtins(t_tab *t)
 {
-	if(check_our_implement(t))
-	{
-		read_path(t);
-		check_path(t);
-	}
+	if (check_our_implement(t)) //CAMBIADO
+		check_bash_implement(t);
+}
+
+void		check_bash_implement(t_tab *t)
+{
+	read_path(t);
+	check_path(t);
 }
 
 int			check_our_implement(t_tab *t)

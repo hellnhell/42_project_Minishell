@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/01 20:34:09 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 20:49:24 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,10 @@ typedef struct		s_tab
 	char		*index;
 	char		**env;
 	int			status;
-	int			qm;
 	int			fd1[2];
 	int			fd2;
-	int			i;
 	int			save[2];
-	int			z;
-	char		**path2;
+	int			i;
 }					t_tab;
 
 
@@ -56,7 +53,6 @@ char			*ft_strncat(char *dest, char *src, unsigned int nb);
 char			*ft_strcat(char *dest, char *src);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
-//void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void			*ft_memmove(void *dst, const void *src, size_t len);
 void			*ft_memchr(const void *s, int c, size_t n);
@@ -129,7 +125,7 @@ void    destructor_node(Node *node);
 void    destructor_list(List *list);
 void    pop_front(List *list);
 void    pop_back(List *list);
-void    pop_n_element(List *list, int n);
+//void    pop_n_element(List *list, int n);
 void    push_front(List *list, char *s);
 void    push_back(List *list, char *s);
 void    push_after_n(List *list, char *s, int n);
@@ -141,8 +137,17 @@ void    ft_free_lists(List *list);
 void	ft_skip_all(t_ints *a, char const *s, char c);
 void	ft_skipsimples(t_ints *a, char const *s, char c);
 void	ft_skipdoubles(t_ints *a, char const *s, char c);
-
-
+int		ft_cpyword(char const *s, t_tab *t, int j, char *str);
+void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s);
+void	ft_quotations_cpy(t_ints *a, t_tab *t, char *str, char const *s);
+void	ft_simpquotations_cpy(t_ints *a, char *str, char const *s);
+int		ft_dollar_count(char const *s, char **env);
+void	ft_dollar_found(t_ints *a, char **env, char const *s);
+int		ft_check_dollar(char const *s, char **env);
+void	ft_quotations_found(t_ints *a, char **env, char const *s);
+void	ft_simpquotations_found(t_ints *a, char const *s);
+void	ft_not_zero(t_ints *a);
+int		skip_env(char const *s);
 
 
 #endif

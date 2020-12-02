@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/20 19:59:56 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 18:37:06 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,30 @@ static int	ft_countwords(char const *s, char c)
 	return (n);
 }
 
+static void		ft_slash(char const *s, int j, int counter)
+{
+	if (s[j] == '\"')
+	{
+		j++;
+		while (s[j] && s[j] != '\"')
+		{
+			j++;
+			counter++;
+		}
+		counter++;
+	}
+	else if (s[j] == '\'')
+	{
+		j++;
+		while (s[j] && s[j] != '\'')
+		{
+			j++;
+			counter++;
+		}
+		counter++;
+	}
+}
+
 static int		ft_size(char const *s, char c, int j)
 {
 	int		counter;
@@ -54,34 +78,14 @@ static int		ft_size(char const *s, char c, int j)
 		j++;
 	while (s[j] && s[j] != c)
 	{
-		if (s[j] == '\"')
-		{
-			j++;
-			while (s[j] && s[j] != '\"')
-			{
-				j++;
-				counter++;
-			}
-			counter++;
-		}
-		else if (s[j] == '\'')
-		{
-			j++;
-			while (s[j] && s[j] != '\'')
-			{
-				j++;
-				counter++;
-			}
-			counter++;
-		}
+		ft_slash(s, j, counter);//TOCADO
 		counter++;
 		j++;
 	}
-	//printf("%i\n", counter + 1);
 	return (counter + 1);
 }
 
-static int		ft_cpyword(char const *s, char c, int j, char *str)
+static int		ft_cpyword2(char const *s, char c, int j, char *str)
 {
 	int		i;
 
@@ -127,7 +131,7 @@ char		**ft_split(char const *s, char c)
 	while (i < words)
 	{
 		tab[i] = malloc(sizeof(char) * ft_size(s, c, j));
-		j = ft_cpyword(s, c, j, tab[i]);
+		j = ft_cpyword2(s, c, j, tab[i]);
 		i++;
 	}
 	return (tab);

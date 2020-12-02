@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/12/01 20:26:06 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 20:50:24 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		ft_minishell(t_tab *t, List *list)
 		}
 		t->orders = ft_split(t->line, ';');
 		free(t->line);
-		iterate_orders(t, list, i);//CAMBIADO
+		create_orders(t, list, i);//CAMBIADO
 	}
 }
 
@@ -56,7 +56,6 @@ char	*read_line(t_tab *t)
 
 void	initt(t_tab *t, char **env)
 {
-	t->z = 0;
 	t->line = NULL;
 	t->path = NULL;
 	t->status = 0;

@@ -1,2 +1,3 @@
+eeee
 eins
-t->orders = ft_split(t->line, ';'); seg fault ??
+pepe

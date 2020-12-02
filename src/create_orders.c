@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   create_orders.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 18:27:27 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 18:06:47 by emartin-         ###   ########.fr       */
+/*   Created: 2020/12/02 20:52:11 by emartin-          #+#    #+#             */
+/*   Updated: 2020/12/02 20:56:43 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+void	create_orders(t_tab *t, List *list, int i)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s1[i] || !s2[i])
-		return (0);
-	while ((s1[i] && s2[i]) && s1[i] == s2[i])
+	while (t->orders[i])
+	{
+		save2_std(t);
+		list = new_list();
+		create_list_elemnts(t, list, i);
+		commands_redi_pipes(t, list);
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		reset_std23(t);
+		ft_free_lists(list);
+		free(t->index);
+	}
+	free_matrix(t->orders);
 }

@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/12/01 20:21:03 by emartin-         ###   ########.fr        #
+#    Updated: 2020/12/02 21:02:31 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,29 +26,29 @@ SRCS	=   src/main.c              \
 			src/builtins/exit.c		 \
 			src/ft_pipes.c	\
 			src/save_std.c	\
-			src/signals.c	\
-			src/iteration.c
+			src/signals.c 	\
+			src/commands_redi_pipe.c \
+			src/create_orders.c
+			#src/clear.c
+			
+GCC			=   @gcc -Wall -Wextra -Werror -g
+OBJS		=   $(SRCS:.c=.o)
+LIBFT		= 	libft/libft.a
+PRINTF		= 	printf/printf.a
+INCLUDES	=   ./
 
-LIBFT	= 	libft/libft.a
-PRINTF	= 	printf/printf.a
-OBJS    =   $(SRCS:.c=.o)
-CFLAGS  =   -Wall -Wextra -Werror -g3 #-fsanitize=address
-
-all     :   $(NAME)
-
-$(NAME) :   $(OBJS)
+all: $(NAME)
+$(NAME):	$(OBJS)
 		@$(MAKE) -C libft
 		@$(MAKE) -C printf
-		@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(PRINTF)
-
-clean   :
-		@/bin/rm -f $(OBJS)
+		@$(GCC) -I$(INCLUDES) $(LIBFT) $(PRINTF) $(OBJS) -o $(NAME)
+clean:
+			-@$(RM) $(OBJS)
 			@$(MAKE) -C libft clean
 			@$(MAKE) -C printf clean
 
-fclean  :   clean
-		-@/bin/rm -f $(NAME) $(LIBFT) $(PRINTF) 
-
-re      :   fclean all
-
-.PHONY  :   all clean fclean re
+fclean:		clean
+			-@$(RM) $(NAME) $(LIBFT) $(PRINTF) 
+			
+re:			fclean all
+.PHONY:		all clean fclean re bonus

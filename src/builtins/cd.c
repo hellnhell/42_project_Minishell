@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 19:04:47 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/11/30 19:19:21 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:51:20 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		home_dir(char **env, int i)
 	}
 }
 
-int			ft_cd(char **args, char **env)
+int				ft_cd(char **args, char **env)
 {
 	char		*path;
 	int			i;
@@ -42,6 +42,5 @@ int			ft_cd(char **args, char **env)
 				path = ft_strjoin(path, " ");
 		}
 	}
-	free(path);//LO PUSE
 	return (0);
 }
