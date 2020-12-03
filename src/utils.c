@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:19:39 by isfernan          #+#    #+#             */
-/*   Updated: 2020/12/01 18:38:30 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/03 19:19:11 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ char			*ft_strjoin_sl2(const char *s1, const char *s2)
 	pos = 0;
 	while (*s1)
 		dest[pos++] = *s1++;
-	s2++;
+	if (*s2 == '.')
+		s2++;
+	else if (*s2 == '/')
+		s2++;
 	while (*s2)
 		dest[pos++] = *s2++;
 	dest[pos] = '\0';

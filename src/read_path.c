@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 20:26:18 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/03 19:49:00 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,18 @@ int		check_path(t_tab *t)
 	//	printf("errrrrrroorrrrr\n");
 		while(t->path[i] != NULL)
 		{ // Esto igual da error porque t->tokens[0] puede no existir
-			if (t->tokens[0][0] == '.')
+			if ((t->tokens[0][0] == '.' && t->tokens[0][1] && t->tokens[0][1] == '/') || ft_isalpha(t->tokens[0][0]))
 			{
-				aux = ft_strjoin_sl2(buff, t->tokens[0]);
+				if (t->tokens[0][0] == '.')
+					aux = ft_strjoin_sl2(buff, t->tokens[0]);
+				else if (ft_isalpha(t->tokens[0][0]))
+					aux = ft_strjoin_sl(buff, t->tokens[0]);
 				j = execve(aux, t->tokens, t->env);
 				free(aux);
 				if (j >= 0)
 					continue ;
 			}
-			else if (t->tokens[0][0] == '/')
+			if (t->tokens[0][0] == '/')
 			{
 				j = execve(t->tokens[0], t->tokens, t->env);
 				if (j >= 0)
@@ -64,8 +67,8 @@ int		check_path(t_tab *t)
 			free(aux);
 			i++;
 		}
-		if (j < 0)
-			not_command_error(t);	
+		if (j < 0 || t->path[i] == NULL)
+			not_command_error(t);
 	}
 	else
 	{
@@ -95,11 +98,16 @@ void	read_path(t_tab *t)
 		{
 
 			t->path = ft_split(&t->env[i][5], ':');
-			//ft_allocate_path(t, path);
-			//ft_cpy_path(t, path);
-			//free_matrix(t->path2);
+			/*ft_allocate_path(t, path);
+			ft_cpy_path(t, path);
+			free_matrix(path);*/
 			break ;
 		}
 		i++;
+	}
+    if (!t->env[i])
+	{
+		t->path = malloc(sizeof(char *));
+        t->path[0] = NULL;
 	}
 }
