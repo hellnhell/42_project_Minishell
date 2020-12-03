@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 20:49:24 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/03 19:59:52 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <unistd.h>
 # include <string.h>
 
-typedef	struct	s_list
+typedef	struct		s_list
 {
 	void			*content;
 	struct s_list	*next;
-}				t_list;
+}					t_list;
 
 typedef	struct 		s_ints
 {
@@ -29,6 +29,18 @@ typedef	struct 		s_ints
 	int			counter;
 	int			j;
 }					t_ints;
+
+typedef struct 	Node
+{
+    char    	*element;
+    struct Node *next;
+} 				Node;
+
+typedef struct  List
+{
+    Node		*first;
+	int 		size;
+} 				List;
 
 typedef struct		s_tab
 {
@@ -45,6 +57,7 @@ typedef struct		s_tab
 	int			fd2;
 	int			save[2];
 	int			i;
+	Node		*iterator;
 }					t_tab;
 
 
@@ -108,24 +121,13 @@ int				ft_strcmp(const char *s1, const char *s2);
 char			**ft_split_list(char const *s, char c, t_tab *t);
 void			ft_strpncpy(char *dest, char *str, int len);
 
-typedef struct Node
-{
-    char    	*element;
-    struct Node *next;
-} 				Node;
-
-typedef struct  List {
-    Node	*first;
-	int 	size;
-} 				List;
-
 List    *new_list(void);
 Node    *new_node(char *s);
 void    destructor_node(Node *node);
 void    destructor_list(List *list);
 void    pop_front(List *list);
 void    pop_back(List *list);
-//void    pop_n_element(List *list, int n);
+//void   pop_n_element(List *list, int n);
 void    push_front(List *list, char *s);
 void    push_back(List *list, char *s);
 void    push_after_n(List *list, char *s, int n);
