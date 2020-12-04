@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:19:39 by isfernan          #+#    #+#             */
-/*   Updated: 2020/12/03 19:19:11 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:38:51 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ int		check_quotes(char *s)
 	int		a;
 	int		b;
 	int		i;
-	int		ain;
-	int		bin;
 
 	a = 0;
 	b = 0;
 	i = 0;
-	ain = 0;
-	bin = 0;
 	while (s[i])
 	{
 		if (s[i] == '\"')
@@ -57,7 +53,6 @@ int		check_quotes(char *s)
 	if ((a % 2 != 0) || (b % 2 != 0))
 		return (0);
 	return (1);
-	
 }
 
 char			*ft_strjoin_sl(const char *s1, const char *s2)

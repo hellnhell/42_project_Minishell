@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/03 19:49:00 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:41:18 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ static void		not_command_error(t_tab *t)
 		ft_printf("mari: %s : No such file or directory\n", t->tokens[0]);
 	else
 		ft_printf("mari: %s : command not found\n", t->tokens[0]);
-	exit(127); 
+	exit(127);
 }
-
 
 int		check_path(t_tab *t)
 {
@@ -40,8 +39,6 @@ int		check_path(t_tab *t)
 	pid = fork();
 	if (pid == 0)
 	{	
-	//if (!t->tokens[0])
-	//	printf("errrrrrroorrrrr\n");
 		while(t->path[i] != NULL)
 		{ // Esto igual da error porque t->tokens[0] puede no existir
 			if ((t->tokens[0][0] == '.' && t->tokens[0][1] && t->tokens[0][1] == '/') || ft_isalpha(t->tokens[0][0]))
@@ -84,11 +81,9 @@ int		check_path(t_tab *t)
 	return(0);
 }
 
-
 void	read_path(t_tab *t)
 {
 	int		i;
-	//char	**path;
 
 	i = 0;
 	while (t->env[i])
@@ -96,11 +91,7 @@ void	read_path(t_tab *t)
 		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
 		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
 		{
-
 			t->path = ft_split(&t->env[i][5], ':');
-			/*ft_allocate_path(t, path);
-			ft_cpy_path(t, path);
-			free_matrix(path);*/
 			break ;
 		}
 		i++;

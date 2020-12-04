@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:44:16 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/12/02 21:00:16 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:15:24 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@
 # include 	<sys/wait.h>
 # include	<fcntl.h>
 # include 	<signal.h>
+
+typedef	struct 		s_counts
+{
+	int				y;
+	int				x;
+	unsigned int	j;
+	int				i;
+}					t_counts;
 
 char	*read_line(t_tab *t);
 void	read_path(t_tab *t);

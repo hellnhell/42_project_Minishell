@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 18:47:03 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/03 17:39:45 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/04 19:04:36 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	ft_redi_less(t_tab *t, Node *iterator)
 		{
 			ft_printf("mari: %s: No such file or directory\n", str[0]);
 			t->status = 1;
+			free_matrix(str);
+			return ;
 		}
 		dup2(t->fd1[READ_END], STDIN_FILENO);
 		check_builtins(t);

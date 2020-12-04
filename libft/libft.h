@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/03 19:59:52 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/04 18:04:42 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_tab
 	int			fd2;
 	int			save[2];
 	int			i;
+	int			z;
 	Node		*iterator;
 }					t_tab;
 
