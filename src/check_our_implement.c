@@ -6,16 +6,15 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/12/02 20:59:52 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:42:29 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 void		check_builtins(t_tab *t)
 {
-	if (check_our_implement(t)) //CAMBIADO
+	if (check_our_implement(t))
 		check_bash_implement(t);
 }
 

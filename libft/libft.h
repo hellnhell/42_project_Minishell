@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 10:59:31 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/04 18:04:42 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 21:12:20 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,44 +23,43 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef	struct 		s_ints
+typedef	struct		s_ints
 {
-	int			i;
-	int			counter;
-	int			j;
+	int				i;
+	int				counter;
+	int				j;
 }					t_ints;
 
-typedef struct 	Node
+typedef struct 		nodes
 {
-    char    	*element;
-    struct Node *next;
-} 				Node;
+    char    		*element;
+    struct nodes 	*next;
+} 					node;
 
-typedef struct  List
+typedef struct  	lista
 {
-    Node		*first;
-	int 		size;
-} 				List;
+    node			*first;
+	int 			size;
+} 					list;
 
 typedef struct		s_tab
 {
-	char		*line;
-	char		**tokens;
-	char		**orders;
-	char		**path;
-	char		**args;
-	char		**command;
-	char		*index;
-	char		**env;
-	int			status;
-	int			fd1[2];
-	int			fd2;
-	int			save[2];
-	int			i;
-	int			z;
-	Node		*iterator;
+	char			*line;
+	char			**tokens;
+	char			**orders;
+	char			**path;
+	char			**args;
+	char			**command;
+	char			*index;
+	char			**env;
+	int				status;
+	int				fd1[2];
+	int				fd2;
+	int				save[2];
+	int				i;
+	int				z;
+	node			*iterator;
 }					t_tab;
-
 
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strncat(char *dest, char *src, unsigned int nb);
@@ -122,20 +121,19 @@ int				ft_strcmp(const char *s1, const char *s2);
 char			**ft_split_list(char const *s, char c, t_tab *t);
 void			ft_strpncpy(char *dest, char *str, int len);
 
-List    *new_list(void);
-Node    *new_node(char *s);
-void    destructor_node(Node *node);
-void    destructor_list(List *list);
-void    pop_front(List *list);
-void    pop_back(List *list);
-//void   pop_n_element(List *list, int n);
-void    push_front(List *list, char *s);
-void    push_back(List *list, char *s);
-void    push_after_n(List *list, char *s, int n);
-List    *copy_list(List *list);
-int     size_list(List *lista);
-void    ft_free_lists(List *list);
-
+list    *new_list(void);
+node    *new_node(char *s);
+void    destructor_node(node *node);
+void    destructor_list(list *st);
+void    pop_front(list *st);
+void    pop_back(list *st);
+//void   pop_n_element(list *list, int n);
+void    push_front(list *lst, char *s);
+void    push_back(list *lst, char *s);
+void    push_after_n(list *lst, char *s, int n);
+list    *copy_list(list *lst);
+int     size_list(list *lista);
+void    ft_free_lists(list *lst);
 
 void	ft_skip_all(t_ints *a, char const *s, char c);
 void	ft_skipsimples(t_ints *a, char const *s, char c);
@@ -151,6 +149,5 @@ void	ft_quotations_found(t_ints *a, char **env, char const *s);
 void	ft_simpquotations_found(t_ints *a, char const *s);
 void	ft_not_zero(t_ints *a);
 int		skip_env(char const *s);
-
 
 #endif

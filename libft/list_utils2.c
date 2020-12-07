@@ -6,53 +6,53 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 19:45:20 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 19:49:16 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 21:08:22 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-List		*new_list(void)
+list		*new_list(void)
 {
-	List	*list;
+	list	*lst;
 
-	if (!(list = (List *)malloc(sizeof(List))))
-		ft_putstr_fd("Malloc error list\n", 1);
-	list->first = NULL;
-	list->size = 0;
-	return (list);
+	if (!(lst = (list *)malloc(sizeof(list))))
+		ft_putstr_fd("Malloc error lst\n", 1);
+	lst->first = NULL;
+	lst->size = 0;
+	return (lst);
 }
 
-Node		*new_node(char *s)
+node		*new_node(char *s)
 {
-	Node	*node;
+	node	*noode;
 
-	node = (Node *)malloc(sizeof(Node));
-	node->element = ft_strdup(s);
-	node->next = NULL;
-	return (node);
+	noode = (node *)malloc(sizeof(node));
+	noode->element = ft_strdup(s);
+	noode->next = NULL;
+	return (noode);
 }
 
-void		destructor_node(Node *node)
+void		destructor_node(node *noode)
 {
-	free(node->element);
-	free(node);
+	free(noode->element);
+	free(noode);
 }
 
-void		destructor_list(List *list)
+void		destructor_list(list *lst)
 {
 	int		i;
 
 	i = 0;
-	while (list->first != NULL)
+	while (lst->first != NULL)
 	{
-		pop_front(list);
+		pop_front(lst);
 		i++;
 	}
-	free(list);
+	free(lst);
 }
 
-int			size_list(List *lista)
+int			size_list(list *lista)
 {
 	return (lista->size);
 }

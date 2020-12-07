@@ -6,15 +6,15 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 19:32:26 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 19:38:59 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 20:52:28 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		pop_front(List *list)
+void		pop_front(list *list)
 {
-	Node	*pop;
+	node	*pop;
 
 	pop = list->first;
 	if (list->first != NULL)
@@ -25,10 +25,10 @@ void		pop_front(List *list)
 	}
 }
 
-void		pop_back(List *list)
+void		pop_back(list *list)
 {
-	Node	*pop;
-	Node	*previous_position;
+	node	*pop;
+	node	*previous_position;
 
 	pop = list->first;
 	previous_position = NULL;
@@ -65,13 +65,13 @@ int			compare_element_c(char *s, char c)
 	return (0);
 }
 
-List		*copy_list(List *list)
+list		*copy_list(list *lst)
 {
-	List	*copy;
-	Node	*iterator;
+	list	*copy;
+	node	*iterator;
 
 	copy = new_list();
-	iterator = list->first;
+	iterator = lst->first;
 	while (iterator != NULL)
 	{
 		push_back(copy, iterator->element);

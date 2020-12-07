@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/12/02 18:37:06 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 21:10:46 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 ** Esta función es el split modificado para dividir los comandos (es decir, ';')
 ** pero ignorando los ; que están entre comillas
 */
-
-//Hay qe comprobar si este gestiona bien que las comillas pegadas a cosas
 
 static int	ft_countwords(char const *s, char c)
 {
@@ -78,7 +76,7 @@ static int		ft_size(char const *s, char c, int j)
 		j++;
 	while (s[j] && s[j] != c)
 	{
-		ft_slash(s, j, counter);//TOCADO
+		ft_slash(s, j, counter);
 		counter++;
 		j++;
 	}

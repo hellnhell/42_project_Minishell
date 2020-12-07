@@ -6,59 +6,68 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:19:39 by isfernan          #+#    #+#             */
-/*   Updated: 2020/12/04 20:38:51 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 21:16:50 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_quotes(char *s)
+void			add_count_a(t_counts2 *c)
 {
-	int		a;
-	int		b;
-	int		i;
+	c->a++;
+	c->i++;
+}
 
-	a = 0;
-	b = 0;
-	i = 0;
-	while (s[i])
+void			check_quotes2(t_counts2 *c, char *s)
+{
+	if (s[c->i] == '\"')
 	{
-		if (s[i] == '\"')
-		{
-			a++;
-			i++;
-			while (s[i] && s[i] != '\"')
-				i++;
-			if (s[i] == '\"')
-			{
-				a++;
-				i++;
-			}
-		}
-		else if (s[i] == '\'')
-		{
-			b++;
-			i++;
-			while (s[i] && s[i] != '\'')
-				i++;
-			if (s[i] == '\'')
-			{
-				b++;
-				i++;
-			}
-		}
-		else
-			i++;
+		add_count_a(c);
+		while (s[c->i] && s[c->i] != '\"')
+			c->i++;
+		if (s[c->i] == '\"')
+			add_count_a(c);
 	}
-	if ((a % 2 != 0) || (b % 2 != 0))
+	else if (s[c->i] == '\'')
+	{
+		c->b++;
+		c->i++;
+		while (s[c->i] && s[c->i] != '\'')
+			c->i++;
+		if (s[c->i] == '\'')
+		{
+			c->b++;
+			c->i++;
+		}
+	}
+	else
+		c->i++;
+}
+
+int				check_quotes(char *s)
+{
+	t_counts2	*c;
+
+	if (!(c = malloc(sizeof(t_counts2))))
 		return (0);
+	c->a = 0;
+	c->b = 0;
+	c->i = 0;
+	while (s[c->i])
+		check_quotes2(c, s);
+	if ((c->a % 2 != 0) || (c->b % 2 != 0))
+	{
+		free(c);
+		return (0);
+	}
+	free(c);
 	return (1);
 }
 
 char			*ft_strjoin_sl(const char *s1, const char *s2)
 {
-	int		pos;
-	char	*dest;
+	int			pos;
+	char		*dest;
 
 	if (!(dest = malloc(ft_strlen(s1) + ft_strlen(s2) + 2)))
 		return (NULL);
@@ -74,8 +83,8 @@ char			*ft_strjoin_sl(const char *s1, const char *s2)
 
 char			*ft_strjoin_sl2(const char *s1, const char *s2)
 {
-	int		pos;
-	char	*dest;
+	int			pos;
+	char		*dest;
 
 	if (!(dest = malloc(ft_strlen(s1) + ft_strlen(s2))))
 		return (NULL);

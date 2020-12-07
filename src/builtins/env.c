@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:02:19 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/30 19:23:13 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 21:14:00 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void		ft_allocate_env(char **env, t_tab *t)
 		while (env[l][c])
 			c++;
 		t->env[l] = (char *)malloc(sizeof(char) * (c + 1));
-		//t->env[l][c] = '\0';
 		l++;
 	}
 	ft_cpy_env(env, t);

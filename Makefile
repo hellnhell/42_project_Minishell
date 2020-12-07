@@ -6,7 +6,7 @@
 #    By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 18:30:24 by hellnhell         #+#    #+#              #
-#    Updated: 2020/12/03 19:03:19 by emartin-         ###   ########.fr        #
+#    Updated: 2020/12/07 21:21:47 by emartin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,17 @@ SRCS	=   src/main.c              \
 			src/builtins/pwd.c				\
 			src/builtins/cd.c				\
 			src/builtins/export.c			\
+			src/builtins/export_env.c			\
 			src/builtins/unset.c				\
 			src/builtins/env.c				\
 			src/builtins/exit.c		 \
 			src/ft_pipes.c	\
+			src/ft_redirections.c \
 			src/save_std.c	\
 			src/signals.c 	\
 			src/commands_redi_pipe.c \
-			src/create_orders.c
+			src/create_orders.c \
+			src/errors.c
 			#src/clear.c
 			
 GCC			=   @gcc -Wall -Wextra -Werror -g3

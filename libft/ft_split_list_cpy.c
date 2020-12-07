@@ -6,14 +6,20 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:32:52 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 19:09:29 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 20:47:59 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s) //TIENE 26 líneas
+void		skip_is_num(char const *s, t_ints *a)
+{
+	while (s[a->j] && (ft_isalnum(s[a->j])))
+		a->j++;
+}
+
+void		ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 {
 	int		n;
 	int		z;
@@ -26,8 +32,7 @@ void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s) //TIENE 26 lí
 		z = ft_strlen2(t->env[n - 1]) + 1;
 		while (t->env[n - 1][z])
 			str[a->i++] = t->env[n - 1][z++];
-		while (s[a->j] && (ft_isalnum(s[a->j])))
-			a->j++;
+		skip_is_num(s, a);
 	}
 	else if (n == -1)
 	{
@@ -39,15 +44,14 @@ void	ft_dollar_cpy(t_ints *a, t_tab *t, char *str, char const *s) //TIENE 26 lí
 		a->j += skip_env(&s[a->j]);
 	}
 	else
-		while (s[a->j] && (ft_isalnum(s[a->j])))
-			a->j++;
+		skip_is_num(s, a);
 }
 
 /*
 ** en env[n - 1] le restamos uno porque hemos devuleto el índice +1
 */
 
-void	ft_quotations_cpy(t_ints *a, t_tab *t, char *str, char const *s)
+void		ft_quotations_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 {
 	int		n;
 	int		z;
@@ -73,7 +77,7 @@ void	ft_quotations_cpy(t_ints *a, t_tab *t, char *str, char const *s)
 	a->j++;
 }
 
-void	ft_simpquotations_cpy(t_ints *a, char *str, char const *s)
+void		ft_simpquotations_cpy(t_ints *a, char *str, char const *s)
 {
 	a->j++;
 	while (s[a->j] && s[a->j] != '\'')
@@ -83,7 +87,7 @@ void	ft_simpquotations_cpy(t_ints *a, char *str, char const *s)
 	a->j++;
 }
 
-int		ft_cpyword(char const *s, t_tab *t, int j, char *str)
+int			ft_cpyword(char const *s, t_tab *t, int j, char *str)
 {
 	t_ints	*a;
 	char	c;

@@ -6,54 +6,54 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:15:23 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 19:26:11 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 20:58:47 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		push_front(List *list, char *s)
+void		push_front(list *lst, char *s)
 {
-	Node		*new;
+	node		*new;
 
 	new = new_node(s);
-	new->next = list->first;
-	list->first = new;
-	list->size++;
+	new->next = lst->first;
+	lst->first = new;
+	lst->size++;
 }
 
-void		push_back(List *list, char *s)
+void		push_back(list *lst, char *s)
 {
-	Node	*new;
-	Node	*iterator;
+	node	*new;
+	node	*iterator;
 
 	new = new_node(s);
 	iterator = NULL;
-	if (list->first == NULL)
-		list->first = new;
+	if (lst->first == NULL)
+		lst->first = new;
 	else
 	{
-		iterator = list->first;
+		iterator = lst->first;
 		while (iterator->next != NULL)
 			iterator = iterator->next;
 		iterator->next = new;
 	}
-	list->size++;
+	lst->size++;
 }
 
-void		push_after_n(List *list, char *s, int n)
+void		push_after_n(list *lst, char *s, int n)
 {
-	Node	*new;
-	Node	*iterator;
+	node	*new;
+	node	*iterator;
 	int		i;
 
 	new = new_node(s);
 	iterator = NULL;
-	if (list->first == NULL)
-		list->first = new;
+	if (lst->first == NULL)
+		lst->first = new;
 	else
 	{
-		iterator = list->first;
+		iterator = lst->first;
 		i = 0;
 		while (iterator->next != NULL && i < n)
 		{
@@ -63,21 +63,21 @@ void		push_after_n(List *list, char *s, int n)
 		new->next = iterator->next;
 		iterator->next = new;
 	}
-	list->size++;
+	lst->size++;
 }
 
-char		*get_element(List *list, int n)
+char		*get_element(list *lst, int n)
 {
-	Node	*iterator;
+	node	*iterator;
 	int		i;
 
 	iterator = NULL;
-	if (list->first == NULL)
+	if (lst->first == NULL)
 		return (NULL);
 	else
 	{
 		i = 0;
-		iterator = list->first;
+		iterator = lst->first;
 		while (iterator->next != NULL && i < n)
 		{
 			iterator = iterator->next;

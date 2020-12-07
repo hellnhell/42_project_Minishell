@@ -6,19 +6,19 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/04 20:27:59 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 21:15:53 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	make_pop(List *list, char *aux)
+void			make_pop(list *lst, char *aux)
 {
 	if (ft_strlen(aux))
-		push_back(list, aux);
+		push_back(lst, aux);
 }
 
-void		save_index(t_tab *t, int i, t_counts *count)
+void			save_index(t_tab *t, int i, t_counts *count)
 {
 	if (t->orders[i][count->j] == '>' && t->orders[i][count->j + 1] == '>')
 	{
@@ -33,9 +33,9 @@ void		save_index(t_tab *t, int i, t_counts *count)
 	}
 }
 
-int		simbols(t_tab *t, t_counts *count)
+int				simbols(t_tab *t, t_counts *count)
 {
-	int		simbol;
+	int			simbol;
 
 	if ((t->orders[count->i][count->j] == '|') ||
 		(t->orders[count->i][count->j] == '<')
@@ -46,7 +46,7 @@ int		simbols(t_tab *t, t_counts *count)
 	return (simbol);
 }
 
-void	ft_cle_2(t_tab *t, t_counts *count, char *aux, List *list)
+void			ft_cle_2(t_tab *t, t_counts *count, char *aux, list *lst)
 {
 	while (t->orders[count->i][count->j])
 	{
@@ -59,14 +59,14 @@ void	ft_cle_2(t_tab *t, t_counts *count, char *aux, List *list)
 		{
 			save_index(t, count->i, count);
 			aux[count->x] = '\0';
-			make_pop(list, aux);
+			make_pop(lst, aux);
 			count->x = 0;
 		}
 		count->j++;
 	}
 }
 
-void	create_list_elemnts(t_tab *t, List *list, int i)
+void			create_list_elemnts(t_tab *t, list *lst, int i)
 {
 	t_counts	*count;
 	char		*aux;
@@ -81,9 +81,9 @@ void	create_list_elemnts(t_tab *t, List *list, int i)
 		return ;
 	if (!(aux = malloc(sizeof(char) * ft_strlen(t->orders[i]) + 1)))
 		return ;
-	ft_cle_2(t, count, aux, list);
+	ft_cle_2(t, count, aux, lst);
 	aux[count->x] = '\0';
-	make_pop(list, aux);
+	make_pop(lst, aux);
 	free(aux);
 	free(count);
 }

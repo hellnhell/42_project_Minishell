@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/01 20:21:51 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/07 21:13:32 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void		ft_exit_args(char **args, int j)//PROBAR A METER NUESTRO PRINTF
+static void		ft_exit_args(char **args, int j)
 {
 	int			i;
 	int			k;
@@ -25,7 +25,7 @@ static void		ft_exit_args(char **args, int j)//PROBAR A METER NUESTRO PRINTF
 	{
 		if (ft_isdigit(args[0][i]) != 1)
 		{
-			ft_printf("mari: exit: %s : numeric argument required\n", args[0]);
+			ft_printf("minishell: exit: %s : numeric argument required\n", args[0]);
 			exit(255);
 		}
 		i++;
@@ -34,7 +34,7 @@ static void		ft_exit_args(char **args, int j)//PROBAR A METER NUESTRO PRINTF
 	{
 		if (++k > 1)
 		{
-			ft_printf("bash: exit: too many arguments\n");
+			ft_printf("minishell: exit: too many arguments\n");
 			exit(1);
 		}
 	}
