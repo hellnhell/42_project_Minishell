@@ -71,9 +71,7 @@ RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror -g3
 
 $(NAME):	${OBJS}
-			@echo "libft.a - compiling"
-			@${AR} ${NAME} ${OBJS} ${SRCSH} 
-			@echo "libft.a - done"
+	@${AR} ${NAME} ${OBJS} ${SRCSH} 
 
 
 all:		${NAME}
@@ -88,8 +86,7 @@ fclean:		clean
 re:			fclean all
 
 bonus:		all ${OBONUS}
-			@echo "libft.a (bonus) - compiling"
-			@${AR} ${NAME} ${OBJS} ${OBONUS}
-			@echo "libft.a (bonus) - done"
+	@${AR} ${NAME} ${OBJS} ${OBONUS}
+
 
 .PHONY:		all clean fclean re

@@ -6,11 +6,11 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 18:47:03 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:02:10 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:51:07 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void		ft_pipes(t_tab *t)
 {
@@ -39,9 +39,8 @@ void		ft_pipes(t_tab *t)
 		exit(-1);
 }
 
-void		ft_redi_pipe(t_tab *t, node *iterator)
+void		ft_redi_pipe(t_tab *t, t_node *iterator)
 {
-	int		status;
 	pid_t	pid;
 	char	**str;
 

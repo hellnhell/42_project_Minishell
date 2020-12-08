@@ -6,11 +6,11 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 20:29:06 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:03:07 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:51:39 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	commands_redi_pipes_3(t_tab *t)
 {
@@ -82,12 +82,12 @@ void	other_redi_less(t_tab *t)
 	}
 }
 
-void	commands_redi_pipes(t_tab *t, list *lst)
+void	commands_redi_pipes(t_tab *t, t_lista *lst)
 {
 	while (t->iterator != NULL)
 	{
 		t->tokens = ft_split_list(t->iterator->element, ' ', t);
-		if ((ft_strlen(t->index) + 1) != size_list(lst))
+		if ((ft_strlen(t->index) + 1) != (size_t)size_list(lst))
 		{
 			error_unex(t);
 			return ;

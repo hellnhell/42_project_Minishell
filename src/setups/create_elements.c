@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:50:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:15:53 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:36:41 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void			make_pop(list *lst, char *aux)
+void			make_pop(t_lista *lst, char *aux)
 {
 	if (ft_strlen(aux))
 		push_back(lst, aux);
@@ -46,7 +46,7 @@ int				simbols(t_tab *t, t_counts *count)
 	return (simbol);
 }
 
-void			ft_cle_2(t_tab *t, t_counts *count, char *aux, list *lst)
+void			ft_cle_2(t_tab *t, t_counts *count, char *aux, t_lista *lst)
 {
 	while (t->orders[count->i][count->j])
 	{
@@ -66,7 +66,7 @@ void			ft_cle_2(t_tab *t, t_counts *count, char *aux, list *lst)
 	}
 }
 
-void			create_list_elemnts(t_tab *t, list *lst, int i)
+void			create_list_elemnts(t_tab *t, t_lista *lst, int i)
 {
 	t_counts	*count;
 	char		*aux;

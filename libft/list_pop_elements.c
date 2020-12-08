@@ -6,35 +6,35 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 19:32:26 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 20:52:28 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 17:40:55 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		pop_front(list *list)
+void		pop_front(t_lista *lst)
 {
-	node	*pop;
+	t_node	*pop;
 
-	pop = list->first;
-	if (list->first != NULL)
+	pop = lst->first;
+	if (lst->first != NULL)
 	{
-		list->first = list->first->next;
+		lst->first = lst->first->next;
 		destructor_node(pop);
-		list->size--;
+		lst->size--;
 	}
 }
 
-void		pop_back(list *list)
+void		pop_back(t_lista *lst)
 {
-	node	*pop;
-	node	*previous_position;
+	t_node	*pop;
+	t_node	*previous_position;
 
-	pop = list->first;
+	pop = lst->first;
 	previous_position = NULL;
-	if (list->first != NULL)
+	if (lst->first != NULL)
 	{
-		if (list->size > 1)
+		if (lst->size > 1)
 		{
 			while (pop->next != NULL)
 			{
@@ -43,13 +43,13 @@ void		pop_back(list *list)
 			}
 			previous_position->next = NULL;
 			destructor_node(pop);
-			list->size--;
+			lst->size--;
 		}
 		else
 		{
-			list->first = NULL;
+			lst->first = NULL;
 			destructor_node(pop);
-			list->size--;
+			lst->size--;
 		}
 	}
 }
@@ -65,10 +65,10 @@ int			compare_element_c(char *s, char c)
 	return (0);
 }
 
-list		*copy_list(list *lst)
+t_lista		*copy_list(t_lista *lst)
 {
-	list	*copy;
-	node	*iterator;
+	t_lista	*copy;
+	t_node	*iterator;
 
 	copy = new_list();
 	iterator = lst->first;

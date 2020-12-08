@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/12/07 21:10:46 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 17:24:05 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_countwords(char const *s, char c)
 	return (n);
 }
 
-static void		ft_slash(char const *s, int j, int counter)
+static void	ft_slash(char const *s, int j, int counter)
 {
 	if (s[j] == '\"')
 	{
@@ -67,7 +67,7 @@ static void		ft_slash(char const *s, int j, int counter)
 	}
 }
 
-static int		ft_size(char const *s, char c, int j)
+static int	ft_size(char const *s, char c, int j)
 {
 	int		counter;
 
@@ -83,7 +83,7 @@ static int		ft_size(char const *s, char c, int j)
 	return (counter + 1);
 }
 
-static int		ft_cpyword2(char const *s, char c, int j, char *str)
+static int	ft_cpyword2(char const *s, char c, int j, char *str)
 {
 	int		i;
 

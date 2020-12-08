@@ -6,11 +6,11 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 18:04:38 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:17:49 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:36:54 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 #include <string.h>
 
 int			relat_path(char *aux, char *buff, t_tab *t, int *j)
@@ -87,7 +87,6 @@ void		read_path(t_tab *t)
 	i = 0;
 	while (t->env[i])
 	{
-		// Esto puede petar si nos dan una variable de entorno que se llame "PATH="
 		if (ft_strncmp("PATH=", t->env[i], 5) == 0)
 		{
 			t->path = ft_split(&t->env[i][5], ':');

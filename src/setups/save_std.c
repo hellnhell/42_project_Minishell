@@ -1,45 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   save_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 18:13:40 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 17:55:57 by emartin-         ###   ########.fr       */
+/*   Created: 2020/11/17 19:21:12 by emartin-          #+#    #+#             */
+/*   Updated: 2020/12/08 18:36:56 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	ft_signal_c1(int sign)
+void	save2_std(t_tab *t)
 {
-	if (sign == SIGINT)
-		ft_printf("\n");
+	t->save[0] = dup(STDIN_FILENO);
+	t->save[1] = dup(STDOUT_FILENO);
 }
 
-void	ft_signal_c(int sign)
+void	reset_std23(t_tab *t)
 {
-	if (sign == SIGINT)
-	{
-		ft_printf("\n");
-		ft_putstr_fd(PROMPT, 1);
-	}
+	dup2(t->save[0], STDIN_FILENO);
+	dup2(t->save[1], STDOUT_FILENO);
 }
 
-void	ft_signal_d(int sign)
+void	reset_stdout(t_tab *t)
 {
-	if (sign == 1)
-	{
-		ft_printf("\n");
-		ft_putstr_fd(PROMPT, 1);
-		ft_printf("exit\n");
-		exit(0);
-	}
-}
-
-void	ft_signal_quit(int sign)
-{
-	if (sign == SIGQUIT)
-		ft_printf("QUIT: 3\n");
+	dup2(t->save[1], STDOUT_FILENO);
 }

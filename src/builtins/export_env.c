@@ -6,15 +6,15 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 21:18:53 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:20:18 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:50:32 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-static int	ft_cpy_newenv2(char *var, char *val, char **newenv, int w)
+static int		ft_cpy_newenv2(char *var, char *val, char **newenv, int w)
 {
-	int		c;
+	int			c;
 
 	c = -1;
 	while (*var)
@@ -25,12 +25,12 @@ static int	ft_cpy_newenv2(char *var, char *val, char **newenv, int w)
 	return (-1);
 }
 
-void		ft_cpy_newenv(char **env, char **newenv, char *var, char *val)
+void			ft_cpy_newenv(char **env, char **newenv, char *var, char *val)
 {
-	int		l;
-	int		c;
-	int		w;
-	int		z;
+	int			l;
+	int			c;
+	int			w;
+	int			z;
 
 	l = 0;
 	w = 0;
@@ -59,7 +59,7 @@ static char		**ft_realloc2(t_tab *t, t_counts *f, int k)
 
 	newenv = (char **)malloc(sizeof(char *) * (f->y + 2));
 	newenv[f->y + 1] = NULL;
-	while (f->j < f->y)
+	while ((int)f->j < f->y)
 	{
 		if (f->x + 2 != f->y)
 		{
@@ -85,7 +85,6 @@ char			**ft_realloc_env(t_tab *t, char *var, char *val, int k)
 {
 	t_counts	*f;
 	char		**newenv;
-	int			c;
 
 	f = malloc(sizeof(t_counts));
 	f->y = 0;

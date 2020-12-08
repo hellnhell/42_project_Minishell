@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 18:30:04 by isfernan          #+#    #+#             */
-/*   Updated: 2020/12/07 21:19:21 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:50:02 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_check_export(t_tab *t, char *var, char *val, int j)
 
 	i = ft_strlen(var);
 	z = ft_strlen(val);
-	if (ft_strlen2(t->env[j]) == i && ft_strncmp(t->env[j], var, i) == 0)
+	if (ft_strlen2(t->env[j]) == (size_t)i && ft_strncmp(t->env[j], var, i) == 0)
 	{
 		free(t->env[j]);
 		t->env[j] = malloc(sizeof(char) * (i + z + 2));
@@ -61,9 +61,9 @@ static int	ft_check_export(t_tab *t, char *var, char *val, int j)
 
 static void	ft_change_env(char *str, t_tab *t)
 {
-	char		*var;
-	char		*val;
-	int			j;
+	char	*var;
+	char	*val;
+	int		j;
 
 	j = 0;
 	var = malloc(sizeof(char) * (ft_strlen2(str) + 1));
@@ -86,7 +86,7 @@ static void	ft_change_env(char *str, t_tab *t)
 	free(val);
 }
 
-int		ft_export(char **args, t_tab *t)
+int			ft_export(char **args, t_tab *t)
 {
 	int		i;
 

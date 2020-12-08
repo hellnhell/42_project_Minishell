@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 20:52:11 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:14:35 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:36:43 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void		create_orders(t_tab *t, list *lst, int i)
+void		create_orders(t_tab *t, t_lista *lst, int i)
 {
 	while (t->orders[i])
 	{
@@ -30,7 +30,7 @@ void		create_orders(t_tab *t, list *lst, int i)
 	free_matrix(t->orders);
 }
 
-void		ft_minishell(t_tab *t, list *lst)
+void		ft_minishell(t_tab *t, t_lista *lst)
 {
 	int		i;
 

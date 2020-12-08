@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_list_count.c                              :+:      :+:    :+:   */
+/*   ft_split_list_found.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:28:43 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/02 18:30:02 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 17:23:33 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			ft_dollar_count(char const *s, char **env)
 	return (0);
 }
 
-void	ft_dollar_found(t_ints *a, char **env, char const *s)
+void		ft_dollar_found(t_ints *a, char **env, char const *s)
 {
 	a->i = ft_dollar_count(&s[a->j + 1], env);
 	a->counter += a->i;
@@ -53,7 +53,7 @@ void	ft_dollar_found(t_ints *a, char **env, char const *s)
 	}
 }
 
-void	ft_quotations_found(t_ints *a, char **env, char const *s)
+void		ft_quotations_found(t_ints *a, char **env, char const *s)
 {
 	a->j++;
 	while (s[a->j] && s[a->j] != '\"')
@@ -79,7 +79,7 @@ void	ft_quotations_found(t_ints *a, char **env, char const *s)
 	a->counter = a->counter - 1;
 }
 
-void	ft_simpquotations_found(t_ints *a, char const *s)
+void		ft_simpquotations_found(t_ints *a, char const *s)
 {
 	a->j++;
 	while (s[a->j] && s[a->j] != '\'')
@@ -90,7 +90,7 @@ void	ft_simpquotations_found(t_ints *a, char const *s)
 	a->counter = a->counter - 1;
 }
 
-void	ft_not_zero(t_ints *a)
+void		ft_not_zero(t_ints *a)
 {
 	a->counter++;
 	a->j++;

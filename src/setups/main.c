@@ -6,11 +6,11 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/12/07 21:15:24 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:50:49 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void		free_matrix(char **matrix)
 {
@@ -32,7 +32,7 @@ char		*read_line(t_tab *t)
 	return (t->line);
 }
 
-void		initt(t_tab *t, char **env)
+void		initt(t_tab *t)
 {
 	t->line = NULL;
 	t->path = NULL;
@@ -42,14 +42,14 @@ void		initt(t_tab *t, char **env)
 int			main(int argc, char **argv, char **env)
 {
 	t_tab	*t;
-	list	*lst;
+	t_lista	*lst;
 
 	lst = NULL;
 	(void)argc;
 	(void)argv;
 	if (!(t = malloc(sizeof(t_tab))))
 		return (1);
-	initt(t, env);
+	initt(t);
 	ft_allocate_env(env, t);
 	ft_minishell(t, lst);
 }

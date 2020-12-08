@@ -6,13 +6,13 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:02:50 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 20:53:22 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:36:49 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void		ft_redi_greater(t_tab *t, node *iterator)
+void		ft_redi_greater(t_tab *t, t_node *iterator)
 {
 	char	**str;
 	int		fd;
@@ -26,7 +26,7 @@ void		ft_redi_greater(t_tab *t, node *iterator)
 	free_matrix(str);
 }
 
-void		ft_redi_less(t_tab *t, node *iterator)
+void		ft_redi_less(t_tab *t, t_node *iterator)
 {
 	char	**str;
 
@@ -54,7 +54,7 @@ void		ft_redi_less(t_tab *t, node *iterator)
 	}
 }
 
-void		ft_redi_double(t_tab *t, node *iterator)
+void		ft_redi_double(t_tab *t, t_node *iterator)
 {
 	char	**str;
 	int		fd;
@@ -68,7 +68,7 @@ void		ft_redi_double(t_tab *t, node *iterator)
 	free_matrix(str);
 }
 
-void		ft_redi_redi(t_tab *t, node *iterator, char c)
+void		ft_redi_redi(t_tab *t, t_node *iterator, char c)
 {
 	char	**s1;
 	char	**s2;

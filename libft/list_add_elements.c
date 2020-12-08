@@ -6,15 +6,15 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:15:23 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 20:58:47 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 17:40:16 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		push_front(list *lst, char *s)
+void		push_front(t_lista *lst, char *s)
 {
-	node		*new;
+	t_node		*new;
 
 	new = new_node(s);
 	new->next = lst->first;
@@ -22,10 +22,10 @@ void		push_front(list *lst, char *s)
 	lst->size++;
 }
 
-void		push_back(list *lst, char *s)
+void		push_back(t_lista *lst, char *s)
 {
-	node	*new;
-	node	*iterator;
+	t_node	*new;
+	t_node	*iterator;
 
 	new = new_node(s);
 	iterator = NULL;
@@ -41,10 +41,10 @@ void		push_back(list *lst, char *s)
 	lst->size++;
 }
 
-void		push_after_n(list *lst, char *s, int n)
+void		push_after_n(t_lista *lst, char *s, int n)
 {
-	node	*new;
-	node	*iterator;
+	t_node	*new;
+	t_node	*iterator;
 	int		i;
 
 	new = new_node(s);
@@ -66,9 +66,9 @@ void		push_after_n(list *lst, char *s, int n)
 	lst->size++;
 }
 
-char		*get_element(list *lst, int n)
+char		*get_element(t_lista *lst, int n)
 {
-	node	*iterator;
+	t_node	*iterator;
 	int		i;
 
 	iterator = NULL;

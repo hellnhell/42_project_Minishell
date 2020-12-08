@@ -6,22 +6,22 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 19:44:29 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:07:51 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 17:41:24 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		ft_destroy_node(node *noode)
+static void		ft_destroy_node(t_node *noode)
 {
 	free(noode->element);
 	free(noode);
 }
 
-static void		ft_remove_back(list *lst)
+static void		ft_remove_back(t_lista *lst)
 {
-	node		*pop;
-	node		*prev_position;
+	t_node		*pop;
+	t_node		*prev_position;
 
 	pop = lst->first;
 	prev_position = NULL;
@@ -43,7 +43,7 @@ static void		ft_remove_back(list *lst)
 	}
 }
 
-void			ft_free_lists(list *lst)
+void			ft_free_lists(t_lista *lst)
 {
 	while (lst->first != NULL)
 		ft_remove_back(lst);

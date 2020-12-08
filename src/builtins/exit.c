@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:13:54 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/07 21:13:32 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:30:15 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		ft_exit_args(char **args, int j)
 	{
 		if (ft_isdigit(args[0][i]) != 1)
 		{
-			ft_printf("minishell: exit: %s : numeric argument required\n", args[0]);
+			ft_printf("msh: exit: %s : numeric argument required\n", args[0]);
 			exit(255);
 		}
 		i++;
@@ -34,7 +34,7 @@ static void		ft_exit_args(char **args, int j)
 	{
 		if (++k > 1)
 		{
-			ft_printf("minishell: exit: too many arguments\n");
+			ft_printf("msh: exit: too many arguments\n");
 			exit(1);
 		}
 	}
@@ -45,7 +45,7 @@ int				ft_exit(char **args, t_tab *t)
 {
 	int			j;
 
-	ft_printf("exit\n");
+	ft_printf("👋 👋 👋\n");
 	if (args[0])
 	{
 		j = ft_atoi(args[0]);
