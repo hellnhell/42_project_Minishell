@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hellnhell <hellnhell@student.42.fr>        +#+  +:+       +#+        */
+/*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:16:24 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/04 12:51:00 by hellnhell        ###   ########.fr       */
+/*   Updated: 2020/12/02 18:13:46 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 #include "get_next_line.h"
-
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -65,4 +64,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	d[i] = '\0';
 	return (d);
 }
-

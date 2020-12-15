@@ -5,73 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/03 13:48:37 by emartin-          #+#    #+#             */
-/*   Updated: 2020/11/11 17:50:31 by emartin-         ###   ########.fr       */
+/*   Created: 2020/01/28 13:13:41 by isfernan          #+#    #+#             */
+/*   Updated: 2020/11/18 20:16:55 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stddef.h>
-# include <stdlib.h>
+
+# include <stdio.h>
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdio.h>
+# include <stdlib.h>
 
-typedef struct	s_tab
-{	
-	char	*str;
-	int		len;
-	int		minus;
-	int		zero;
-	int		prec;
-	int		prec_true;
+typedef	struct	s_index_char
+{
+	int		printed;
+	int		fm;
+	int		f0;
 	int		width;
-	int		count;
-	int		pp;
-}				t_tab;
+	int		pre;
+	char	spe;
+}				t_data;
 
-void			ft_putchar_fd(char c, int fd, t_tab *tab);
-void			ft_putstr_fd(char *s, int fd, t_tab *tab);
-void			ft_putnbr_fd(unsigned int nb, int fd, t_tab *tab);
-int				ft_strlen(const char *s);
-char			*ft_itoa(int n);
+int				ft_printf(const char *format, ...);
+void			szeros(t_data *data);
+int				read_flags(int i, const char *format, t_data *data,
+va_list lista);
+int				read_flags_else(int i, const char *format, t_data *data);
+int				read_flags_2(int i, const char *format, t_data *data,
+va_list lista);
+
+void			call_spe(t_data *data, va_list lista);
+void			ft_int(t_data *data, va_list lista);
+void			ft_int_both(t_data *data, int nb);
+void			ft_int_else(int nb, int z, int s, t_data *data);
+void			ft_uint(t_data *data, va_list lista);
+void			ft_uint_else(int nb, int z, int s, t_data *data);
+void			ft_char(t_data *data, va_list lista);
+void			ft_str(t_data *data, va_list lista);
+void			ft_str_null(t_data *data);
+void			ft_hex(t_data *data, va_list lista);
+void			ft_hexx(t_data *data, va_list lista);
+void			ft_ptr(t_data *data, va_list lista);
+void			ft_perc(t_data *data);
+
+void			putchr_add(int i, const char *format, t_data *data);
+void			putchr_add_nb(char c, int t, t_data *data);
+void			putchr_add_sz(int d, int t, t_data *data);
+void			putsmpl(char c, t_data *data);
+void			put_nbr(int nb, t_data *data);
+void			put_nbru(unsigned int nb, t_data *data);
+void			put_str(char *str, t_data *data);
+void			put_str_len(char *str, int z, t_data *data);
+void			put_nbr_long(long nb, t_data *data);
+
 int				ft_atoi(const char *str);
-void			ft_check_flags(va_list args, t_tab *tab);
-int				ft_isdigit(int c);
-void			ft_check_minzero(t_tab *tab);
-void			ft_check_prec(va_list args, t_tab *tab);
-void			ft_check_width(va_list args, t_tab *tab);
-int				ft_count_int(int nbr, t_tab *tab);
-int				ft_count_hex(unsigned long nbr, t_tab *tab);
-int				ft_count_uns(unsigned int nbr, t_tab *tab);
-void			ft_write_cases(t_tab *tab, va_list args);
-void			ft_putnbr_global(t_tab *tab, va_list args);
-void			ft_putstr_global(t_tab *tab, va_list args);
-void			ft_putchar_global(t_tab *tab, va_list args);
-void			ft_puthex_global(t_tab *tab, va_list args);
-void			ft_putpoint_global(t_tab *tab, va_list args);
-void			ft_putunsigned_global(t_tab *tab, va_list args);
-void			ft_put_sp(int c, t_tab *tab);
-void			ft_put_zero(int c, t_tab *tab);
-void			ft_puthex(t_tab *tab, unsigned long nbr);
-void			ft_initializate(t_tab *tab);
-void			ft_min_off_prec_off(int nbr, t_tab *tab);
-void			ft_min_on_prec_off(int nbr, t_tab *tab);
-void			ft_min_off_prec_on(int nbr, t_tab *tab);
-void			ft_min_on_prec_on(int nbr, t_tab *tab);
-void			ft_mins_on_precs_on(char *s, t_tab *tab);
-void			ft_mins_off_precs_on(char *s, t_tab *tab);
-void			ft_mins_on_precs_off(char *s, t_tab *tab);
-void			ft_mins_off_precs_off(char *s, t_tab *tab);
-void			ft_minx_on_precx_on(unsigned int nbr, t_tab *tab);
-void			ft_minx_off_precx_on(unsigned int nbr, t_tab *tab);
-void			ft_minx_on_precx_off(unsigned int nbr, t_tab *tab);
-void			ft_minx_off_precx_off(unsigned int nbr, t_tab *tab);
-void			ft_minp_off_precp_off(unsigned long nbr, t_tab *tab);
-void			ft_minpu_off_precpu_off(unsigned int nbr, t_tab *tab);
-void			ft_minpu_off_precpu_off(unsigned int nbr, t_tab *tab);
-void			ft_minpu_off_precpu_off(unsigned int nbr, t_tab *tab);
-void			ft_minpu_off_precpu_off(unsigned int nbr, t_tab *tab);
+size_t			ft_strlen(const char *s);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
+int				ft_max(int a, int b);
+int				ft_min(int a, int b);
+int				ft_min_2(int a, int b);
+int				ft_abs(int a);
+void			to_base(unsigned int nb, char *base, t_data *data);
+void			to_base2(unsigned long nb, char *base, t_data *data);
+int				count_nb(int nb, int j);
+int				count_nbu(unsigned int nb, int j);
+int				count_nbuu(unsigned int nb, int j);
+int				count_nbu2(unsigned long nb, int j);
+int				count_nb_z(int nb, int j);
+int				count_nb_z2(int nb, int j);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:42:37 by isfernan          #+#    #+#             */
-/*   Updated: 2020/11/17 19:33:11 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 17:24:05 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,58 +18,56 @@
 ** pero ignorando los ; que están entre comillas
 */
 
-//Hay qe comprobar si este gestiona bien que las comillas pegadas a cosas
-
-static int		ft_countwords(char const *s, char c)
+static int	ft_countwords(char const *s, char c)
 {
-	int		i;
-	int		counter;
+	t_ints	*a;
+	int		n;
 
-	counter = 0;
-	i = 0;
-	while (s[i])
+	a = malloc(sizeof(t_ints));
+	a->counter = 0;
+	a->i = 0;
+	while (s[a->i])
 	{
-		while (s[i] == '\"')
+		ft_skipdoubles(a, s, c);
+		ft_skipsimples(a, s, c);
+		if (s[a->i] == c)
 		{
-			i++;
-			while (s[i] && s[i] != '\"')
-				i++;
-			i++;
-		}
-		while (s[i] == '\'')
-		{
-			i++;
-			while (s[i] && s[i] != '\'')
-				i++;
-			i++;
-		}
-		if (s[i] && s[i] == c)
-		{
-			i++;
+			a->i++;
 			continue ;
 		}
-		counter++;
-		while (s[i] && s[i] != c && s[i] != '\"' && s[i] != '\'')
-		{
-			i++;
-			if (s[i] && s[i] == '\"')
-			{
-				i++;
-				while (s[i] && s[i] != '\"')
-					i++;
-			}
-			else if (s[i] && s[i] == '\'')
-			{
-				i++;
-				while (s[i] && s[i] != '\'')
-					i++;
-			}
-		}
+		a->counter++;
+		ft_skip_all(a, s, c);
 	}
-	return (counter);
+	n = a->counter;
+	free(a);
+	return (n);
 }
 
-static int		ft_size(char const *s, char c, int j)
+static void	ft_slash(char const *s, int j, int counter)
+{
+	if (s[j] == '\"')
+	{
+		j++;
+		while (s[j] && s[j] != '\"')
+		{
+			j++;
+			counter++;
+		}
+		counter++;
+	}
+	else if (s[j] == '\'')
+	{
+		j++;
+		while (s[j] && s[j] != '\'')
+		{
+			j++;
+			counter++;
+		}
+		counter++;
+	}
+}
+
+static int	ft_size(char const *s, char c, int j)
 {
 	int		counter;
 
@@ -78,34 +76,14 @@ static int		ft_size(char const *s, char c, int j)
 		j++;
 	while (s[j] && s[j] != c)
 	{
-		if (s[j] == '\"')
-		{
-			j++;
-			while (s[j] && s[j] != '\"')
-			{
-				j++;
-				counter++;
-			}
-			counter++;
-		}
-		else if (s[j] == '\'')
-		{
-			j++;
-			while (s[j] && s[j] != '\'')
-			{
-				j++;
-				counter++;
-			}
-			counter++;
-		}
+		ft_slash(s, j, counter);
 		counter++;
 		j++;
 	}
-	//printf("%i\n", counter + 1);
 	return (counter + 1);
 }
 
-static int		ft_cpyword(char const *s, char c, int j, char *str)
+static int	ft_cpyword2(char const *s, char c, int j, char *str)
 {
 	int		i;
 
@@ -143,7 +121,6 @@ char		**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	i = ft_countwords(s, c);
-	//printf("%i\n", i);
 	if (!(tab = malloc(sizeof(char **) * (i + 1))))
 		return (NULL);
 	tab[i] = NULL;
@@ -152,7 +129,7 @@ char		**ft_split(char const *s, char c)
 	while (i < words)
 	{
 		tab[i] = malloc(sizeof(char) * ft_size(s, c, j));
-		j = ft_cpyword(s, c, j, tab[i]);
+		j = ft_cpyword2(s, c, j, tab[i]);
 		i++;
 	}
 	return (tab);

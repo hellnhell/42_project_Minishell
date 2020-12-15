@@ -35,12 +35,15 @@ SRCSC		= ft_memset.c \
 				get_next_line/get_next_line.c \
 				ft_strcmp.c \
 				ft_split_list.c \
+				ft_split_list_cpy.c \
+				ft_split_list_found.c \
+				ft_split_list_skip.c \
 				ft_strpncpy.c	\
 				list_add_elements.c \
 				list_pop_elements.c \
-				list_utils.c
+				list_utils.c	\
+				list_utils2.c
 			
-
 SBONUS		= ft_lstadd_front_bonus.c\
 				ft_lstadd_back_bonus.c\
 				ft_lstclear_bonus.c\
@@ -59,18 +62,16 @@ OBONUS		= $(SBONUS:%.c=%.o)
 
 NAME		= libft.a
 
-CC			= gcc
+CC			= @gcc
 
 AR			= ar rc
 
-RM			= rm -f
+RM			= @rm -f
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 $(NAME):	${OBJS}
-			@echo "libft.a - compiling"
-			@${AR} ${NAME} ${OBJS} ${SRCSH} 
-			@echo "libft.a - done"
+	-@${AR} ${NAME} ${OBJS} ${SRCSH} 
 
 
 all:		${NAME}
@@ -80,13 +81,12 @@ clean:
 
 
 fclean:		clean
-			${RM} ${NAME} ${PRINTF} 
+			${RM} ${NAME}
 
 re:			fclean all
 
 bonus:		all ${OBONUS}
-			@echo "libft.a (bonus) - compiling"
-			@${AR} ${NAME} ${OBJS} ${OBONUS}
-			@echo "libft.a (bonus) - done"
+	-@${AR} ${NAME} ${OBJS} ${OBONUS}
+
 
 .PHONY:		all clean fclean re
