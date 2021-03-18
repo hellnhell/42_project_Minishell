@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 18:29:03 by hellnhell         #+#    #+#             */
-/*   Updated: 2020/12/15 17:38:05 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:50:49 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void		free_matrix(char **matrix)
 char		*read_line(t_tab *t)
 {
 	if (!get_next_line(0, &t->line))
-	{
 		ft_signal_d(1);
-		free(t->line);
-	}
 	return (t->line);
 }
 

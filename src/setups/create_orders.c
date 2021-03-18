@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 20:52:11 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/15 17:47:26 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/09 18:05:20 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void		ft_minishell(t_tab *t, t_lista *lst)
 
 	while (1)
 	{
-		signal(SIGINT, ft_signal_c);
-		signal(SIGQUIT, ft_signal_c);
 		i = 0;
 		ft_putstr_fd(PROMPT, 1);
+		signal(SIGINT, ft_signal_c);
+		signal(SIGQUIT, ft_signal_c);
 		t->line = read_line(t);
 		if (!check_quotes(t->line))
 		{

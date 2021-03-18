@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 18:47:06 by nazurmen          #+#    #+#             */
-/*   Updated: 2020/12/15 17:44:11 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/09 18:08:51 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		check_bash_implement(t_tab *t)
 int			check_our_implement(t_tab *t)
 {
 	t->status = 0;
-	fprintf(stderr, "|%s|\n", t->tokens[0]);
 	if (!t->tokens[0])
 		return (1);
 	if (!ft_strncmp(t->tokens[0], "exit\0", 5))

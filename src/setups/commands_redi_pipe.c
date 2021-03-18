@@ -6,7 +6,7 @@
 /*   By: emartin- <emartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 20:29:06 by emartin-          #+#    #+#             */
-/*   Updated: 2020/12/15 17:34:48 by emartin-         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:51:39 by emartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	other_redi_less(t_tab *t)
 {
 	if (t->index[t->i + 1] && t->index[t->i + 1] == '|')
 	{
+		t->iterator = t->iterator->next;
 		ft_redi_pipe(t, t->iterator);
 		t->i++;
 	}
@@ -92,13 +93,13 @@ void	commands_redi_pipes(t_tab *t, t_lista *lst)
 			return ;
 		}
 		else if (t->index[t->i] && t->index[t->i] == '<')
+			other_redi_less(t);
+		else
 		{
 			if (redi_less_return(t))
 				return ;
-			other_redi_less(t);
-		}
-		else
 			commands_redi_pipes_2(t);
+		}
 		free_matrix(t->tokens);
 		t->iterator = t->iterator->next;
 		t->i++;
